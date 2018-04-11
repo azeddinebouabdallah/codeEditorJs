@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./Style/style.css">
+  <style media="screen">
+
+
+  </style>
+    <title></title>
+  </head>
+  <body>
+ <div class="container-fluid example-2">
+     <div class="split split-horizontal" id="one">
+       <ul>
+         <li>Item 1</li>
+         <li>Item 2</li>
+         <li>Item 3</li>
+       </ul>
+     </div>
+     <div class="split split-horizontal" id="two">
+       <div class="alert alert-success" role="alert">
+         <h4 class="alert-heading">Well done!</h4>
+         <p>Aww yeah, you successfully read this important alert message.
+           This example text is going to run a bit longer so that you can see how
+           spacing within an alert works with this kind of content.</p>
+         <hr>
+         <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+        </div>
+     </div>
+  </div>
+  <script type="text/javascript" src="./bower_components/Split.js/split.js"></script>
+  <script type="text/javascript">
+
+  Split(['#one', '#two'], {
+        sizes: [20, 80],
+        minSize: 200
+    });
+  </script>
+  </body>
+</html>
