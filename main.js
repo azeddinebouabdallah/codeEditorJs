@@ -1,16 +1,24 @@
 const electron = require('electron')
-const app = electron.app
+const app = electron.app.remote
+const fs = require('fs')
 
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 
+
 const path = require('path')
 const url = require('url')
-
+const dialog = app.dialog
 let mainWindow
 
-const mainMenuTemplate = [{ label: 'File',
+const mainMenuTemplate = [
+  { label: 'File',
   submenu: [
+    {label: 'Open Directory', click(){
+      dialog.showOpenDialog((filename) => {
+        // Open Button
+      })
+    }},
     {label: 'Open Dev-Tools',
     accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
   click(){
