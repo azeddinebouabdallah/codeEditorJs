@@ -9,9 +9,12 @@
   "author": "Bouabdallah Azeddine",
   "license": "ISC",
   "dependencies": {
+    "dialogs": "^1.1.20",
     "electron-navigation": "^1.5.6",
     "electron-tabs": "^0.9.1",
     "jquery": "^3.3.1",
-    "js-treeview": "^1.1.5"
+    "js-treeview": "^1.1.5",
+    "prismjs": "^1.14.0",
+    "smalltalk": "^2.5.1"
   }
 }

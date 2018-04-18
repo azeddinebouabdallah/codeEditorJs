@@ -1,23 +1,34 @@
+//import smalltalk from 'node_modules/smalltalk/legacy';
+//const Dialogs = require('dialogs')
+//let dialogs = Dialogs()
+
 const electron = require('electron')
-const app = electron.app.remote
+const {app, dialog, BrowserWindow, Menu, ipcRenderer} = electron
 const fs = require('fs')
 
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
+
 
 
 const path = require('path')
 const url = require('url')
-const dialog = app.dialog
+
 let mainWindow
 
 const mainMenuTemplate = [
   { label: 'File',
   submenu: [
     {label: 'Open Directory', click(){
-      dialog.showOpenDialog((filename) => {
-        // Open Button
+
+      dialog.showOpenDialog((fileNames) => {
+        if (fileNames === undefined){
+          console.log('File undefined')
+        }else {
+          readFile(fileNames[0])
+        }
       })
+      //dialog.showOpenDialog((filename) => {
+        // Open Button
+      //})
     }},
     {label: 'Open Dev-Tools',
     accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
@@ -29,7 +40,16 @@ const mainMenuTemplate = [
 }
 ]
 
+function readFile(filePath){
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err){
+      console.log('File can\'t be opened')
+      return
+    }
 
+    mainWindow.webContents.send('file', data)
+  })
+}
 
 function createWindow() {
   mainWindow = new BrowserWindow({})

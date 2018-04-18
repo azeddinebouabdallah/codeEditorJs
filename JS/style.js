@@ -1,3 +1,60 @@
+const TabGroup = require("electron-tabs");
+const electron = require('electron')
+const {ipcRenderer} = electron
+const fs = require('fs')
+
+
+let tabGroup = new TabGroup();
+let data
+let filePath
+
+ipcRenderer.on('file', (e, item) => {
+  data = item
+  console.log(data)
+  var filename = data[0].replace(/^.*[\\\/]/, '')
+  code = JSON.stringify(data, null, 2)
+  fs.writeFile('Files/'+ filename +'.json', code, (err) => {console.log(err)})
+
+  newPage = '<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body>' +
+  '<p>' + data[1] + '</p></body></html>'
+
+  fs.writeFile('Files/'+ filename, newPage, (err) => {
+    console.log(err)
+  })
+
+  tab = tabGroup.addTab({
+    title: filename,
+    src: './Files/' + filename,
+    webviewAttributes: {
+        'nodeintegration': true
+    },
+    icon: 'fa fa-home',
+    visible: true,
+    active: true,
+  })
+
+  //p.value = item[1]
+
+})
+
+
+
+
+
+let tab = tabGroup.addTab({
+    title: 'Home',
+    src: './Files/homeEditor.html',
+    webviewAttributes: {
+        'nodeintegration': true
+    },
+    icon: 'fa fa-home',
+    visible: true,
+    active: true,
+
+});
+
+
+
 require('./node_modules/jquery/dist/jquery.js')
 
 TreeView = require('js-treeview')
@@ -14,27 +71,3 @@ tree = new TreeView([
 tree.on('collapse', function (e) {
     console.log(JSON.stringify(e));
 });
-
-
-function selection(panelIndex) {
-  const buttons = document.querySelectorAll('.nav-button')
-  const content = document.querySelectorAll('.code-workspace')
-  const areas = document.querySelectorAll('.area')
-  areas.forEach((node) => {
-    node.setAttribute('id', '')
-  })
-  buttons.forEach((node) => {
-    node.style.backgroundColor = '#ecf0f1'
-  })
-  content.forEach((node) => {
-    node.style.display = 'none'
-  })
-  buttons[panelIndex].style.backgroundColor = '#bdc3c7'
-  const textArea = content[panelIndex].childNodes
-
-  content[panelIndex].style.display = 'block'
-
-  areas[panelIndex].setAttribute('id', 'codemirror-textarea')
-//  require('scriptCodeHighlighter.js')
-  launch()
-}

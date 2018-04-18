@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./jstree/dist/themes/default/style.min.css" />
     <link rel="stylesheet" href="./codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="./codemirror/theme/3024-day.css">
-    <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
-
+    <link rel="stylesheet" href="./node_modules/electron-tabs/electron-tabs.css">
     <link rel="stylesheet" href="./Style/style.css">
   <style media="screen">
 
@@ -58,24 +58,29 @@
             <textarea class="area"></textarea>
             </div>
        </div>-->
+
+
        <div class="etabs-tabgroup">
     <div class="etabs-tabs"></div>
     <div class="etabs-buttons"></div>
     </div>
-    <div class="etabs-views"></div>
+    <div class="etabs-views">
+    </div>
 
 
   </div>
   <input type="file" id="dialog-file" style="display: none">
   <script type="text/javascript" src="./bower_components/Split.js/split.js"></script>
   <script type="text/javascript">
-  const TabGroup = require("electron-tabs");
-  let tabGroup = new TabGroup();
-  let tab = tabGroup.addTab({
-      title: "Electron",
-      src: "http://electron.atom.io",
-      visible: true
-  });
+  /*const electron = require('electron')
+  const ipcRenderer = electron
+  ipcRenderer.on('file', (e, item) => {
+    let data = item.file_data
+     let filePath = item.file_path
+    let p = document.querySelector('.code-test')
+    p.value = 'File path: '+ filePath + '\n File Data: ' + data
+    console.log(filePath)
+  })*/
   Split(['#one', '#two'], {
         sizes: [20, 80],
         minSize: 200
