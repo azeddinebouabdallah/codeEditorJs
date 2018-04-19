@@ -46,8 +46,9 @@ function readFile(filePath){
       console.log('File can\'t be opened')
       return
     }
-
-    mainWindow.webContents.send('file', data)
+    console.log(filePath)
+    dataNew = [filePath, data]
+    mainWindow.webContents.send('file', dataNew)
   })
 }
 

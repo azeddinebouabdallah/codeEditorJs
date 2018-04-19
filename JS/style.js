@@ -9,30 +9,30 @@ let data
 let filePath
 
 ipcRenderer.on('file', (e, item) => {
+
+  console.log(item)
   data = item
-  console.log(data)
+
   var filename = data[0].replace(/^.*[\\\/]/, '')
   code = JSON.stringify(data, null, 2)
   fs.writeFile('Files/'+ filename +'.json', code, (err) => {console.log(err)})
 
-  newPage = '<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body>' +
-  '<p>' + data[1] + '</p></body></html>'
+ newPage = '<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body>' +
+  '<textarea>'+ data[1] + '</textarea></body></html>'
 
   fs.writeFile('Files/'+ filename, newPage, (err) => {
     console.log(err)
   })
 
-  tab = tabGroup.addTab({
-    title: filename,
-    src: './Files/' + filename,
-    webviewAttributes: {
-        'nodeintegration': true
-    },
-    icon: 'fa fa-home',
-    visible: true,
-    active: true,
-  })
-
+  let tab = tabGroup.addTab({
+  title: filename,
+  src: './Files/' + filename,
+  webviewAttributes: {
+      'nodeintegration': true
+  },
+  icon: 'fa fa-home',
+  visible: true,
+  active: true,})
   //p.value = item[1]
 
 })
@@ -51,7 +51,7 @@ let tab = tabGroup.addTab({
     visible: true,
     active: true,
 
-});
+})
 
 
 
