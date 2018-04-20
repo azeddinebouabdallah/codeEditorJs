@@ -1,22 +1,25 @@
-<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body><p><!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body><p><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script src="../codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="../codemirror/theme/material.css">
+    <script src="../codemirror/mode/css/css.js"></script>
+
     <title></title>
   </head>
   <body>
+    <div id="codeeditor">
 
-    <h1>Welcome to the Code Editor</h1>
-    <p class="code-test">
-      hey
-    </p>
-    <script type="text/javascript">
-
-
-
-
-    </script>
+    </div>
     <script src="./JS/style.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var myCodeMirror = CodeMirror(document.getElementById('codeeditor'), {
+      lineNumbers: true,
+      mode: "css",
+      theme: "material"
+    })
+  </script>
   </body>
 </html>
-</p></body></html></p></body></html>
