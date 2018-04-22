@@ -17,41 +17,51 @@ ipcRenderer.on('file', (e, item) => {
   var exe = filename.split('.').pop();
   code = JSON.stringify(data, null, 2)
   fs.writeFile('Files/'+ filename +'.json', code, (err) => {console.log(err)})
-  switch (exe) {
-    case 'html':
-    newPage = '<!DOCTYPE html>'+
-    '<html lang="en" dir="ltr">'+
-      '<head>'+
-        '<meta charset="utf-8">'+
-        '<script src="../codemirror/lib/codemirror.js"></script>'+
-        '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">'+
-        '<link rel="stylesheet" href="../codemirror/theme/material.css">'+
-        '<script src="../codemirror/mode/htmlmixed/htmlmixed.js"></script>'+
-        '<title></title>'+
-      '</head>'+
-      '<body>'+
-        '<div id="codeeditor">'+
-        '</div>'+
-        '<script src="./JS/style.js" type="text/javascript"></script>'+
-      '<script type="text/javascript">'+
-        'var myCodeMirror = CodeMirror(document.getElementById(\'codeeditor\'), {'+
-          'lineNumbers: true,'+
-        '  mode: "htmlmixed",'+
-          'theme: "material"'+
-          'value: ' + data[1] +
-        '})'+
-      '</script>'+
-      '</body>'+
+
+  var newData = data[1].split('\n');
+  var newOrgData = ''
+console.log('Length: ' +newData.length);
+  for (var i = 0; i<newData.length;i++){
+    console.log(newData[i] + ' index : ' + i);
+    if (i != newData.length - 1){
+      newOrgData += '\'' + newData[i] + '\\n \' +  \n';
+      console.log('Cond 1');
+    }
+    else {
+        newOrgData += '\'' + newData[i] + '\\n \' \n';
+        console.log('Cond 2');
+    }
+
+}
+
+    newPage = '<!DOCTYPE html>\n'+
+    '<html lang="en" dir="ltr">\n'+
+    '<head>\n'+
+      '<meta charset="utf-8">\n'+
+      '<script src="../codemirror/lib/codemirror.js"></script>\n'+
+      '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
+      '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
+      '<script src="../codemirror/mode/htmlmixed/htmlmixed.js"></script>\n'+
+    '</head>\n'+
+    '<body>\n'+
+    '<h1>File Name</h1>\n'+
+      '<div id="codeeditor">\n'+
+      '</div>\n'+
+      '<script src="../JS/style.js" type="text/javascript">\n'+
+      '</script><script type="text/javascript">\n'+
+      'var myCodeMirror =CodeMirror(document.getElementById("codeeditor"), {\n'+
+         'lineNumbers: true,\n'+
+         'mode: "htmlmixed",\n'+
+         'theme: "material",\n'+
+      '});\n'+
+    ' myCodeMirror.getDoc().setValue('+
+      newOrgData +
+    ');\n' +
+    '</script>\n'+
+    '</body>\n'+
     '</html>'
 
-      break;
-    case 'css':
 
-     break;
-
-    default:
-
-  }
  //newPage = '<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body>' +
 //  '<textarea>'+ data[1] + '</textarea></body></html>'
 
@@ -78,7 +88,7 @@ ipcRenderer.on('file', (e, item) => {
 
 let tab = tabGroup.addTab({
     title: 'Home',
-    src: './Files/homeEditor.html',
+    src: './Files/file3.html',
     webviewAttributes: {
         'nodeintegration': true
     },
