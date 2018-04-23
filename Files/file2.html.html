@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<script src="../codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="../codemirror/theme/material.css">
+<script src="../codemirror/mode/xml/xml.js"></script>
+</head>
+<body>
+<h1>File Name</h1>
+<textarea class="codemirror-textarea" id="codemirror">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en" dir="ltr"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;script src="../codemirror/lib/codemirror.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="../codemirror/lib/codemirror.css"&gt;
+&lt;link rel="stylesheet" href="../codemirror/theme/material.css"&gt;
+&lt;script src="../codemirror/mode/htmlmixed/htmlmixed.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;File Name&lt;/h1&gt;
+&lt;div id="codeeditor"&gt;
+&lt;/div&gt;
+&lt;script src="../JS/style.js" type="text/javascript"&gt;
+&lt;/script&gt;&lt;script type="text/javascript"&gt;
+var myCodeMirror =CodeMirror(document.getElementById("codeeditor"), {
+lineNumbers: true,
+mode: "htmlmixed",
+theme: "material",
+});
+ myCodeMirror.getDoc().setValue('&lt;!DOCTYPE html&gt;\n ' +  
+'&lt;html lang="en" dir="ltr"&gt;\n ' +  
+'  &lt;head&gt;\n ' +  
+'    &lt;meta charset="utf-8"&gt;\n ' +  
+'    &lt;title&gt;&lt;/title&gt;\n ' +  
+'  &lt;/head&gt;\n ' +  
+'  &lt;body&gt;\n ' +  
+'\n ' +  
+'  &lt;/body&gt;\n ' +  
+'&lt;/html&gt;\n ' +  
+'\n ' 
+);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</textarea><script src="../JS/style.js" type="text/javascript">
+</script><script type="text/javascript">
+var textArea = document.getElementById('codemirror');
+var editor = CodeMirror.fromTextArea(textArea, { 
+lineNumbers: true,
+theme: "material",
+mode: "xml",
+htmlMode: true,
+  });
+</script>
+</body>
+</html>

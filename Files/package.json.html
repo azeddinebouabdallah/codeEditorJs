@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<script src="../codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="../codemirror/theme/material.css">
+</head>
+<body>
+<h1>File Name</h1>
+<textarea class="codemirror-textarea" id="codemirror">
+{
+  "name": "codeeditor",
+  "version": "1.0.0",
+  "description": "Code Editor for HTML, CSS and JS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Bouabdallah Azeddine",
+  "license": "ISC",
+  "dependencies": {
+    "dialogs": "^1.1.20",
+    "electron-navigation": "^1.5.6",
+    "electron-tabs": "^0.9.1",
+    "highlight.js": "^9.12.0",
+    "jquery": "^3.3.1",
+    "js-treeview": "^1.1.5",
+    "prismjs": "^1.14.0",
+    "smalltalk": "^2.5.1"
+  }
+}
+
+</textarea><script src="../JS/style.js" type="text/javascript">
+</script><script type="text/javascript">
+var textArea = document.getElementById('codemirror');
+var editor = CodeMirror.fromTextArea(textArea, { 
+lineNumbers: true,
+mode: "htmlmixed",
+theme: "material",
+mode: "xml",
+htmlMode: true,
+  });
+</script>
+<script src="../codemirror/mode/xml/xml.js"></script>
+</body>
+</html>
