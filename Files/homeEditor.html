@@ -15,10 +15,13 @@
   &lt;textarea/&gt;
 </textarea>
 
-<script src="../JS/style.js" type="text/javascript">
-</script>
+<!--<script src="../JS/style.js" type="text/javascript"></script>-->
+<script src="../JS/require.js"></script>
+<script src="../JS/requires.js"></script>
+<!--<script type="text/javascript">
+var name = window.location.pathname; 
+var name = name.replace(/^.*[\\\/]/, '');
 
-<script type="text/javascript">
 var textArea = document.getElementById('codemirror');
 var editor = CodeMirror.fromTextArea(textArea, {
   lineNumbers: true,
@@ -26,7 +29,23 @@ var editor = CodeMirror.fromTextArea(textArea, {
   htmlMode: true,
   theme: "material",
 });
-CodeMirror.setSize("100%", "100%");
+
+editor.on('change', () => {
+     var dataReload = editor.getValue();
+     console.log(name)
+     var fileContent = fs.readFileSync(name + '.json');
+     var content = JSON.parse(fileContent);
+     content.fileContent = textArea.innerHTML;
+     fs.writeFile(name, content, (err) => { });
+  });
+
+/*CodeMirror.on('change', () => {
+     var dataReload = codeMirrorObj.getValue();
+     var fileContent = fs.readFileSync(name + '.json');
+     var content = JSON.parse(fileContent);
+     content.fileContent = textArea.innerHTML;
+     fs.writeFile(name, content, (err) => { });
+  });*/
 
 
 /*var myCodeMirror =CodeMirror(document.getElementById("codemirror"), {
@@ -35,7 +54,7 @@ mode: "htmlmixed",
 theme: "material",
 });*/
 
-</script>
+</script>-->
 
 </body>
 </html>

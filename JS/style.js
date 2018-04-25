@@ -1,5 +1,3 @@
-import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
-
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
@@ -7,7 +5,6 @@ const fs = require('fs')
 
 
 let tabGroup = new TabGroup();
-let data
 let filePath
 
 let filesOpened = new Array();
@@ -24,9 +21,19 @@ constructor(fileName, filePath, content, exe, dateOfCreation){
 
 }
 createFile() {
+
     var extention = this.exe;
     var dfc = this.dateOfCreation;
-    var JSONData = data.concat({extention, dfc});
+    
+    var data = {
+      filename : this.fileName, 
+      filePath : this.filePath,
+      fileexe : this.exe,
+      fileDate : this.dateOfCreation,
+      fileContent : this.content
+    }
+    var JSONData = data;
+    
     var code = JSON.stringify(JSONData, null, 2);
     fs.writeFile('Files/'+ this.fileName +'.json', code, (err) => {console.log(err)})
     var newData = this.content.split('\n');
@@ -188,15 +195,17 @@ ipcRenderer.on('file', (e, item) => {
 })
 
 ipcRenderer.on('save', (e) => {
-  var tab = tabGroup.getActiveTab();
-  var filename; 
+  var currentTab = tabGroup.getActiveTab();
+
+  
 })
+
 
 
 
 let tab = tabGroup.addTab({
     title: 'Home',
-    src: './Files/file2.html.html',
+    src: './Files/homeEditor.html',
     webviewAttributes: {
         'nodeintegration': true
     },
