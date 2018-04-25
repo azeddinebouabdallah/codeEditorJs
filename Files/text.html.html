@@ -6,36 +6,19 @@
 <link rel="stylesheet" href="../codemirror/lib/codemirror.css">
 <link rel="stylesheet" href="../codemirror/theme/material.css">
 <script src="../codemirror/mode/xml/xml.js"></script>
-<link rel="stylesheet" href="./Style/stylePages.css">
 </head>
 <body>
-
-<!-- Our code goes here -->
 <textarea class="codemirror-textarea" id="codemirror">
-  &lt;textarea/&gt;
-</textarea>
 
-<script src="../JS/style.js" type="text/javascript">
-</script>
-
-<script type="text/javascript">
+</textarea><script src="../JS/style.js" type="text/javascript">
+</script><script type="text/javascript">
 var textArea = document.getElementById('codemirror');
-var editor = CodeMirror.fromTextArea(textArea, {
-  lineNumbers: true,
-  mode: "xml",
-  htmlMode: true,
-  theme: "material",
-});
-CodeMirror.setSize("100%", "100%");
-
-
-/*var myCodeMirror =CodeMirror(document.getElementById("codemirror"), {
+var editor = CodeMirror.fromTextArea(textArea, { 
 lineNumbers: true,
-mode: "htmlmixed",
 theme: "material",
-});*/
-
+mode: "xml",
+htmlMode: true,
+  });
 </script>
-
 </body>
 </html>

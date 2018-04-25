@@ -1,3 +1,5 @@
+import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
+
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
@@ -8,60 +10,95 @@ let tabGroup = new TabGroup();
 let data
 let filePath
 
-ipcRenderer.on('file', (e, item) => {
+let filesOpened = new Array();
 
-  console.log(item)
-  data = item
+class File {
 
-  var filename = data[0].replace(/^.*[\\\/]/, '')
-  var exe = filename.split('.').pop();
-  code = JSON.stringify(data, null, 2)
-  fs.writeFile('Files/'+ filename +'.json', code, (err) => {console.log(err)})
-console.log('EXE: ' + exe);
-  var newData = data[1].split('\n');
-  var newOrgData = ''
-console.log('Length: ' +newData.length);
-  /*for (var i = 0; i<newData.length;i++){
-    console.log(newData[i] + ' index : ' + i);
-    if (i != newData.length - 1){
-      asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-      newOrgData += asciiDataI + '\n';
-      console.log('Cond 1');
+constructor(fileName, filePath, content, exe, dateOfCreation){
+
+  this.fileName = fileName;
+  this.filePath = filePath;
+  this.exe = exe;
+  this.dateOfCreation = dateOfCreation;
+  this.content = content;
+
+}
+createFile() {
+    var extention = this.exe;
+    var dfc = this.dateOfCreation;
+    var JSONData = data.concat({extention, dfc});
+    var code = JSON.stringify(JSONData, null, 2);
+    fs.writeFile('Files/'+ this.fileName +'.json', code, (err) => {console.log(err)})
+    var newData = this.content.split('\n');
+
+    var newOrgData = '';
+
+    if (this.exe == 'html') {
+      for (var i = 0; i<newData.length;i++){
+        console.log(newData[i] + ' index : ' + i);
+        if (i != newData.length - 1){
+          var asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
+          newOrgData += asciiDataI + '\n';
+          console.log('Cond 1');
+        }
+        else {
+          asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
+            newOrgData += asciiDataI + '\n';
+            console.log('Cond 2');
+        }
+
     }
-    else {
-      asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-        newOrgData += asciiDataI + '\n';
-        console.log('Cond 2');
-    }
+      var newPage = '<!DOCTYPE html>\n'+
+      '<html lang="en" dir="ltr">\n'+
+      '<head>\n'+
+        '<meta charset="utf-8">\n'+
+        '<script src="../codemirror/lib/codemirror.js"></script>\n'+
+        '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
+        '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
+        '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
+      '</head>\n'+
+      '<body>\n'+
+      '<textarea class="codemirror-textarea" id="codemirror">\n' +
+       newOrgData +
+      '</textarea>'+
+        '<script src="../JS/style.js" type="text/javascript">\n'+
+        '</script><script type="text/javascript">\n'+
+        'var textArea = document.getElementById(\'codemirror\');\n' +
+        'var editor = CodeMirror.fromTextArea(textArea, { \n' +
+          'lineNumbers: true,\n' +
+          'theme: "material",\n' +
+          'mode: "xml",\n'+
+          'htmlMode: true,\n'+
+      '  });\n' +
+      '</script>\n'+
+      '</body>\n'+
+      '</html>';
 
-}*/
+  }else if (this.exe == 'css') {
 
-  if (exe == 'html') {
     for (var i = 0; i<newData.length;i++){
       console.log(newData[i] + ' index : ' + i);
       if (i != newData.length - 1){
-        asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-        newOrgData += asciiDataI + '\n';
+        newOrgData += newData[i] + '\n';
         console.log('Cond 1');
       }
       else {
-        asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-          newOrgData += asciiDataI + '\n';
+          newOrgData += newData[i] + '\n';
           console.log('Cond 2');
       }
 
   }
-    newPage = '<!DOCTYPE html>\n'+
+
+    var newPage = '<!DOCTYPE html>\n'+
     '<html lang="en" dir="ltr">\n'+
     '<head>\n'+
       '<meta charset="utf-8">\n'+
       '<script src="../codemirror/lib/codemirror.js"></script>\n'+
       '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
       '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-      '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
+      '<script src="../codemirror/mode/css/css.js"></script>\n'+
     '</head>\n'+
     '<body>\n'+
-    '<h1>File Name</h1>\n'+
     '<textarea class="codemirror-textarea" id="codemirror">\n' +
      newOrgData +
     '</textarea>'+
@@ -71,123 +108,95 @@ console.log('Length: ' +newData.length);
       'var editor = CodeMirror.fromTextArea(textArea, { \n' +
         'lineNumbers: true,\n' +
         'theme: "material",\n' +
+        'mode: "css",\n'+
+    '  });\n' +
+    '</script>\n'+
+    '</body>\n'+
+    '</html>';
+
+  }else {
+    for (var i = 0; i<newData.length;i++){
+      console.log(newData[i] + ' index : ' + i);
+      if (i != newData.length - 1){
+        newOrgData += newData[i] + '\n';
+        console.log('Cond 1');
+      }
+      else {
+          newOrgData += newData[i] + '\n';
+          console.log('Cond 2');
+      }
+
+  }
+    var newPage = '<!DOCTYPE html>\n'+
+    '<html lang="en" dir="ltr">\n'+
+    '<head>\n'+
+      '<meta charset="utf-8">\n'+
+      '<script src="../codemirror/lib/codemirror.js"></script>\n'+
+      '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
+      '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
+
+    '</head>\n'+
+    '<body>\n'+
+    '<textarea class="codemirror-textarea" id="codemirror">\n' +
+     newOrgData +
+    '</textarea>'+
+      '<script src="../JS/style.js" type="text/javascript">\n'+
+      '</script><script type="text/javascript">\n'+
+      'var textArea = document.getElementById(\'codemirror\');\n' +
+      'var editor = CodeMirror.fromTextArea(textArea, { \n' +
+        'lineNumbers: true,\n' +
+        'mode: "htmlmixed",\n' +
+        'theme: "material",\n' +
         'mode: "xml",\n'+
         'htmlMode: true,\n'+
     '  });\n' +
     '</script>\n'+
+    '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
     '</body>\n'+
-    '</html>'
+    '</html>';
+  }
 
-}else if (exe == 'css') {
-
-  for (var i = 0; i<newData.length;i++){
-    console.log(newData[i] + ' index : ' + i);
-    if (i != newData.length - 1){
-      newOrgData += newData[i] + '\n';
-      console.log('Cond 1');
-    }
-    else {
-        newOrgData += newData[i] + '\n';
-        console.log('Cond 2');
-    }
-
-}
-
-  newPage = '<!DOCTYPE html>\n'+
-  '<html lang="en" dir="ltr">\n'+
-  '<head>\n'+
-    '<meta charset="utf-8">\n'+
-    '<script src="../codemirror/lib/codemirror.js"></script>\n'+
-    '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
-    '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-    '<script src="../codemirror/mode/css/css.js"></script>\n'+
-  '</head>\n'+
-  '<body>\n'+
-  '<h1>File Name</h1>\n'+
-  '<textarea class="codemirror-textarea" id="codemirror">\n' +
-   newOrgData +
-  '</textarea>'+
-    '<script src="../JS/style.js" type="text/javascript">\n'+
-    '</script><script type="text/javascript">\n'+
-    'var textArea = document.getElementById(\'codemirror\');\n' +
-    'var editor = CodeMirror.fromTextArea(textArea, { \n' +
-      'lineNumbers: true,\n' +
-      'theme: "material",\n' +
-      'mode: "css",\n'+
-  '  });\n' +
-  '</script>\n'+
-  '</body>\n'+
-  '</html>'
-
-}else {
-  for (var i = 0; i<newData.length;i++){
-    console.log(newData[i] + ' index : ' + i);
-    if (i != newData.length - 1){
-      newOrgData += newData[i] + '\n';
-      console.log('Cond 1');
-    }
-    else {
-        newOrgData += newData[i] + '\n';
-        console.log('Cond 2');
-    }
-
-}
-  newPage = '<!DOCTYPE html>\n'+
-  '<html lang="en" dir="ltr">\n'+
-  '<head>\n'+
-    '<meta charset="utf-8">\n'+
-    '<script src="../codemirror/lib/codemirror.js"></script>\n'+
-    '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
-    '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-
-  '</head>\n'+
-  '<body>\n'+
-  '<h1>File Name</h1>\n'+
-  '<textarea class="codemirror-textarea" id="codemirror">\n' +
-   newOrgData +
-  '</textarea>'+
-    '<script src="../JS/style.js" type="text/javascript">\n'+
-    '</script><script type="text/javascript">\n'+
-    'var textArea = document.getElementById(\'codemirror\');\n' +
-    'var editor = CodeMirror.fromTextArea(textArea, { \n' +
-      'lineNumbers: true,\n' +
-      'mode: "htmlmixed",\n' +
-      'theme: "material",\n' +
-      'mode: "xml",\n'+
-      'htmlMode: true,\n'+
-  '  });\n' +
-  '</script>\n'+
-  '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
-  '</body>\n'+
-  '</html>'
-}
- //newPage = '<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title></title></head><body>' +
-//  '<textarea>'+ data[1] + '</textarea></body></html>'
-
-  fs.writeFile('Files/'+ filename +'.html', newPage, (err) => {
+  fs.writeFile('Files/'+ this.fileName +'.html', newPage, (err) => {
     console.log(err)
   })
 
   let tab = tabGroup.addTab({
-  title: filename,
-  src: './Files/' + filename + '.html',
+  title: this.fileName,
+  src: './Files/' + this.fileName + '.html',
   webviewAttributes: {
       'nodeintegration': true
   },
   icon: 'fa fa-home',
   visible: true,
   active: true,})
-  //p.value = item[1]
+}
 
+}
+
+ipcRenderer.on('file', (e, item) => {
+
+  data = item; // pass array [name, path] to data
+
+  var filename = data[0].replace(/^.*[\\\/]/, '');
+  var exe = filename.split('.').pop();
+
+  var file = new File(filename, data[0], data[1], exe, '12-12-2012');
+
+  file.createFile();
+  filesOpened.push(file);
+  
 })
 
-
+ipcRenderer.on('save', (e) => {
+  var tab = tabGroup.getActiveTab();
+  var filename; 
+})
 
 
 
 let tab = tabGroup.addTab({
     title: 'Home',
-    src: './Files/photon.css.html',
+    src: './Files/file2.html.html',
     webviewAttributes: {
         'nodeintegration': true
     },

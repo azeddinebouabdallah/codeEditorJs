@@ -1,4 +1,0 @@
-[
-  "/Users/mac/CocoApp/CodeEditor/package.json",
-  "{\n  \"name\": \"codeeditor\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Code Editor for HTML, CSS and JS\",\n  \"main\": \"main.js\",\n  \"scripts\": {\n    \"start\": \"electron .\"\n  },\n  \"author\": \"Bouabdallah Azeddine\",\n  \"license\": \"ISC\",\n  \"dependencies\": {\n    \"dialogs\": \"^1.1.20\",\n    \"electron-navigation\": \"^1.5.6\",\n    \"electron-tabs\": \"^0.9.1\",\n    \"highlight.js\": \"^9.12.0\",\n    \"jquery\": \"^3.3.1\",\n    \"js-treeview\": \"^1.1.5\",\n    \"prismjs\": \"^1.14.0\",\n    \"smalltalk\": \"^2.5.1\"\n  }\n}\n"
-]

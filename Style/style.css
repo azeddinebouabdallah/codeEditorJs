@@ -1,32 +1,47 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+
 .split.split-horizontal, .gutter.gutter-horizontal {
     height: 100%;
+    overflow: auto;
     float: left;
 }
 .gutter.gutter-horizontal {
-
     cursor: ew-resize;
 }
 .gutter {
-    background-color: #eee;
+    background-color: #2b3a42;
     background-repeat: no-repeat;
     background-position: 50%;
 }
 .window {
-  height: 100vw;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-
-
+.fileTree {
+  height: 100%;
+  width: 100%;
+  background-color: #2b3a42;
+}
+.split-horizontal{
+  background-color: #273238;
+}
 
 .split.split-horizontal, .gutter.gutter-horizontal {
-  height: 100%;
   float: left;
 }
 
 .split.split-horizontal, .gutter.gutter-horizontal {
-  height: 100%;
   float: left;
 }
 #project-tree> li{
@@ -57,13 +72,13 @@
   float:left
   ;margin-left:5px
   }
+
   .tree-leaf .tree-leaf-text:hover{color:#00f}
   .tree-leaf .tree-leaf-content:after,.tree-leaf .tree-leaf-content:before{
-
-
-    content:" ";display:table
-
+    content:" ";
+    display:table;
     }
+
   .tree-leaf .tree-leaf-content:after{clear:both}
 
   .nav-button {
@@ -82,3 +97,18 @@
     border: 1px solid #eee;
     min-height: 100%;
   }
+
+  .project-header {
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+  }
+
+.footer-editor {
+  width: 100%;
+  height: 3vh;
+  background-color: #fff;
+}

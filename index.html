@@ -18,11 +18,10 @@
   <body>
  <div class="window">
      <div class="split split-horizontal" id="one"><!--The Tree-View Goes Here! -->
-       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" id="project-tree">
-          <li class="breadcrumb-item active" aria-current="page">Project</li>
-        </ol>
-        </nav>
+       <div class="fileTree">
+       <div class="project-header">
+         <h5>Project</h5>
+       </div>
         <!--<div id="treeview"></div>-->
         <div id="jstree">
     <!-- in this example the tree is populated from inline HTML -->
@@ -35,6 +34,7 @@
       </li>
       <li>Root node 2</li>
     </ul>
+  </div>
   </div>
      </div>
      <div class="split split-horizontal" id="two"><!--The Tab-View Goes Here! -->
@@ -67,8 +67,9 @@
     <div class="etabs-views">
     </div>
 
-
+  
   </div>
+
   <input type="file" id="dialog-file" style="display: none">
   <script type="text/javascript" src="./bower_components/Split.js/split.js"></script>
   <script type="text/javascript">
