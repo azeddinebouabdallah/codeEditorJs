@@ -67,17 +67,18 @@ createFile() {
       '<body>\n'+
       '<textarea class="codemirror-textarea" id="codemirror">\n' +
        newOrgData +
-      '</textarea>'+
-        '<script src="../JS/style.js" type="text/javascript">\n'+
-        '</script><script type="text/javascript">\n'+
-        'var textArea = document.getElementById(\'codemirror\');\n' +
-        'var editor = CodeMirror.fromTextArea(textArea, { \n' +
-          'lineNumbers: true,\n' +
-          'theme: "material",\n' +
-          'mode: "xml",\n'+
-          'htmlMode: true,\n'+
-      '  });\n' +
-      '</script>\n'+
+      '</textarea>\n'+
+      '<script type="text/javascript">\n' +
+      'var textArea = document.getElementById(\'codemirror\');\n' +
+      'var editor = CodeMirror.fromTextArea(textArea, {\n' +
+        'lineNumbers: true,\n' +
+        'mode: "xml",\n' +
+       ' htmlMode: true,\n' +
+        'theme: "material",\n' +
+      '});\n' +
+      '</script>\n' +
+     ' <script src="../JS/require.js"></script>\n' +
+      '<script src="../JS/requires.js"></script>\n' +
       '</body>\n'+
       '</html>';
 
@@ -108,18 +109,19 @@ createFile() {
     '<body>\n'+
     '<textarea class="codemirror-textarea" id="codemirror">\n' +
      newOrgData +
-    '</textarea>'+
-      '<script src="../JS/style.js" type="text/javascript">\n'+
-      '</script><script type="text/javascript">\n'+
-      'var textArea = document.getElementById(\'codemirror\');\n' +
-      'var editor = CodeMirror.fromTextArea(textArea, { \n' +
-        'lineNumbers: true,\n' +
-        'theme: "material",\n' +
-        'mode: "css",\n'+
-    '  });\n' +
-    '</script>\n'+
-    '</body>\n'+
-    '</html>';
+     '</textarea>\n'+
+     '<script type="text/javascript">\n' +
+     'var textArea = document.getElementById(\'codemirror\');\n' +
+     'var editor = CodeMirror.fromTextArea(textArea, {\n' +
+       'lineNumbers: true,\n' +
+       'mode: "css",\n' +
+       'theme: "material",\n' +
+     '});\n' +
+     '</script>\n' +
+    ' <script src="../JS/require.js"></script>\n' +
+     '<script src="../JS/requires.js"></script>\n' +
+     '</body>\n'+
+     '</html>';
 
   }else {
     for (var i = 0; i<newData.length;i++){
@@ -146,21 +148,20 @@ createFile() {
     '<body>\n'+
     '<textarea class="codemirror-textarea" id="codemirror">\n' +
      newOrgData +
-    '</textarea>'+
-      '<script src="../JS/style.js" type="text/javascript">\n'+
-      '</script><script type="text/javascript">\n'+
-      'var textArea = document.getElementById(\'codemirror\');\n' +
-      'var editor = CodeMirror.fromTextArea(textArea, { \n' +
-        'lineNumbers: true,\n' +
-        'mode: "htmlmixed",\n' +
-        'theme: "material",\n' +
-        'mode: "xml",\n'+
-        'htmlMode: true,\n'+
-    '  });\n' +
-    '</script>\n'+
-    '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
-    '</body>\n'+
-    '</html>';
+     '</textarea>\n'+
+     '<script type="text/javascript">\n' +
+     'var textArea = document.getElementById(\'codemirror\');\n' +
+     'var editor = CodeMirror.fromTextArea(textArea, {\n' +
+       'lineNumbers: true,\n' +
+       'mode: "xml",\n' +
+      ' htmlMode: true,\n' +
+       'theme: "material",\n' +
+     '});\n' +
+     '</script>\n' +
+    ' <script src="../JS/require.js"></script>\n' +
+     '<script src="../JS/requires.js"></script>\n' +
+     '</body>\n'+
+     '</html>';
   }
 
   fs.writeFile('Files/'+ this.fileName +'.html', newPage, (err) => {
@@ -195,9 +196,23 @@ ipcRenderer.on('file', (e, item) => {
 })
 
 ipcRenderer.on('save', (e) => {
-  var currentTab = tabGroup.getActiveTab();
+  let currentTab = tabGroup.getActiveTab();
 
+  var name = currentTab.getTitle();
+
+  var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err)=> {});
+  var jsonFileContent = JSON.parse(jsonFile);
   
+  var newSavedData = jsonFileContent.fileContent;
+  var pathOfFile = jsonFileContent.filePath;
+
+  fs.writeFile(pathOfFile, newSavedData, (err) => {
+    if (err){
+      return
+    }
+  });
+  
+
 })
 
 

@@ -1,26 +1,36 @@
 const fs = require('fs')
 
-var name = window.location.pathname; 
-var name = name.replace(/^.*[\\\/]/, '');
+var nameBeta = window.location.pathname; 
+ nameBeta = nameBeta.replace(/^.*[\\\/]/, '');
+ nameBeta = nameBeta.split('.')
+ var name = ''
 
-var textArea = document.getElementById('codemirror');
-var editor = CodeMirror.fromTextArea(textArea, {
-  lineNumbers: true,
-  mode: "xml",
-  htmlMode: true,
-  theme: "material",
-});
+ for (var i = 0; i < nameBeta.length - 1; i++){
+        name += nameBeta[i] + '.';
+ }
 
-editor.on('change', () => {
-     var dataReload = editor.getValue();
-     if (fs.existsSync(name + '.json')){
-     var fileContent = fs.readFileSync(name + '.json');
-     var content = JSON.parse(fileContent);
+
+editor.on('keyup', () => {
+
+     /*fs.writeFile('./Files/hey.json', '', (err) => {
+
+     });*/
+    if (fs.existsSync('Files/' + name + 'json')){
+
+        var jsonFile = fs.readFileSync('Files/' + name + 'json', 'utf8', (err)=> {});
+        var jsonFileContent = JSON.parse(jsonFile);
+        
+        jsonFileContent.fileContent = editor.getValue();
+        jsonFileContent = JSON.stringify(jsonFileContent, null, 2);
+
      }else {
-         var content = {
-             fileContent : ''
-         }
+        jsonFileContent = {
+            fileContent : editor.getValue()
+        }
+        jsonFileContent = JSON.stringify(jsonFileContent, null , 2);
      }
-     content.fileContent = editor.getValue();
-     fs.writeFile(name, content, (err) => { });
+    
+     fs.writeFile('Files/' + name + 'json' , jsonFileContent, (err) => { 
+
+     });
   });

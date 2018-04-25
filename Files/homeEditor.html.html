@@ -9,39 +9,14 @@
 </head>
 <body>
 <textarea class="codemirror-textarea" id="codemirror">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" dir="ltr"&gt;
-&lt;head&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;script src="../codemirror/lib/codemirror.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="../codemirror/lib/codemirror.css"&gt;
-&lt;link rel="stylesheet" href="../codemirror/theme/material.css"&gt;
-&lt;script src="../codemirror/mode/xml/xml.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="./Style/stylePages.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
 
-&lt;!-- Our code goes here --&gt;
-&lt;textarea class="codemirror-textarea" id="codemirror"&gt;
-  &lt;textarea/&gt;
-&lt;/textarea&gt;
 
-&lt;script src="../JS/style.js" type="text/javascript"&gt;
-&lt;/script&gt;
-
-&lt;script type="text/javascript"&gt;
-var textArea = document.getElementById('codemirror');
-var editor = CodeMirror.fromTextArea(textArea, {
-  lineNumbers: true,
-  mode: "xml",
-  htmlMode: true,
-  theme: "material",
-  onChange: (codeMirrorObj) =&gt; {
-     var reloadJSONData = codeMirrorObj.getValue();
-  },
-});
-CodeMirror.setSize("100%", "100%");
-
+&lt;!--&lt;script src="../JS/style.js" type="text/javascript"&gt;&lt;/script&gt;--&gt;
+&lt;script src="../JS/require.js"&gt;&lt;/script&gt;
+&lt;script src="../JS/requires.js"&gt;&lt;/script&gt;
+&lt;!--&lt;script type="text/javascript"&gt;
+var name = window.location.pathname; 
+var name = name.replace(/^.*[\\\/]/, '');
 
 /*var myCodeMirror =CodeMirror(document.getElementById("codemirror"), {
 lineNumbers: true,
@@ -49,20 +24,23 @@ mode: "htmlmixed",
 theme: "material",
 });*/
 
-&lt;/script&gt;
+&lt;/script&gt;--&gt;
 
 &lt;/body&gt;
 &lt;/html&gt;
 
-</textarea><script src="../JS/style.js" type="text/javascript">
-</script><script type="text/javascript">
+
+</textarea>
+<script type="text/javascript">
 var textArea = document.getElementById('codemirror');
-var editor = CodeMirror.fromTextArea(textArea, { 
+var editor = CodeMirror.fromTextArea(textArea, {
 lineNumbers: true,
-theme: "material",
 mode: "xml",
-htmlMode: true,
-  });
+ htmlMode: true,
+theme: "material",
+});
 </script>
+ <script src="../JS/require.js"></script>
+<script src="../JS/requires.js"></script>
 </body>
 </html>
