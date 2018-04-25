@@ -63,7 +63,7 @@ const mainMenuTemplate = [
         label : 'Close Tab',
         accelerator : process.platform == 'darwin' ? 'Command+Shift+Q' : 'Command+Shift+Q',
         click(){
-
+              
         }
     },{
       label: 'Close Program',

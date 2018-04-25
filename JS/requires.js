@@ -11,7 +11,7 @@ var nameBeta = window.location.pathname;
 
 
 editor.on('keyup', () => {
-
+ 
      /*fs.writeFile('./Files/hey.json', '', (err) => {
 
      });*/

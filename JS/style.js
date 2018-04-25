@@ -50,8 +50,8 @@ createFile() {
         }
         else {
           asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-            newOrgData += asciiDataI + '\n';
-            console.log('Cond 2');
+          newOrgData += asciiDataI + '\n';
+          console.log('Cond 2');
         }
 
     }
