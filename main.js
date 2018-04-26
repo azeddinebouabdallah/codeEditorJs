@@ -57,17 +57,6 @@ const mainMenuTemplate = [
       label: 'Save As',
       accelerator: process.platform == 'darwin'? 'Command+Shift+S' : 'Ctrl+N',
       click() {
-        /*dialog.showSaveDialog((filename)=> {
-          if (filename === undefined){
-            return;
-          }
-          fs.writeFile(filename, '', (err) => {
-            if (err){
-              return;
-            }
-            mainWindow.webContents.send('saveas', filename);
-          })
-        })*/
         var savePath = dialog.showSaveDialog((filename) => {
           if (filename === undefined){
             console.log('Filename undefined (Save as)')
@@ -78,13 +67,12 @@ const mainMenuTemplate = [
           mainWindow.webContents.send('saveas', data);
           }
         })
-
       }
     }, {
         label : 'Close Tab',
-        accelerator : process.platform == 'darwin' ? 'Command+Shift+Q' : 'Command+Shift+Q',
+        //accelerator : process.platform == 'darwin' ? 'Command+Shift+Q' : 'Command+Shift+Q',
         click(){
-              
+              mainWindow.webContents.send('closetab')
         }
     },{
       label: 'Close Program',

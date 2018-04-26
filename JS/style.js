@@ -239,6 +239,13 @@ ipcRenderer.on('saveas', (e, filePath) => {
 
 })
 
+ipcRenderer.on('closetab', (e) => {
+  
+    var activeTab = tabGroup.getActiveTab();
+    console.log('Name of Tab: ' + activeTab.getTitle())
+    activeTab.close(true);
+})
+
 
 let tab = tabGroup.addTab({
     title: 'Home',
