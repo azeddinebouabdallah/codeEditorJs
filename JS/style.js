@@ -5,9 +5,10 @@ const fs = require('fs')
 
 
 let tabGroup = new TabGroup();
-let filePath
+let filePath;
 
 let filesOpened = new Array();
+
 
 class File {
 
@@ -185,27 +186,39 @@ ipcRenderer.on('file', (e, item) => {
 
   data = item; // pass array [name, path] to data
 
+  // Get the name of the file using regular expression and put it into **filename
   var filename = data[0].replace(/^.*[\\\/]/, '');
+  // Get the extention of the file
   var exe = filename.split('.').pop();
 
+  // Create the obj from File Class
   var file = new File(filename, data[0], data[1], exe, '12-12-2012');
 
+  // Call the create File function
   file.createFile();
+
+  //Push file into a list that hold all the opened files
   filesOpened.push(file);
   
 })
 
 ipcRenderer.on('save', (e) => {
+
+  // Get the current tab
   let currentTab = tabGroup.getActiveTab();
 
+  // Get the title of the time 
   var name = currentTab.getTitle();
 
+  // Reading the JSON file of the tab selected and parse it into **jsonFileContent variable
   var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err)=> {});
   var jsonFileContent = JSON.parse(jsonFile);
   
+  // Get the file content and path into **newSavedData and **pathOfFile
   var newSavedData = jsonFileContent.fileContent;
   var pathOfFile = jsonFileContent.filePath;
 
+  // Write the new file
   fs.writeFile(pathOfFile, newSavedData, (err) => {
     if (err){
       console.log('Error with saving file')
@@ -218,16 +231,23 @@ ipcRenderer.on('save', (e) => {
 
 ipcRenderer.on('saveas', (e, filePath) => {
 
+    // Get the current tab
     var currentTab = tabGroup.getActiveTab();
 
+    // Get the title of the Tab
     var name = currentTab.getTitle();
-    
+
+    // Read the JSON file of the activated tab and parse it into **jsonFileContent variable
     var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err) => {});
     var jsonFileContent = JSON.parse(jsonFile);
     
+    // Get the content from the JSON file 
     var newSavedData = jsonFileContent.fileContent
+    /* Buffer the path so it can be used in fs.write IDK why in this func it said to me that you need to buufer
+    so you'll not find any Path Buffer in other writing files */
     var path = Buffer.from(filePath, 'utf8');
     console.log('Filename: ' + name + '\n Filepath : ' + path);
+    // Write the new file
     fs.writeFile(path, newSavedData, (err) => {
       if (err) {
         console.log('Error with saving file as')
@@ -241,6 +261,7 @@ ipcRenderer.on('saveas', (e, filePath) => {
 
 ipcRenderer.on('closetab', (e) => {
   
+    // Get the current active Tab and close it
     var activeTab = tabGroup.getActiveTab();
     console.log('Name of Tab: ' + activeTab.getTitle())
     activeTab.close(true);
@@ -248,14 +269,138 @@ ipcRenderer.on('closetab', (e) => {
 
 
 ipcRenderer.on('selectall', (e) => {
+
+  // Get the current tab and the title
   var activeTab = tabGroup.getActiveTab();
   var nameOfTab = activeTab.getTitle();
 
+  // Get access to the webview of the activated tab and select all the content of the webView
   activeTab.addEventListener('dom-ready', () => {
   webview.selectAll()
 })
+})
+
+ipcRenderer.on('increasefontsize', (e) => { 
+
+  // Get the param JSON File and parse it into **param variable
+  var param = fs.readFileSync('./param.json', 'utf8', (err) => {})
+  param = JSON.parse(param)
+
+  
+  fontSize = param.fontsize + 1 ; //Increase the font size of our local variable
+
+  param.fontsize += 1; // Increase the font size of our global DATA Json Data
+
+  //Stringify and write the new params
+  var param = JSON.stringify(param);
+  fs.writeFile('./param.json', param, (err) => {
+
+  })
 
 
+  // Read the CodeMirror Css file 
+  var codeMirrorCss = fs.readFileSync('codemirror/lib/codemirror.css','utf8' , (err) => {
+    if (err){
+      console.log('Error with reading CodeMirror css file');
+      return;
+    }
+  })
+
+  // Add the font Size property to CODEMirror text
+  codeMirrorCss += '.CodeMirror {font-size :  ' + fontSize + 'px  }'
+ 
+  // Rewrite the CodeMirror Css
+  console.log ('File Added: ' + codeMirrorCss);
+  fs.writeFile('./codemirror/lib/codemirror.css', codeMirrorCss, (err) => {
+    if (err) {
+      console.log('Error with writing the CodeMirror css file')
+    }
+  })
+
+  // Reload each tab so the new CSS takes a place
+  tabGroup.eachTab((ctab, index, tabCollection) => {
+    var webview = ctab.webview;
+    webview.reload();
+  })
+
+})
+
+ipcRenderer.on('decreasefontsize', (e)=> {
+
+  // Get the param JSON File and parse it into **param variable
+  var param = fs.readFileSync('./param.json', 'utf8', (err) => {})
+  param = JSON.parse(param)
+
+  fontSize = param.fontsize - 1 ; //Decrease the font size of our local variable
+
+  param.fontsize -= 1; // Decrease the font size of our global DATA Json Data
+
+  //Stringify and write the new params
+  var param = JSON.stringify(param);
+  fs.writeFile('./param.json', param, (err) => {})
+
+  // Read the CodeMirror Css file 
+  var codeMirrorCss = fs.readFileSync('codemirror/lib/codemirror.css','utf8' , (err) => {
+    if (err){
+      console.log('Error with reading CodeMirror css file');
+      return;
+    }
+  })
+  // Add the font Size property to CODEMirror text
+  codeMirrorCss += '.CodeMirror {font-size :  ' + fontSize + 'px  }'
+ 
+  // Rewrite the CodeMirror Css
+  console.log ('File Added: ' + codeMirrorCss);
+  fs.writeFile('./codemirror/lib/codemirror.css', codeMirrorCss, (err) => {
+    if (err) {
+      console.log('Error with writing the CodeMirror css file')
+    }
+  })
+
+  // Reload each tab so the new CSS takes a place
+  tabGroup.eachTab((ctab, index, tabCollection) => {
+    var webview = ctab.webview;
+    webview.reload();
+  })
+})
+
+ipcRenderer.on('resetfontsize', (e) => {
+
+  // Get the param JSON File and parse it into **param variable
+  var param = fs.readFileSync('./param.json', 'utf8', (err) => {})
+  param = JSON.parse(param)
+
+  fontSize = 12 ; //put the value 12 (reset the value) of the local variable
+
+  param.fontsize = 12; // Reset the value (fontsize) of the param Data (JSON file)
+
+  //Stringify and write the new params
+  var param = JSON.stringify(param);
+  fs.writeFile('./param.json', param, (err) => {})
+
+  // Read the CodeMirror Css file 
+  var codeMirrorCss = fs.readFileSync('codemirror/lib/codemirror.css','utf8' , (err) => {
+    if (err){
+      console.log('Error with reading CodeMirror css file');
+      return;
+    }
+  })
+  // Add the font Size property to CODEMirror text
+  codeMirrorCss += '.CodeMirror {font-size :  ' + fontSize + 'px  }'
+ 
+  // Rewrite the CodeMirror Css
+  console.log ('File Added: ' + codeMirrorCss);
+  fs.writeFile('./codemirror/lib/codemirror.css', codeMirrorCss, (err) => {
+    if (err) {
+      console.log('Error with writing the CodeMirror css file')
+    }
+  })
+
+  // Reload each tab so the new CSS takes a place
+  tabGroup.eachTab((ctab, index, tabCollection) => {
+    var webview = ctab.webview;
+    webview.reload();
+  })
 })
 
 let tab = tabGroup.addTab({

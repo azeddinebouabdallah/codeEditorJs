@@ -112,26 +112,27 @@ const mainMenuTemplate = [
     click(){
       mainWindow.webContents.send('selectall')
     }
-  }, {role: 'delete'}]
+  }]
 }, {
   label: 'View',
-  submenu : [{role: 'togglefullscreen'}, {
+  submenu : [{role: 'togglefullscreen'}, 
+  {
     label: 'Increase Font Size',
     accelerator: process.platform == 'darwin' ? 'Command+ +' : 'Ctrl+ +',
     click(){
-
+        mainWindow.webContents.send('increasefontsize')
     }
   }, {
     label: 'Decrease Font Size',
     accelerator: process.platform == 'darwin' ? 'Command+-' : 'Ctrl+-',
     click(){
-
+        mainWindow.webContents.send('decreasefontsize')
     }
   }, {
     label: 'Reset Font Size',
     accelerator: process.platform == 'darwin' ? 'Command+O' : 'Command+O',
     click (){
-
+      mainWindow.webContents.send('resetfontsize')
     }
   }]
 }, {
