@@ -208,6 +208,7 @@ ipcRenderer.on('save', (e) => {
 
   fs.writeFile(pathOfFile, newSavedData, (err) => {
     if (err){
+      console.log('Error with saving file')
       return
     }
   });
@@ -215,7 +216,28 @@ ipcRenderer.on('save', (e) => {
 
 })
 
+ipcRenderer.on('saveas', (e, filePath) => {
 
+    var currentTab = tabGroup.getActiveTab();
+
+    var name = currentTab.getTitle();
+    
+    var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err) => {});
+    var jsonFileContent = JSON.parse(jsonFile);
+    
+    var newSavedData = jsonFileContent.fileContent
+    var path = Buffer.from(filePath, 'utf8');
+    console.log('Filename: ' + name + '\n Filepath : ' + path);
+    fs.writeFile(path, newSavedData, (err) => {
+      if (err) {
+        console.log('Error with saving file as')
+        return
+      }
+    })
+
+    
+
+})
 
 
 let tab = tabGroup.addTab({
