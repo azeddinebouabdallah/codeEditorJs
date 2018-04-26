@@ -109,6 +109,9 @@ const mainMenuTemplate = [
   {
     label: 'selectall',
     accelerator: process.platform == 'darwin' ? 'Command+A' : 'Ctrl+A',
+    click(){
+      mainWindow.webContents.send('selectall')
+    }
   }, {role: 'delete'}]
 }, {
   label: 'View',

@@ -65,7 +65,7 @@ createFile() {
         '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
       '</head>\n'+
       '<body>\n'+
-      '<textarea class="codemirror-textarea" id="codemirror">\n' +
+      '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
        newOrgData +
       '</textarea>\n'+
       '<script type="text/javascript">\n' +
@@ -107,7 +107,7 @@ createFile() {
       '<script src="../codemirror/mode/css/css.js"></script>\n'+
     '</head>\n'+
     '<body>\n'+
-    '<textarea class="codemirror-textarea" id="codemirror">\n' +
+    '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
      newOrgData +
      '</textarea>\n'+
      '<script type="text/javascript">\n' +
@@ -146,7 +146,7 @@ createFile() {
 
     '</head>\n'+
     '<body>\n'+
-    '<textarea class="codemirror-textarea" id="codemirror">\n' +
+    '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
      newOrgData +
      '</textarea>\n'+
      '<script type="text/javascript">\n' +
@@ -246,6 +246,17 @@ ipcRenderer.on('closetab', (e) => {
     activeTab.close(true);
 })
 
+
+ipcRenderer.on('selectall', (e) => {
+  var activeTab = tabGroup.getActiveTab();
+  var nameOfTab = activeTab.getTitle();
+
+  activeTab.addEventListener('dom-ready', () => {
+  webview.selectAll()
+})
+
+
+})
 
 let tab = tabGroup.addTab({
     title: 'Home',
