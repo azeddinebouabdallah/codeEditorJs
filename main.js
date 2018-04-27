@@ -67,13 +67,13 @@ const mainMenuTemplate = [
       }
     },{
       label: 'Save',
-      accelerator: process.platform == 'darwin' ? 'Command+S' : 'Ctrl+N',
+      accelerator: process.platform == 'darwin' ? 'Command+S' : 'Ctrl+S',
       click (){
         mainWindow.webContents.send('save');
       }
     }, {
       label: 'Save As',
-      accelerator: process.platform == 'darwin'? 'Command+Shift+S' : 'Ctrl+N',
+      accelerator: process.platform == 'darwin'? 'Command+Shift+S' : 'Ctrl+Shift+S',
       click() {
         var savePath = dialog.showSaveDialog((filename) => {
           if (filename === undefined){
