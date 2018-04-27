@@ -417,19 +417,4 @@ let tab = tabGroup.addTab({
 
 
 
-require('./node_modules/jquery/dist/jquery.js')
 
-TreeView = require('js-treeview')
-
-tree = new TreeView([
-    { name: 'Item 1', children: [] },
-    { name: 'Item 2', expanded: true, children: [
-            { name: 'Sub Item 1', children: [] },
-            { name: 'Sub Item 2', children: [] }
-        ]
-    }
-], 'treeview');
-
-tree.on('collapse', function (e) {
-    console.log(JSON.stringify(e));
-});

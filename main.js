@@ -27,7 +27,17 @@ const mainMenuTemplate = [
           readFile(fileNames[0])
         }
       })
-    }}, {
+    }},{
+      label: 'Open Folders', // This part is for opening a file
+      click(){
+        dialog.showOpenDialog({
+          properties: ['openDirectory', 'promptToCreate'],
+        }, (foldername) => {
+          console.log('Folder returns = ' + foldername)
+        });
+      }
+    }
+    , {
       label : 'New file',
       accelerator : process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
       click(){

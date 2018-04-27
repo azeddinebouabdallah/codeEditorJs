@@ -1,4 +1,4 @@
-# codeEditorJs
+# Code Editor
 Code Editor JavaScript
 
 This Code Editor is for html, css and Javascript languages
