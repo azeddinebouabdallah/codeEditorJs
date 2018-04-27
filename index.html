@@ -23,8 +23,22 @@
        <div class="project-header">
          <h5>Project</h5>
        </div>
-        
-      <ul class="all_tree">
+      <!-- Tree List -->
+      <ul class="all_tree"> <!-- Root -->
+
+        <!--
+        <li class="folders">Name of Folder
+            <ul class="subfiles">
+              <li class="files">Name of file</li>
+              <li class="folders">Name of Folder
+                <ul>
+
+                </ul>
+              </li>
+            </ul>
+        </li>-->
+
+        <!-- Code goes here -->
         <li class="folders"> Folder
           <ul class="subfiles">
             <li class="files">File</li>
@@ -35,9 +49,20 @@
             </li>
           </ul>
         </li>
-        <li class="folders">Folder</li>
-      </ul>
+        <li class="folders">Folder
+            <ul class="subfiles">
+                <li class="files">File</li>
+                <li class="folders">Folder
+                  <ul class="subfiles">
+                    <li class="files">File</li>
+                  </ul>
+                </li>
+              </ul>
+        </li>
+         <!-- Code goes here -->
 
+      </ul>
+      <!-- Tree List -->
       </div>
      </div>
      <div class="split split-horizontal" id="two"><!--The Tab-View Goes Here! -->
@@ -62,17 +87,40 @@
   <script type="text/javascript" src="./JS/style.js"></script>
   <script type="text/javascript" src="./vanillatree-master/vanillatree.js"></script>
   <script type="text/javascript">
+  // Don't change Split
    Split(['#one', '#two'], {
         sizes: [20, 80],
         minSize: 200
       });
-  
+  //Include jquery
   window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
   
-  $('.folders').click(function () {
-    console.log($(this).first())
-    $(this).first().children().toggle();
+  var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
+
   })
+/*
+  jsonData = JSON.parse(jsonData);
+  Code of displaying (Not working)
+  for (data in jsonData) {
+
+  }
+  $('.folders').click(function () {
+    
+    $(this).children().toggle();
+    
+  function nameD(data){
+    for (data in jsonData) {
+        if (data.type= 'folder') {
+          $('.all-tree').append('<li class="folders">' + data.name + '<ul class="subfiles">')
+          nameD();
+        }else {
+          $('.all-tree').append('<li>' + data.name + '</li>');
+        }
+    } 
+  }
+
+  })
+  */
 
  
   </script>

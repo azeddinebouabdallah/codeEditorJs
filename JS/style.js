@@ -403,6 +403,23 @@ ipcRenderer.on('resetfontsize', (e) => {
   })
 })
 
+
+ipcRenderer.on('folder', (e)=> {
+  window.$ = require('./bower_components/jquery/dist/jquery.min.js')
+
+  $('#all_tree').html('');
+  var jsonFolder = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
+  });
+
+  var jsonFolderContent = JSON.parse(jsonFolder);
+  console.dir(jsonFolderContent)
+
+})
+
+function loopJsonFile(){
+  
+}
+
 let tab = tabGroup.addTab({
     title: 'Home',
     src: './Files/homeEditor.html',

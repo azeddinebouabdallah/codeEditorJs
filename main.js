@@ -33,7 +33,15 @@ const mainMenuTemplate = [
         dialog.showOpenDialog({
           properties: ['openDirectory', 'promptToCreate'],
         }, (foldername) => {
-          console.log('Folder returns = ' + foldername)
+          console.log('Folder returns = ' + foldername[0])
+          console.dir(foldername)
+          var dataa = dirTree(foldername[0]);
+          console.log('succ' + dataa);
+          console.dir(dataa);
+          dataa = JSON.stringify(dataa, null, 2)
+          fs.writeFile('Files/folderOpen.json', dataa, (err) => {
+          mainWindow.webContents.send('folder');
+          })
         });
       }
     }
@@ -48,7 +56,7 @@ const mainMenuTemplate = [
           }
           fs.writeFile(filename, '', (err) => {
             if (err) {
-              console('Error with creating file');
+              console.log('Error with creating file');
               return;
             }
             console.log(filename);
@@ -209,6 +217,57 @@ function openNewFile(filePath){
       mainWindow.webContents.send('file' , dataNew);
   })
 }
+
+
+function dirTreerrr(filename) {
+  console.log('FileName: ' + filename);
+  info = {
+    path: filename,
+    name: path.basename(filename)
+  };
+  fs.readdir(filename, (err, files) => {
+    console.log('Files: ' + files);
+    files.forEach((file) => {
+      if (fs.lstatSync(path.join(filename,file)).isDirectory()){
+        console.log('In progress: Folder')
+        info.type = 'folder';
+        info.children = fs.readdirSync(filename).map(function(child) {
+          return dirTree(path.join(filename, child));
+        });
+      }else {
+        console.log('In progress: File')
+        info.type = "file";
+      }
+      console.log('returns: ' + info)
+    });
+  })
+  return info;
+}
+
+function dirTree(filename) {
+
+  var stats = fs.lstatSync(filename),
+  
+      info = {
+          path: filename,
+          name: path.basename(filename)
+      };
+
+  if (stats.isDirectory()) {
+      info.type = "folder";
+      info.children = fs.readdirSync(filename).map(function(child) {
+          return dirTree(filename + '/' + child); // path.join(filename, child);
+      });
+  } else {
+      // Assuming it's a file. In real life it could be a symlink or
+      // something else!
+      info.type = "file";
+  }
+
+  return info;
+}
+
+
 
 app.on('ready', createWindow)
 
