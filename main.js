@@ -148,7 +148,7 @@ const mainMenuTemplate = [
     }
   }, {
     label: 'Reset Font Size',
-    accelerator: process.platform == 'darwin' ? 'Command+O' : 'Command+O',
+    accelerator: process.platform == 'darwin' ? 'Command+O' : 'Ctrl+O',
     click (){
       mainWindow.webContents.send('resetfontsize')
     }
