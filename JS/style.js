@@ -10,6 +10,20 @@ let filePath;
 let filesOpened = new Array();
 
 
+var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+  if (err) {
+    console.log(err);
+  }
+}));
+
+var tree = require('electron-tree-view')({
+root,
+container: document.querySelector('#jstree_demo_div'),
+children: c => c.children,
+label: c => c.name
+})
+
+
 class File {
 
 constructor(fileName, filePath, content, exe, dateOfCreation){
@@ -25,7 +39,7 @@ createFile() {
 
     var extention = this.exe;
     var dfc = this.dateOfCreation;
-    
+    console.log ('the file exe : ' + this.exe)
     var data = {
       filename : this.fileName, 
       filePath : this.filePath,
@@ -41,18 +55,16 @@ createFile() {
 
     var newOrgData = '';
 
-    if (this.exe == 'html') {
+    if (this.exe == 'html' || this.exe == 'xml') {
+      console.log('Html or Xml file')
       for (var i = 0; i<newData.length;i++){
-        console.log(newData[i] + ' index : ' + i);
         if (i != newData.length - 1){
           var asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
           newOrgData += asciiDataI + '\n';
-          console.log('Cond 1');
         }
         else {
           asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
           newOrgData += asciiDataI + '\n';
-          console.log('Cond 2');
         }
 
     }
@@ -86,14 +98,12 @@ createFile() {
   }else if (this.exe == 'css') {
 
     for (var i = 0; i<newData.length;i++){
-      console.log(newData[i] + ' index : ' + i);
+      console.log('Css file')
       if (i != newData.length - 1){
         newOrgData += newData[i] + '\n';
-        console.log('Cond 1');
       }
       else {
           newOrgData += newData[i] + '\n';
-          console.log('Cond 2');
       }
 
   }
@@ -125,15 +135,13 @@ createFile() {
      '</html>';
 
   }else {
+    console.log('Other file')
     for (var i = 0; i<newData.length;i++){
-      console.log(newData[i] + ' index : ' + i);
       if (i != newData.length - 1){
         newOrgData += newData[i] + '\n';
-        console.log('Cond 1');
       }
       else {
           newOrgData += newData[i] + '\n';
-          console.log('Cond 2');
       }
 
   }
@@ -405,20 +413,74 @@ ipcRenderer.on('resetfontsize', (e) => {
 
 
 ipcRenderer.on('folder', (e)=> {
-  window.$ = require('./bower_components/jquery/dist/jquery.min.js')
-
-  $('#all_tree').html('');
+  
   var jsonFolder = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
   });
 
   var jsonFolderContent = JSON.parse(jsonFolder);
-  console.dir(jsonFolderContent)
+  refreshWhenFolderOpen();
 
 })
 
-function loopJsonFile(){
-  
+function refreshWhenFolderOpen(){
+  window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+  var root = {
+    name: '',
+    children: []
+  }
+  var tree = require('electron-tree-view')({
+    root,
+    container: document.querySelector('#jstree_demo_div'),
+  })
+  var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+     if (err) {
+       console.log(err);
+     }
+   }));
+ 
+ var tree = require('electron-tree-view')({
+   root,
+   container: document.querySelector('#jstree_demo_div'),
+   children: c => c.children,
+   label: c => c.name
+ })
+ tree.loop.update({ root })
+
+ tree.on('selected', item => {
+  // adding a new children to every selected item
+ 
+  if (item.type == 'file') {
+    
+    var dataOfNewFile = fs.readFileSync(item.path, 'utf8', (err)=> {
+      console.log('can\'t read selected file') 
+      return
+    })
+    var exeOfNewFile = item.name.split('.').pop()
+    console.log('The new exe : ' + exeOfNewFile)
+    var file = new File(item.name, item.path, dataOfNewFile, exeOfNewFile, '12-12-2012')
+    file.createFile();
+  }
+  console.log('item selected');
+})
 }
+
+tree.on('selected', item => {
+  // adding a new children to every selected item
+ 
+  if (item.type == 'file') {
+    
+    var dataOfNewFile = fs.readFileSync(item.path, 'utf8', (err)=> {
+      console.log('can\'t read selected file') 
+      return
+    })
+    var exeOfNewFile = item.name.split('.').pop()
+    console.log('The new exe : ' + exeOfNewFile)
+    var file = new File(item.name, item.path, dataOfNewFile, exeOfNewFile, '12-12-2012')
+    file.createFile();
+  }
+  console.log('item selected');
+})
+
 
 let tab = tabGroup.addTab({
     title: 'Home',

@@ -1,0 +1,7 @@
+{
+  "filename": "stylePages.css",
+  "filePath": "/Users/mac/CocoApp/CodeEditor/Style/stylePages.css",
+  "fileexe": "css",
+  "fileDate": "12-12-2012",
+  "fileContent": "body {\n  padding: 0px;\n  margin: 0px;\n  height: 100%;\n}\n.codemirror-textarea {\n  margin: 0px;\n  padding: 0px;\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  top: 0;\n}\n"
+}

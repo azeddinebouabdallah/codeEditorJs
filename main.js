@@ -33,13 +33,14 @@ const mainMenuTemplate = [
         dialog.showOpenDialog({
           properties: ['openDirectory', 'promptToCreate'],
         }, (foldername) => {
-          console.log('Folder returns = ' + foldername[0])
-          console.dir(foldername)
+          if (foldername === undefined){return}
+
+         
           var dataa = dirTree(foldername[0]);
-          console.log('succ' + dataa);
-          console.dir(dataa);
           dataa = JSON.stringify(dataa, null, 2)
+
           fs.writeFile('Files/folderOpen.json', dataa, (err) => {
+            if (err) {return}
           mainWindow.webContents.send('folder');
           })
         });
@@ -262,6 +263,7 @@ function dirTree(filename) {
       // Assuming it's a file. In real life it could be a symlink or
       // something else!
       info.type = "file";
+      info.children = [];
   }
 
   return info;

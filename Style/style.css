@@ -112,3 +112,10 @@ body {
   height: 3vh;
   background-color: #fff;
 }
+
+#jstree_demo_div {
+  color: #ddd;
+}
+.elem{
+  color: #fff;
+}

@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="./node_modules/electron-tabs/electron-tabs.css">
     <link rel="stylesheet" href="./vanillatree-master/vanillatree.css">
     <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="./jsTree/dist/themes/default/style.min.css" />
     
   <style media="screen">
-
-
   </style>
     <title></title>
   </head>
@@ -24,44 +23,7 @@
          <h5>Project</h5>
        </div>
       <!-- Tree List -->
-      <ul class="all_tree"> <!-- Root -->
-
-        <!--
-        <li class="folders">Name of Folder
-            <ul class="subfiles">
-              <li class="files">Name of file</li>
-              <li class="folders">Name of Folder
-                <ul>
-
-                </ul>
-              </li>
-            </ul>
-        </li>-->
-
-        <!-- Code goes here -->
-        <li class="folders"> Folder
-          <ul class="subfiles">
-            <li class="files">File</li>
-            <li class="folders">Folder
-              <ul class="subfiles">
-                <li class="files">File</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="folders">Folder
-            <ul class="subfiles">
-                <li class="files">File</li>
-                <li class="folders">Folder
-                  <ul class="subfiles">
-                    <li class="files">File</li>
-                  </ul>
-                </li>
-              </ul>
-        </li>
-         <!-- Code goes here -->
-
-      </ul>
+      <div id="jstree_demo_div"></div>
       <!-- Tree List -->
       </div>
      </div>
@@ -83,26 +45,43 @@
   <script type="text/javascript" src="./bower_components/Split.js/split.js"></script>
   <script type="text/javascript" src="./codemirror/lib/codemirror.js"></script>
   <script type="text/javascript" src="./codemirror/mode/css/css.js"></script>
-  <script type="text/javascript" src="./codemirror/mode/htmlmixed/htmlmixed.js"></script>
+  <script type="text/javascript" src="./codemirror/mode/xml/xml.js"></script>
   <script type="text/javascript" src="./JS/style.js"></script>
   <script type="text/javascript" src="./vanillatree-master/vanillatree.js"></script>
   <script type="text/javascript">
+
   // Don't change Split
    Split(['#one', '#two'], {
         sizes: [20, 80],
         minSize: 200
       });
+
   //Include jquery
-  window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+/*    window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+
+ var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+    if (err) {
+      console.log(err);
+    }
+  }));
+
+ 
+const tree = require('electron-tree-view')({
+  root,
+  container: document.querySelector('#jstree_demo_div'),
+  children: c => c.children,
+  label: c => c.name
+}) */
+ 
+
+
   
   var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
-
   })
 /*
   jsonData = JSON.parse(jsonData);
   Code of displaying (Not working)
   for (data in jsonData) {
-
   }
   $('.folders').click(function () {
     
@@ -118,10 +97,8 @@
         }
     } 
   }
-
   })
   */
-
  
   </script>
 

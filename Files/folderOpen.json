@@ -1,71 +1,19 @@
 {
-  "path": "/Users/mac/Downloads/jsTree/dist/themes",
-  "name": "themes",
+  "path": "/Users/mac/CocoApp/CodeEditor/Style",
+  "name": "Style",
   "type": "folder",
   "children": [
     {
-      "path": "/Users/mac/Downloads/jsTree/dist/themes/default",
-      "name": "default",
-      "type": "folder",
-      "children": [
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default/32px.png",
-          "name": "32px.png",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default/40px.png",
-          "name": "40px.png",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default/style.css",
-          "name": "style.css",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default/style.min.css",
-          "name": "style.min.css",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default/throbber.gif",
-          "name": "throbber.gif",
-          "type": "file"
-        }
-      ]
+      "path": "/Users/mac/CocoApp/CodeEditor/Style/style.css",
+      "name": "style.css",
+      "type": "file",
+      "children": []
     },
     {
-      "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark",
-      "name": "default-dark",
-      "type": "folder",
-      "children": [
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark/32px.png",
-          "name": "32px.png",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark/40px.png",
-          "name": "40px.png",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark/style.css",
-          "name": "style.css",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark/style.min.css",
-          "name": "style.min.css",
-          "type": "file"
-        },
-        {
-          "path": "/Users/mac/Downloads/jsTree/dist/themes/default-dark/throbber.gif",
-          "name": "throbber.gif",
-          "type": "file"
-        }
-      ]
+      "path": "/Users/mac/CocoApp/CodeEditor/Style/stylePages.css",
+      "name": "stylePages.css",
+      "type": "file",
+      "children": []
     }
   ]
 }

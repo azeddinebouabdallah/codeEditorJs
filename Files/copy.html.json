@@ -1,7 +1,0 @@
-{
-  "filename": "copy.html",
-  "filePath": "/Users/mac/CocoApp/CodeEditor/copy.html",
-  "fileexe": "html",
-  "fileDate": "12-12-2012",
-  "fileContent": "\n<html>\n  <body>\n<!--<script src=\"../JS/style.js\" type=\"text/javascript\"></script>-->\n<script src=\"../JS/require.js\"></script>\n<script src=\"../JS/requires.js\"></script>\n<!--<script type=\"text/javascript\">\nvar name = window.location.pathname; \nvar name = name.replace(/^.*[\\\\\\/]/, '');\n\n/*var myCodeMirror =CodeMirror(document.getElementById(\"codemirror\"), {\nlineNumbers: true,\nmode: \"htmlmixed\",\ntheme: \"material\",\n});*/\n\n</script>-->\n    <h1></h1>\n\n\n</body>\n</html>\n\n\n\n"
-}
