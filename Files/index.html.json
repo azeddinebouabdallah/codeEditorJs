@@ -1,0 +1,7 @@
+{
+  "filename": "index.html",
+  "filePath": "/Users/mac/CocoApp/ElectronJs/electron-quick-start/index.html",
+  "fileexe": "html",
+  "fileDate": "12-12-2012",
+  "fileContent": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Hello World!</title>\n  </head>\n  <body>\n    <h1>Hello World!</h1>\n    <!-- All of the Node.js APIs are available in this renderer process. -->\n    We are using Node.js <script>document.write(process.versions.node)</script>,\n    Chromium <script>document.write(process.versions.chrome)</script>,\n    and Electron <script>document.write(process.versions.electron)</script>.\n\n    <script>\n      // You can also require other files to run in this process\n      require('./renderer.js')\n    </script>\n  </body>\n</html>\n"
+}

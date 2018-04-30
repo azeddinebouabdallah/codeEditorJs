@@ -176,65 +176,22 @@ createFile() {
   fs.writeFile('Files/'+ this.fileName +'.html', newPage, (err) => {
     console.log(err)
   })
+  
+  addTab(this.fileName);
 
-  let tab = tabGroup.addTab({
-  title: this.fileName,
-  src: './Files/' + this.fileName + '.html',
-  webviewAttributes: {
-      'nodeintegration': true
-  },
-  icon: 'fa fa-home',
-  visible: true,
-  active: true,})
+
 }
 
 }
 
 ipcRenderer.on('file', (e, item) => {
-
-  data = item; // pass array [name, path] to data
-
-  // Get the name of the file using regular expression and put it into **filename
-  var filename = data[0].replace(/^.*[\\\/]/, '');
-  // Get the extention of the file
-  var exe = filename.split('.').pop();
-
-  // Create the obj from File Class
-  var file = new File(filename, data[0], data[1], exe, '12-12-2012');
-
-  // Call the create File function
-  file.createFile();
-
-  //Push file into a list that hold all the opened files
-  filesOpened.push(file);
-  
+  openFile(item);
 })
 
 ipcRenderer.on('save', (e) => {
 
-  // Get the current tab
-  let currentTab = tabGroup.getActiveTab();
-
-  // Get the title of the time 
-  var name = currentTab.getTitle();
-
-  // Reading the JSON file of the tab selected and parse it into **jsonFileContent variable
-  var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err)=> {});
-  var jsonFileContent = JSON.parse(jsonFile);
+  saveFile();
   
-  // Get the file content and path into **newSavedData and **pathOfFile
-  var newSavedData = jsonFileContent.fileContent;
-  var pathOfFile = jsonFileContent.filePath;
-
-  // Write the new file
-  fs.writeFile(pathOfFile, newSavedData, (err) => {
-    if (err){
-      console.log('Error with saving file')
-      return
-    }
-  });
-  
-
 })
 
 ipcRenderer.on('saveas', (e, filePath) => {
@@ -275,17 +232,17 @@ ipcRenderer.on('closetab', (e) => {
     activeTab.close(true);
 })
 
-
+ /* !!!!!!!!!!!!!!!!!!!!!!!!!!  NEED TO FIX ERROR  !!!!!!!!!!!!!!!!!!!!!!!!!!*/
 ipcRenderer.on('selectall', (e) => {
 
   // Get the current tab and the title
   var activeTab = tabGroup.getActiveTab();
   var nameOfTab = activeTab.getTitle();
-
+ 
   // Get access to the webview of the activated tab and select all the content of the webView
-  activeTab.addEventListener('dom-ready', () => {
-  webview.selectAll()
-})
+  //activeTab.EventListener('dom-ready', () => {
+  //webview.selectAll()
+  //})
 })
 
 ipcRenderer.on('increasefontsize', (e) => { 
@@ -422,6 +379,120 @@ ipcRenderer.on('folder', (e)=> {
 
 })
 
+
+tree.on('selected', item => {
+  // treeClickEvent Function that Create and add Files to our project
+  treeClickEvent(item);
+})
+
+let tab = tabGroup.addTab({
+    title: 'Home',
+    src: './Files/homeEditor.html',
+    webviewAttributes: {
+        'nodeintegration': true
+    },
+    icon: 'fa fa-home',
+    visible: true,
+    active: true,
+
+})
+
+function openFile(item){
+  data = item; // pass array [name, path] to data
+
+  // Get the name of the file using regular expression and put it into **filename
+  var filename = data[0].replace(/^.*[\\\/]/, '');
+  // Get the extention of the file
+  var exe = filename.split('.').pop();
+
+  if (isOpen(data[0])) {
+    return;
+  }else {
+  // Create the obj from File Class
+  var file = new File(filename, data[0], data[1], exe, '12-12-2012');
+
+  // Call the create File function
+  file.createFile();
+
+  //Push file into a list that hold all the opened files
+  filesOpened.push(file);
+  }
+}
+
+// Function to see if file is already open
+function isOpen(filepath){
+  var result;
+  for (var i = 0; i < filesOpened.length; i++){
+        if (filesOpened[i].filePath == filepath){
+          return true;
+        }else {
+          result = false;
+        }
+
+  }
+  return result;
+}
+
+function addTab(filename){
+
+  let tab = tabGroup.addTab({
+    title: filename,
+    src: './Files/' + filename + '.html',
+    webviewAttributes: {
+        'nodeintegration': true
+    },
+    icon: 'fa fa-home',
+    visible: true,
+    active: true,})
+
+}
+
+function treeClickEvent(item) {
+
+  if (item.type == 'file') {
+    if (isOpen(item.path)){
+      console.log('File Exists')
+    }else {
+      var dataOfNewFile = fs.readFileSync(item.path, 'utf8', (err)=> {
+        console.log('can\'t read selected file') 
+        return
+      })
+      var newItem = [item.path, dataOfNewFile];
+      openFile(newItem);
+    }
+  }
+}
+
+function saveFile(){
+
+   // Get the current tab
+   let currentTab = tabGroup.getActiveTab();
+
+   // Get the title of the time 
+   var name = currentTab.getTitle();
+ 
+   // Reading the JSON file of the tab selected and parse it into **jsonFileContent variable
+   var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err)=> {
+     if (err) {
+       console.log('Error')
+       return
+      };
+   });
+   var jsonFileContent = JSON.parse(jsonFile);
+   
+   // Get the file content and path into **newSavedData and **pathOfFile
+   var newSavedData = jsonFileContent.fileContent;
+   var pathOfFile = jsonFileContent.filePath;
+ 
+   // Write the new file
+   fs.writeFile(pathOfFile, newSavedData, (err) => {
+     if (err){
+       console.log('Error with saving file')
+       return
+     }
+   });
+
+}
 function refreshWhenFolderOpen(){
   window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
   var root = {
@@ -446,54 +517,5 @@ function refreshWhenFolderOpen(){
  })
  tree.loop.update({ root })
 
- tree.on('selected', item => {
-  // adding a new children to every selected item
  
-  if (item.type == 'file') {
-    
-    var dataOfNewFile = fs.readFileSync(item.path, 'utf8', (err)=> {
-      console.log('can\'t read selected file') 
-      return
-    })
-    var exeOfNewFile = item.name.split('.').pop()
-    console.log('The new exe : ' + exeOfNewFile)
-    var file = new File(item.name, item.path, dataOfNewFile, exeOfNewFile, '12-12-2012')
-    file.createFile();
-  }
-  console.log('item selected');
-})
 }
-
-tree.on('selected', item => {
-  // adding a new children to every selected item
- 
-  if (item.type == 'file') {
-    
-    var dataOfNewFile = fs.readFileSync(item.path, 'utf8', (err)=> {
-      console.log('can\'t read selected file') 
-      return
-    })
-    var exeOfNewFile = item.name.split('.').pop()
-    console.log('The new exe : ' + exeOfNewFile)
-    var file = new File(item.name, item.path, dataOfNewFile, exeOfNewFile, '12-12-2012')
-    file.createFile();
-  }
-  console.log('item selected');
-})
-
-
-let tab = tabGroup.addTab({
-    title: 'Home',
-    src: './Files/homeEditor.html',
-    webviewAttributes: {
-        'nodeintegration': true
-    },
-    icon: 'fa fa-home',
-    visible: true,
-    active: true,
-
-})
-
-
-
-
