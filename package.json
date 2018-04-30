@@ -11,6 +11,7 @@
   "dependencies": {
     "dialogs": "^1.1.20",
     "electron-navigation": "^1.5.6",
+    "electron-reload": "^1.2.2",
     "electron-tabs": "^0.9.1",
     "electron-tree-view": "^1.1.0",
     "highlight.js": "^9.12.0",

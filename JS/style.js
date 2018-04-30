@@ -387,7 +387,7 @@ tree.on('selected', item => {
 
 let tab = tabGroup.addTab({
     title: 'Home',
-    src: './Files/homeEditor.html',
+    src: './homeEditor.html',
     webviewAttributes: {
         'nodeintegration': true
     },
@@ -494,6 +494,7 @@ function saveFile(){
 
 }
 function refreshWhenFolderOpen(){
+  
   window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
   var root = {
     name: '',
@@ -507,6 +508,7 @@ function refreshWhenFolderOpen(){
      if (err) {
        console.log(err);
      }
+
    }));
  
  var tree = require('electron-tree-view')({
@@ -517,5 +519,10 @@ function refreshWhenFolderOpen(){
  })
  tree.loop.update({ root })
 
+
+
  
 }
+
+
+// !!!!!!!! TREE REFRESH PROBLEM !!!!!!!!!!!

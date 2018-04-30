@@ -1,112 +1,37 @@
 {
-  "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist",
-  "name": "dist",
+  "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark",
+  "name": "default-dark",
   "type": "folder",
   "children": [
     {
-      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/.DS_Store",
-      "name": ".DS_Store",
+      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/32px.png",
+      "name": "32px.png",
       "type": "file",
       "children": []
     },
     {
-      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/jstree.js",
-      "name": "jstree.js",
+      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/40px.png",
+      "name": "40px.png",
       "type": "file",
       "children": []
     },
     {
-      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/jstree.min.js",
-      "name": "jstree.min.js",
+      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/style.css",
+      "name": "style.css",
       "type": "file",
       "children": []
     },
     {
-      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes",
-      "name": "themes",
-      "type": "folder",
-      "children": [
-        {
-          "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/.DS_Store",
-          "name": ".DS_Store",
-          "type": "file",
-          "children": []
-        },
-        {
-          "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default",
-          "name": "default",
-          "type": "folder",
-          "children": [
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default/32px.png",
-              "name": "32px.png",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default/40px.png",
-              "name": "40px.png",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default/style.css",
-              "name": "style.css",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default/style.min.css",
-              "name": "style.min.css",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default/throbber.gif",
-              "name": "throbber.gif",
-              "type": "file",
-              "children": []
-            }
-          ]
-        },
-        {
-          "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark",
-          "name": "default-dark",
-          "type": "folder",
-          "children": [
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/32px.png",
-              "name": "32px.png",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/40px.png",
-              "name": "40px.png",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/style.css",
-              "name": "style.css",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/style.min.css",
-              "name": "style.min.css",
-              "type": "file",
-              "children": []
-            },
-            {
-              "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/throbber.gif",
-              "name": "throbber.gif",
-              "type": "file",
-              "children": []
-            }
-          ]
-        }
-      ]
+      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/style.min.css",
+      "name": "style.min.css",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/CodeEditor/jsTree/dist/themes/default-dark/throbber.gif",
+      "name": "throbber.gif",
+      "type": "file",
+      "children": []
     }
   ]
 }
