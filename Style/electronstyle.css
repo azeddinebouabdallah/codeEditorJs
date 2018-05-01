@@ -131,10 +131,9 @@
 }
 
 .etabs-views {
+    position: fixed;
     border-top: 1px solid #aaa;
-    height: 96%;
+    height: 100%;
     width: 1200px;
-    
 }
-
 
