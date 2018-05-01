@@ -57,7 +57,44 @@
         minSize: 200
       });
 
+      window.$ = require('./bower_components/jquery/dist/jquery.min.js');
 
+      $('span').contextmenu(function (){
+        console.log($(this).text())
+        var fileO = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+          console.log('Error in reading folderOpen.json')
+        })
+        fileO = JSON.parse(fileO);
+        var element
+        console.log(fileO.children)
+        
+          element = recJSON(fileO.children, $(this).text());
+          console.log('selected item : ' + element.path)
+        
+
+        ipcRenderer.send('right_click_file', element);
+
+      });
+
+      function recJSON(elem, name){
+      var elemR
+        elem.map((child) => {
+          console.dir(child)
+          console.log(child.name + ' : ' + name)
+          if (child.type == 'folder'){
+            recJSON(child.children, name)
+          }{
+            if (child.name == name){
+              console.log('File found + ' + child.name)
+              elemR  = child
+            }
+          }
+        })
+        return elemR
+
+      }
+      
+      
  /* var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
   })*/
  

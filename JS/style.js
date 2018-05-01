@@ -544,10 +544,17 @@ function refreshWhenFolderOpen(){
  
 }
 
-var viewFiles = document.querySelector('span')
-viewFiles.oncontextmenu = function (e){
-  console.log("right Click")
-  console.dir(this);
+
+
+var viewFiles = document.querySelectorAll('span');
+var arrayFiles = []
+for (var i = 0; i < viewFiles.length; i++){
+  arrayFiles.push(viewFiles[i]);
+}
+console.dir(arrayFiles)
+
+arrayFiles.oncontextmenu = function (e){
+  console.log("this: " + e)
   ipcRenderer.send('files_right_click', e)
 }
 

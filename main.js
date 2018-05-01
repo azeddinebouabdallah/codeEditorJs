@@ -4,7 +4,7 @@
 //let dialogs = Dialogs()
 
 const electron = require('electron')
-const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain} = electron
+const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain, clipboard} = electron
 const fs = require('fs')
 
  
@@ -14,6 +14,9 @@ const path = require('path')
 const url = require('url')
 
 let mainWindow
+
+let filepath;
+
 
 const mainMenuTemplate = [
   { label: 'File',
@@ -247,6 +250,7 @@ function createWindow() {
     label: 'Copy Path',
     click(){
       // Copy path of file [get name of File and then parse the path]
+      clipboard.writeText(filepath)
     }
   }))
   ctxMenuFiles.append(new MenuItem({
@@ -256,6 +260,11 @@ function createWindow() {
     label: 'Delete',
     click(){
       // Delete the file [Get the selected file name and then pare the path from openFolders.json and detele the file]
+      fs.unlink(filepath, (err) => {
+        if (err) {
+          console.log('can\'t remove file');
+        }
+      })
     }
   }))
   ctxMenuFiles.append(new MenuItem({
@@ -290,16 +299,13 @@ function dirTreerrr(filename) {
     console.log('Files: ' + files);
     files.forEach((file) => {
       if (fs.lstatSync(path.join(filename,file)).isDirectory()){
-        console.log('In progress: Folder')
         info.type = 'folder';
         info.children = fs.readdirSync(filename).map(function(child) {
           return dirTree(path.join(filename, child));
         });
       }else {
-        console.log('In progress: File')
         info.type = "file";
       }
-      console.log('returns: ' + info)
     });
   })
   return info;
@@ -346,6 +352,11 @@ ipcMain.on('files_right_click', (e) => {
   rightClickFiles(e);
 })
 
+ipcMain.on('right_click_file', (e, elem) => {
+    filepath = elem.path;
+    rightClickFiles(e);
+
+})
 
 app.on('ready', createWindow)
 
