@@ -60,7 +60,7 @@
       window.$ = require('./bower_components/jquery/dist/jquery.min.js');
 
       $('span').contextmenu(function (){
-        console.log($(this).text())
+        console.log('Elem = ' + $(this).text())
         var fileO = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
           console.log('Error in reading folderOpen.json')
         })
@@ -69,7 +69,7 @@
         console.log(fileO.children)
         
           element = recJSON(fileO.children, $(this).text());
-          console.log('selected item : ' + element.path)
+          console.dir(element.path)
         
 
         ipcRenderer.send('right_click_file', element);
@@ -78,19 +78,25 @@
 
       function recJSON(elem, name){
       var elemR
+      var fileFounded = false;
         elem.map((child) => {
+          if (!fileFounded)
+          {
           console.dir(child)
           console.log(child.name + ' : ' + name)
           if (child.type == 'folder'){
-            recJSON(child.children, name)
+            elemR = recJSON(child.children, name)
           }{
             if (child.name == name){
               console.log('File found + ' + child.name)
-              elemR  = child
+              elemR = child;
+              fileFounded = true;
             }
           }
+        }
         })
-        return elemR
+        
+        return elemR;
 
       }
       

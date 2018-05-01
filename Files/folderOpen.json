@@ -1,29 +1,23 @@
 {
-  "path": "/Users/mac/Didou/GIT REPO/PFE/src/application",
-  "name": "application",
+  "path": "./Files",
+  "name": "Files",
   "type": "folder",
   "children": [
     {
-      "path": "/Users/mac/Didou/GIT REPO/PFE/src/application/GuiPFE.fxml",
-      "name": "GuiPFE.fxml",
+      "path": "./Files/PFEController copy 2.class.html",
+      "name": "PFEController copy 2.class.html",
       "type": "file",
       "children": []
     },
     {
-      "path": "/Users/mac/Didou/GIT REPO/PFE/src/application/Main.java",
-      "name": "Main.java",
+      "path": "./Files/PFEController copy 2.class.json",
+      "name": "PFEController copy 2.class.json",
       "type": "file",
       "children": []
     },
     {
-      "path": "/Users/mac/Didou/GIT REPO/PFE/src/application/PFEController.java",
-      "name": "PFEController.java",
-      "type": "file",
-      "children": []
-    },
-    {
-      "path": "/Users/mac/Didou/GIT REPO/PFE/src/application/application.css",
-      "name": "application.css",
+      "path": "./Files/folderOpen.json",
+      "name": "folderOpen.json",
       "type": "file",
       "children": []
     }

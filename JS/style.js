@@ -1,3 +1,5 @@
+// Select All Problem
+
 
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
@@ -370,11 +372,7 @@ ipcRenderer.on('resetfontsize', (e) => {
 
 ipcRenderer.on('folder', (e)=> {
   
-  var jsonFolder = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
-  });
-
-  var jsonFolderContent = JSON.parse(jsonFolder);
-  refreshWhenFolderOpen();
+  readFolderOpen();
 
 })
 
@@ -441,6 +439,11 @@ function closeTab(){
     }
   }
   activeTab.close(true);
+}
+
+function readFolderOpen(){
+  
+  refreshWhenFolderOpen();
 }
 // Function to see if file is already open
 function isOpen(filepath){
@@ -517,6 +520,8 @@ function saveFile(){
 
 }
 function refreshWhenFolderOpen(){
+
+  location.reload();
   
   window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
   var root = {
@@ -540,7 +545,7 @@ function refreshWhenFolderOpen(){
    children: c => c.children,
    label: c => c.name
   })
- tree.loop.update({ root })
+ tree.loop.reload({ root })
  
 }
 
@@ -564,4 +569,9 @@ viewTabs.oncontextmenu = function (e) {
   
   ipcRenderer.send('home_page_right_click', e)
 }
-// !!!!!!!! TREE REFRESH PROBLEM !!!!!!!!!!!
+
+ipcRenderer.on('delete', (e) => {
+  
+  readFolderOpen();
+  
+})

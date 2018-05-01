@@ -16,6 +16,7 @@ const url = require('url')
 let mainWindow
 
 let filepath;
+let filename;
 
 
 const mainMenuTemplate = [
@@ -33,6 +34,7 @@ const mainMenuTemplate = [
     }},{
       label: 'Open Folders', // This part is for opening a file
       click(){
+        /*
         dialog.showOpenDialog({
           properties: ['openDirectory', 'promptToCreate'],
         }, (foldername) => {
@@ -47,12 +49,16 @@ const mainMenuTemplate = [
           mainWindow.webContents.send('folder');
           })
         });
+        */
+        openDialogFolder();
+        
       }
     }
     , {
       label : 'New file',
       accelerator : process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
       click(){
+        
         dialog.showSaveDialog((filename) => {
           if (filename === undefined){
             console.log('File undefined');
@@ -211,8 +217,9 @@ function createWindow() {
     slashes: true
   }))
   
-
-
+  var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  data = JSON.parse(data);
+  writeFolderOpen(data.path);
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
   Menu.setApplicationMenu(mainMenu)
@@ -260,11 +267,13 @@ function createWindow() {
     label: 'Delete',
     click(){
       // Delete the file [Get the selected file name and then pare the path from openFolders.json and detele the file]
-      fs.unlink(filepath, (err) => {
-        if (err) {
-          console.log('can\'t remove file');
-        }
-      })
+      deleteAnyFile(filepath)
+      var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+      data = JSON.parse(data);
+      console.log('pathname: == >' + data.path)
+      writeFolderOpen(data.path);
+      console.log('Get New FOLDEROPEN JSON ----')
+      mainWindow.webContents.send('delete')
     }
   }))
   ctxMenuFiles.append(new MenuItem({
@@ -275,6 +284,16 @@ function createWindow() {
   }))
  
 
+}
+
+function deleteAnyFile(path){
+  var rimraf = require('rimraf');
+  console.log('delete ---------')
+  rimraf(path, function () { console.log('done');
+  var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  data = JSON.parse(data);
+  writeFolderOpen(data.path);
+ });
 }
 
 function openNewFile(filePath){
@@ -344,6 +363,39 @@ function rightClickHome(e){
     ctxMenuHome.popup(mainWindow, e.x, e.y);
 }
 
+function openDialogFolder(){
+  dialog.showOpenDialog({
+    properties: ['openDirectory', 'promptToCreate'],
+  }, (foldername) => {
+    if (foldername === undefined){return}
+
+   
+    /*var dataa = dirTree(foldername[0]);
+    dataa = JSON.stringify(dataa, null, 2)
+
+    fs.writeFile('Files/folderOpen.json', dataa, (err) => {
+      if (err) {return}
+    mainWindow.webContents.send('folder');
+    })*/
+    writeFolderOpen(foldername[0]);
+    mainWindow.webContents.send('folder');
+  });
+}
+
+function getNewFoldersWhenOpen(){
+    var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+    data = JSON.parse(data);
+    writeFolderOpen(data.path)
+}
+
+function writeFolderOpen(path){
+  var dataa = dirTree(path);
+  dataa = JSON.stringify(dataa, null, 2)
+
+  fs.writeFile('Files/folderOpen.json', dataa, (err) => {
+    if (err) {return}
+  })
+}
 ipcMain.on('home_page_right_click', (e)=>{
   rightClickHome(e);
 })
@@ -354,6 +406,7 @@ ipcMain.on('files_right_click', (e) => {
 
 ipcMain.on('right_click_file', (e, elem) => {
     filepath = elem.path;
+    filename = elem.name
     rightClickFiles(e);
 
 })
