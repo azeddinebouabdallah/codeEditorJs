@@ -7,7 +7,7 @@ const electron = require('electron')
 const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain} = electron
 const fs = require('fs')
 
-
+ 
 
 
 const path = require('path')
@@ -207,6 +207,9 @@ function createWindow() {
     protocol: 'file:',
     slashes: true
   }))
+  
+
+
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
   Menu.setApplicationMenu(mainMenu)
