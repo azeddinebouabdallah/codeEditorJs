@@ -119,3 +119,8 @@ body {
 .elem{
   color: #fff;
 }
+
+#browser-plugin-1 {
+  width: 1100px;
+  height: 900px;
+}
