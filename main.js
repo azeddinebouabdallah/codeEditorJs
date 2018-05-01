@@ -162,7 +162,8 @@ const mainMenuTemplate = [
       accelerator: process.platform == 'darwin' ? 'Command+F' : 'Ctrl+F'
     }
   ]
-}, {role: 'window',
+}, { 
+  role: 'window',
       submenu: [
         {role: 'minimize'},
         {role: 'zoom'}
@@ -206,6 +207,7 @@ function createWindow() {
   mainWindow.on('closed', function() {
     mainWindow = null
   })
+  mainWindow.maximize();
 }
 
 function openNewFile(filePath){
