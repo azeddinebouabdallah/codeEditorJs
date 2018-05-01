@@ -57,49 +57,9 @@
         minSize: 200
       });
 
-  //Include jquery
-/*    window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
 
- var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
-    if (err) {
-      console.log(err);
-    }
-  }));
-
- 
-const tree = require('electron-tree-view')({
-  root,
-  container: document.querySelector('#jstree_demo_div'),
-  children: c => c.children,
-  label: c => c.name
-}) */
- 
-
-
-  
-  var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
-  })
-/*
-  jsonData = JSON.parse(jsonData);
-  Code of displaying (Not working)
-  for (data in jsonData) {
-  }
-  $('.folders').click(function () {
-    
-    $(this).children().toggle();
-    
-  function nameD(data){
-    for (data in jsonData) {
-        if (data.type= 'folder') {
-          $('.all-tree').append('<li class="folders">' + data.name + '<ul class="subfiles">')
-          nameD();
-        }else {
-          $('.all-tree').append('<li>' + data.name + '</li>');
-        }
-    } 
-  }
-  })
-  */
+ /* var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
+  })*/
  
   </script>
 

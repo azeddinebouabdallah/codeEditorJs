@@ -1,3 +1,4 @@
+
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
@@ -227,9 +228,7 @@ ipcRenderer.on('saveas', (e, filePath) => {
 ipcRenderer.on('closetab', (e) => {
   
     // Get the current active Tab and close it
-    var activeTab = tabGroup.getActiveTab();
-    console.log('Name of Tab: ' + activeTab.getTitle())
-    activeTab.close(true);
+   closeTab();
 })
 
  /* !!!!!!!!!!!!!!!!!!!!!!!!!!  NEED TO FIX ERROR  !!!!!!!!!!!!!!!!!!!!!!!!!!*/
@@ -397,6 +396,18 @@ let tab = tabGroup.addTab({
 
 })
 
+tabGroup.on("tab-removed", (tab, tabGroup) => { 
+
+  for (var i = 0; i < filesOpened.length; i++){
+    if (filesOpened[i].fileName == tab.title ){
+        filesOpened.splice(i, 1)
+    }
+  }
+  tab.close(true);
+ });
+
+
+
 function openFile(item){
   data = item; // pass array [name, path] to data
 
@@ -414,11 +425,23 @@ function openFile(item){
   // Call the create File function
   file.createFile();
 
-  //Push file into a list that hold all the opened files
-  filesOpened.push(file);
+   //Push file into a list that hold all the opened files
+    filesOpened.push(file);
+    }
   }
-}
 
+function closeTab(){
+
+  var activeTab = tabGroup.getActiveTab();
+  console.log('Name of Tab: ' + activeTab.getTitle())
+  for (var i = 0; i < filesOpened.length; i++){
+    if (filesOpened[i].fileName == activeTab.getTitle() ){
+        filesOpened.splice(i, 1)
+        console.log('Deleting file from Array')
+    }
+  }
+  activeTab.close(true);
+}
 // Function to see if file is already open
 function isOpen(filepath){
   var result;
@@ -511,18 +534,27 @@ function refreshWhenFolderOpen(){
 
    }));
  
- var tree = require('electron-tree-view')({
+  var tree = require('electron-tree-view')({
    root,
    container: document.querySelector('#jstree_demo_div'),
    children: c => c.children,
    label: c => c.name
- })
+  })
  tree.loop.update({ root })
-
-
-
  
 }
 
+var viewFiles = document.querySelector('span')
+viewFiles.oncontextmenu = function (e){
+  console.log("right Click")
+  console.dir(this);
+  ipcRenderer.send('files_right_click', e)
+}
 
+// Click on pages Listener
+var viewTabs = document.querySelector('.etabs-views') 
+viewTabs.oncontextmenu = function (e) {
+  
+  ipcRenderer.send('home_page_right_click', e)
+}
 // !!!!!!!! TREE REFRESH PROBLEM !!!!!!!!!!!

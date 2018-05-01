@@ -4,7 +4,7 @@
 //let dialogs = Dialogs()
 
 const electron = require('electron')
-const {app, dialog, BrowserWindow, Menu, ipcRenderer} = electron
+const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain} = electron
 const fs = require('fs')
 
 
@@ -180,6 +180,8 @@ const mainMenuTemplate = [
       }
 ]
 
+  
+
 function readFile(filePath){
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err){
@@ -191,6 +193,11 @@ function readFile(filePath){
     mainWindow.webContents.send('file', dataNew)
   })
 }
+
+const ctxMenuHome = new Menu();
+const ctxMenuFiles = new Menu();
+const ctxMenu = new Menu();
+
 
 function createWindow() {
   mainWindow = new BrowserWindow({})
@@ -208,6 +215,54 @@ function createWindow() {
     mainWindow = null
   })
   mainWindow.maximize();
+
+  // App Menu
+  ctxMenu.append(new MenuItem({
+    label: 'test',
+  }))
+
+  // Context Menu Inside Pages
+  ctxMenuHome.append(new MenuItem({
+    role: 'selectall',
+  }))
+  ctxMenuHome.append(new MenuItem({
+    type: 'separator',
+  }))
+  ctxMenuHome.append(new MenuItem({
+    role: 'copy',
+  }))
+  ctxMenuHome.append(new MenuItem({
+    role: 'cut',
+  }))
+  ctxMenuHome.append(new MenuItem({
+    role: 'paste',
+  }))
+  
+  // Files Context Menu 
+
+  ctxMenuFiles.append(new MenuItem({
+    label: 'Copy Path',
+    click(){
+      // Copy path of file [get name of File and then parse the path]
+    }
+  }))
+  ctxMenuFiles.append(new MenuItem({
+    type: 'separator',
+  }))
+  ctxMenuFiles.append(new MenuItem({
+    label: 'Delete',
+    click(){
+      // Delete the file [Get the selected file name and then pare the path from openFolders.json and detele the file]
+    }
+  }))
+  ctxMenuFiles.append(new MenuItem({
+    label: 'Rename',
+    click(){
+      // Rename the file []
+    }
+  }))
+ 
+
 }
 
 function openNewFile(filePath){
@@ -270,7 +325,23 @@ function dirTree(filename) {
 
   return info;
 }
+function rightClickFiles(e){
+  console.dir(e)
+  ctxMenuFiles.popup(mainWindow, e.x, e.y);
+}
 
+function rightClickHome(e){
+    console.dir(e);
+    ctxMenuHome.popup(mainWindow, e.x, e.y);
+}
+
+ipcMain.on('home_page_right_click', (e)=>{
+  rightClickHome(e);
+})
+ipcMain.on('files_right_click', (e) => {
+  console.log('RightClick')
+  rightClickFiles(e);
+})
 
 
 app.on('ready', createWindow)
