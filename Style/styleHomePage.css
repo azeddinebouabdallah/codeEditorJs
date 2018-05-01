@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    width: 1050px;
+    width: 1030px;
     height: 685px;
    /* background-image: url('../img/background1.jpeg');
     background-size: 100%;
@@ -20,8 +20,8 @@ body {
     background-image: url('../img/background1.jpeg');
     background-size: 120%;
     background-repeat: no-repeat;
-    width: 1050px;
-    height: 685px;
+    width: 1044px;
+    height: 688px;
   
     
     filter: blur(3px);
