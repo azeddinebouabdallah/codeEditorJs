@@ -4,20 +4,32 @@
   "type": "folder",
   "children": [
     {
-      "path": "./Files/PFEController copy 2.class.html",
-      "name": "PFEController copy 2.class.html",
+      "path": "./Files/Untitled.html.html",
+      "name": "Untitled.html.html",
       "type": "file",
       "children": []
     },
     {
-      "path": "./Files/PFEController copy 2.class.json",
-      "name": "PFEController copy 2.class.json",
+      "path": "./Files/Untitled.html.json",
+      "name": "Untitled.html.json",
       "type": "file",
       "children": []
     },
     {
       "path": "./Files/folderOpen.json",
       "name": "folderOpen.json",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "./Files/index.html.html",
+      "name": "index.html.html",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "./Files/index.html.json",
+      "name": "index.html.json",
       "type": "file",
       "children": []
     }

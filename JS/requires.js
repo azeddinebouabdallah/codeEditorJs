@@ -15,11 +15,12 @@ editor.on('keyup', () => {
      /*fs.writeFile('./Files/hey.json', '', (err) => {
 
      });*/
+    
     if (fs.existsSync('Files/' + name + 'json')){
 
         var jsonFile = fs.readFileSync('Files/' + name + 'json', 'utf8', (err)=> {});
         var jsonFileContent = JSON.parse(jsonFile);
-        
+        jsonFileContent.isSaved = false;
         jsonFileContent.fileContent = editor.getValue();
         jsonFileContent = JSON.stringify(jsonFileContent, null, 2);
 

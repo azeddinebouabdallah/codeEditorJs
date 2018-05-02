@@ -27,166 +27,6 @@ label: c => c.name
 })
 
 
-class File {
-
-constructor(fileName, filePath, content, exe, dateOfCreation){
-
-  this.fileName = fileName;
-  this.filePath = filePath;
-  this.exe = exe;
-  this.dateOfCreation = dateOfCreation;
-  this.content = content;
-
-}
-createFile() {
-
-    var extention = this.exe;
-    var dfc = this.dateOfCreation;
-    console.log ('the file exe : ' + this.exe)
-    var data = {
-      filename : this.fileName, 
-      filePath : this.filePath,
-      fileexe : this.exe,
-      fileDate : this.dateOfCreation,
-      fileContent : this.content
-    }
-    var JSONData = data;
-    
-    var code = JSON.stringify(JSONData, null, 2);
-    fs.writeFile('Files/'+ this.fileName +'.json', code, (err) => {console.log(err)})
-    var newData = this.content.split('\n');
-
-    var newOrgData = '';
-
-    if (this.exe == 'html' || this.exe == 'xml') {
-      console.log('Html or Xml file')
-      for (var i = 0; i<newData.length;i++){
-        if (i != newData.length - 1){
-          var asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-          newOrgData += asciiDataI + '\n';
-        }
-        else {
-          asciiDataI = newData[i].replace(/>/g, '&gt;').replace(/</g, '&lt;');
-          newOrgData += asciiDataI + '\n';
-        }
-
-    }
-      var newPage = '<!DOCTYPE html>\n'+
-      '<html lang="en" dir="ltr">\n'+
-      '<head>\n'+
-        '<meta charset="utf-8">\n'+
-        '<script src="../codemirror/lib/codemirror.js"></script>\n'+
-        '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
-        '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-        '<script src="../codemirror/mode/xml/xml.js"></script>\n'+
-      '</head>\n'+
-      '<body>\n'+
-      '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
-       newOrgData +
-      '</textarea>\n'+
-      '<script type="text/javascript">\n' +
-      'var textArea = document.getElementById(\'codemirror\');\n' +
-      'var editor = CodeMirror.fromTextArea(textArea, {\n' +
-        'lineNumbers: true,\n' +
-        'mode: "xml",\n' +
-       ' htmlMode: true,\n' +
-        'theme: "material",\n' +
-      '});\n' +
-      '</script>\n' +
-     ' <script src="../JS/require.js"></script>\n' +
-      '<script src="../JS/requires.js"></script>\n' +
-      '</body>\n'+
-      '</html>';
-
-  }else if (this.exe == 'css') {
-
-    for (var i = 0; i<newData.length;i++){
-      console.log('Css file')
-      if (i != newData.length - 1){
-        newOrgData += newData[i] + '\n';
-      }
-      else {
-          newOrgData += newData[i] + '\n';
-      }
-
-  }
-
-    var newPage = '<!DOCTYPE html>\n'+
-    '<html lang="en" dir="ltr">\n'+
-    '<head>\n'+
-      '<meta charset="utf-8">\n'+
-      '<script src="../codemirror/lib/codemirror.js"></script>\n'+
-      '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
-      '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-      '<script src="../codemirror/mode/css/css.js"></script>\n'+
-    '</head>\n'+
-    '<body>\n'+
-    '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
-     newOrgData +
-     '</textarea>\n'+
-     '<script type="text/javascript">\n' +
-     'var textArea = document.getElementById(\'codemirror\');\n' +
-     'var editor = CodeMirror.fromTextArea(textArea, {\n' +
-       'lineNumbers: true,\n' +
-       'mode: "css",\n' +
-       'theme: "material",\n' +
-     '});\n' +
-     '</script>\n' +
-    ' <script src="../JS/require.js"></script>\n' +
-     '<script src="../JS/requires.js"></script>\n' +
-     '</body>\n'+
-     '</html>';
-
-  }else {
-    console.log('Other file')
-    for (var i = 0; i<newData.length;i++){
-      if (i != newData.length - 1){
-        newOrgData += newData[i] + '\n';
-      }
-      else {
-          newOrgData += newData[i] + '\n';
-      }
-
-  }
-    var newPage = '<!DOCTYPE html>\n'+
-    '<html lang="en" dir="ltr">\n'+
-    '<head>\n'+
-      '<meta charset="utf-8">\n'+
-      '<script src="../codemirror/lib/codemirror.js"></script>\n'+
-      '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
-      '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
-
-    '</head>\n'+
-    '<body>\n'+
-    '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
-     newOrgData +
-     '</textarea>\n'+
-     '<script type="text/javascript">\n' +
-     'var textArea = document.getElementById(\'codemirror\');\n' +
-     'var editor = CodeMirror.fromTextArea(textArea, {\n' +
-       'lineNumbers: true,\n' +
-       'mode: "xml",\n' +
-      ' htmlMode: true,\n' +
-       'theme: "material",\n' +
-     '});\n' +
-     '</script>\n' +
-    ' <script src="../JS/require.js"></script>\n' +
-     '<script src="../JS/requires.js"></script>\n' +
-     '</body>\n'+
-     '</html>';
-  }
-
-  fs.writeFile('Files/'+ this.fileName +'.html', newPage, (err) => {
-    console.log(err)
-  })
-  
-  addTab(this.fileName);
-
-
-}
-
-}
-
 ipcRenderer.on('file', (e, item) => {
   openFile(item);
 })
@@ -206,23 +46,27 @@ ipcRenderer.on('saveas', (e, filePath) => {
     var name = currentTab.getTitle();
 
     // Read the JSON file of the activated tab and parse it into **jsonFileContent variable
-    var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err) => {});
+    var jsonFile = fs.readFileSync('./Files/' + name + '.json', 'utf8', (err) => {});
     var jsonFileContent = JSON.parse(jsonFile);
     
     // Get the content from the JSON file 
     var newSavedData = jsonFileContent.fileContent
-    /* Buffer the path so it can be used in fs.write IDK why in this func it said to me that you need to buufer
-    so you'll not find any Path Buffer in other writing files */
-    var path = Buffer.from(filePath, 'utf8');
-    console.log('Filename: ' + name + '\n Filepath : ' + path);
-    // Write the new file
-    fs.writeFile(path, newSavedData, (err) => {
-      if (err) {
-        console.log('Error with saving file as')
-        return
+    var selectedSavedAsFile;
+    filesOpened.map((child) => {
+      console.log('map')
+      console.log(child.fileName)
+      if (child.fileName == name){
+        selectedSavedAsFile = child;
       }
     })
 
+    
+    /* Buffer the path so it can be used in fs.write IDK why in this func it said to me that you need to buufer
+    so you'll not find any Path Buffer in other writing files */
+    var path = Buffer.from(filePath, 'utf8');
+    // Write the new file
+    
+    selectedSavedAsFile.saveAs(path, newSavedData)
     
 
 })
@@ -393,13 +237,25 @@ let tab = tabGroup.addTab({
     active: true,
 
 })
-
+// !!!!!!!! NEED WORK !!!!!!!!!!!!!
 tabGroup.on("tab-removed", (tab, tabGroup) => { 
 
+  var activeTab = tabGroup.getActiveTab();
+  var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
+    if (err){
+      return
+    }
+  })
+  jsonContentFile = JSON.parse(jsonContentFile)
+ if (jsonContentFile.isSaved){
   for (var i = 0; i < filesOpened.length; i++){
     if (filesOpened[i].fileName == tab.title ){
         filesOpened.splice(i, 1)
     }
+  }
+  
+  }else {
+
   }
   tab.close(true);
  });
@@ -431,7 +287,13 @@ function openFile(item){
 function closeTab(){
 
   var activeTab = tabGroup.getActiveTab();
-  console.log('Name of Tab: ' + activeTab.getTitle())
+  var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
+    if (err){
+      return
+    }
+  })
+  jsonContentFile = JSON.parse(jsonContentFile)
+  if (jsonContentFile.isSaved){
   for (var i = 0; i < filesOpened.length; i++){
     if (filesOpened[i].fileName == activeTab.getTitle() ){
         filesOpened.splice(i, 1)
@@ -439,6 +301,7 @@ function closeTab(){
     }
   }
   activeTab.close(true);
+  }
 }
 
 function readFolderOpen(){
@@ -459,19 +322,6 @@ function isOpen(filepath){
   return result;
 }
 
-function addTab(filename){
-
-  let tab = tabGroup.addTab({
-    title: filename,
-    src: './Files/' + filename + '.html',
-    webviewAttributes: {
-        'nodeintegration': true
-    },
-    icon: 'fa fa-home',
-    visible: true,
-    active: true,})
-
-}
 
 function treeClickEvent(item) {
 
@@ -496,27 +346,14 @@ function saveFile(){
 
    // Get the title of the time 
    var name = currentTab.getTitle();
- 
-   // Reading the JSON file of the tab selected and parse it into **jsonFileContent variable
-   var jsonFile = fs.readFileSync('Files/' + name + '.json', 'utf8', (err)=> {
-     if (err) {
-       console.log('Error')
-       return
-      };
-   });
-   var jsonFileContent = JSON.parse(jsonFile);
-   
-   // Get the file content and path into **newSavedData and **pathOfFile
-   var newSavedData = jsonFileContent.fileContent;
-   var pathOfFile = jsonFileContent.filePath;
- 
-   // Write the new file
-   fs.writeFile(pathOfFile, newSavedData, (err) => {
-     if (err){
-       console.log('Error with saving file')
-       return
+   var selectedFileSave = null;
+   filesOpened.map((child) => {
+     if (child.fileName == name){
+       selectedFileSave = child;
      }
-   });
+   })
+
+   selectedFileSave.saveFile();
 
 }
 function refreshWhenFolderOpen(){
@@ -548,7 +385,6 @@ function refreshWhenFolderOpen(){
  tree.loop.reload({ root })
  
 }
-
 
 
 var viewFiles = document.querySelectorAll('span');
