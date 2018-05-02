@@ -4,6 +4,7 @@ const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
 const fs = require('fs')
+const swal = require('sweetalert2')
 
 let tabGroup = new TabGroup();
 let filePath;
@@ -284,7 +285,10 @@ function openFile(item){
 function closeTab(){
 
   var activeTab = tabGroup.getActiveTab();
-  var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
+  if (activeTab.getTitle() == 'Home'){
+    activeTab.close()
+  }else {
+    var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
     if (err){
       return
     }
@@ -299,10 +303,38 @@ function closeTab(){
   }
   activeTab.close(true);
   }else {
-    ipcRenderer.send('closing_not_saved')
+    swal({
+      title: 'Are you sure?',
+      text: "You file isn't saved, you want to save it!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Quit any way!'
+    }).then((result) => {
+      if (result.value) {
+        forceClose();
+      }
+     
+    })
   }
+ }
 }
-
+function forceClose(){
+  var activeTab = tabGroup.getActiveTab();
+  var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
+    if (err){
+      return
+    }
+  })
+  for (var i = 0; i < filesOpened.length; i++){
+    if (filesOpened[i].getFileName() == activeTab.getTitle() ){
+        filesOpened.splice(i, 1)
+        console.log('Deleting file from Array')
+    }
+  }
+  activeTab.close(true);
+}
 function readFolderOpen(){
   
   refreshWhenFolderOpen();
@@ -320,8 +352,6 @@ function isOpen(filepath){
   }
   return result;
 }
-
-
 function treeClickEvent(item) {
 
   if (item.type == 'file') {
@@ -337,7 +367,6 @@ function treeClickEvent(item) {
     }
   }
 }
-
 function saveFile(){
 
    // Get the current tab
@@ -385,7 +414,6 @@ function refreshWhenFolderOpen(){
  
 }
 
-
 var viewFiles = document.querySelectorAll('span');
 var arrayFiles = []
 for (var i = 0; i < viewFiles.length; i++){
@@ -409,4 +437,8 @@ ipcRenderer.on('delete', (e) => {
   
   readFolderOpen();
   
+})
+
+$('.etabs-tab-button-close').on('click', function(){
+  console.log('Click')
 })

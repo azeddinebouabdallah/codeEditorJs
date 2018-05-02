@@ -1,13 +1,8 @@
-
-//import smalltalk from 'node_modules/smalltalk/legacy';
-//const Dialogs = require('dialogs')
-//let dialogs = Dialogs()
-
 const electron = require('electron')
 const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain, clipboard} = electron
 const fs = require('fs')
 const Folder = require('./Classes/folder.js')
- 
+const swal = require('sweetalert2')
 
 
 const path = require('path')
@@ -174,12 +169,9 @@ const mainMenuTemplate = [
       }
 ]
 
-  
-
 const ctxMenuHome = new Menu();
 const ctxMenuFiles = new Menu();
 const ctxMenu = new Menu();
-
 
 function createWindow() {
   mainWindow = new BrowserWindow({})
@@ -258,7 +250,6 @@ function createWindow() {
  
 
 }
-
 function deleteAnyFile(path){
   var rimraf = require('rimraf');
   console.log('delete ---------')
@@ -268,7 +259,6 @@ function deleteAnyFile(path){
   writeFolderOpen(data.path);
  });
 }
-
 function openNewFile(filePath){
   fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
@@ -279,8 +269,6 @@ function openNewFile(filePath){
       mainWindow.webContents.send('file' , dataNew);
   })
 }
-
-
 function dirTreerrr(filename) {
   console.log('FileName: ' + filename);
   info = {
@@ -302,7 +290,6 @@ function dirTreerrr(filename) {
   })
   return info;
 }
-
 function dirTree(filename) {
 
   var stats = fs.lstatSync(filename),
@@ -330,12 +317,10 @@ function rightClickFiles(e){
   console.dir(e)
   ctxMenuFiles.popup(mainWindow, e.x, e.y);
 }
-
 function rightClickHome(e){
     console.dir(e);
     ctxMenuHome.popup(mainWindow, e.x, e.y);
 }
-
 function openDialogFolder(){
   dialog.showOpenDialog({
     properties: ['openDirectory', 'promptToCreate'],
@@ -348,13 +333,11 @@ function openDialogFolder(){
     mainWindow.webContents.send('folder');
   });
 }
-
 function getNewFoldersWhenOpen(){
     var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
     data = JSON.parse(data);
     writeFolderOpen(data.path)
 }
-
 function writeFolderOpen(path){
   var dataa = dirTree(path);
   dataa = JSON.stringify(dataa, null, 2)
@@ -381,20 +364,11 @@ ipcMain.on('files_right_click', (e) => {
   console.log('RightClick')
   rightClickFiles(e);
 })
-
 ipcMain.on('right_click_file', (e, elem) => {
     filepath = elem.path;
     filename = elem.name
     rightClickFiles(e);
 
-})
-ipcMain.on('closing_not_saved', (e) => {
-  dialog.showMessageBox(mainWindow, {type: "question" ,title: 'saved', 
-  message: "Your files are not saved",
-  
- }, (err) =>{
-
-  })
 })
 app.on('ready', createWindow)
 
