@@ -6,7 +6,7 @@
 const electron = require('electron')
 const {app, dialog, BrowserWindow, Menu, ipcRenderer, MenuItem, ipcMain, clipboard} = electron
 const fs = require('fs')
-
+const Folder = require('./Classes/folder.js')
  
 
 
@@ -34,22 +34,7 @@ const mainMenuTemplate = [
     }},{
       label: 'Open Folders', // This part is for opening a file
       click(){
-        /*
-        dialog.showOpenDialog({
-          properties: ['openDirectory', 'promptToCreate'],
-        }, (foldername) => {
-          if (foldername === undefined){return}
 
-         
-          var dataa = dirTree(foldername[0]);
-          dataa = JSON.stringify(dataa, null, 2)
-
-          fs.writeFile('Files/folderOpen.json', dataa, (err) => {
-            if (err) {return}
-          mainWindow.webContents.send('folder');
-          })
-        });
-        */
         openDialogFolder();
         
       }
@@ -190,18 +175,6 @@ const mainMenuTemplate = [
 ]
 
   
-
-function readFile(filePath){
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err){
-      console.log('File can\'t be opened')
-      return
-    }
-    console.log(filePath)
-    dataNew = [filePath, data]
-    mainWindow.webContents.send('file', dataNew)
-  })
-}
 
 const ctxMenuHome = new Menu();
 const ctxMenuFiles = new Menu();
@@ -369,14 +342,8 @@ function openDialogFolder(){
   }, (foldername) => {
     if (foldername === undefined){return}
 
-   
-    /*var dataa = dirTree(foldername[0]);
-    dataa = JSON.stringify(dataa, null, 2)
+    
 
-    fs.writeFile('Files/folderOpen.json', dataa, (err) => {
-      if (err) {return}
-    mainWindow.webContents.send('folder');
-    })*/
     writeFolderOpen(foldername[0]);
     mainWindow.webContents.send('folder');
   });
@@ -392,8 +359,19 @@ function writeFolderOpen(path){
   var dataa = dirTree(path);
   dataa = JSON.stringify(dataa, null, 2)
 
-  fs.writeFile('Files/folderOpen.json', dataa, (err) => {
-    if (err) {return}
+  let folder = new Folder(dataa.name, dataa.path, dataa);
+
+  folder.createFolder();
+}
+function readFile(filePath){
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err){
+      console.log('File can\'t be opened')
+      return
+    }
+    console.log(filePath)
+    dataNew = [filePath, data]
+    mainWindow.webContents.send('file', dataNew)
   })
 }
 ipcMain.on('home_page_right_click', (e)=>{
@@ -410,7 +388,14 @@ ipcMain.on('right_click_file', (e, elem) => {
     rightClickFiles(e);
 
 })
+ipcMain.on('closing_not_saved', (e) => {
+  dialog.showMessageBox(mainWindow, {type: "question" ,title: 'saved', 
+  message: "Your files are not saved",
+  
+ }, (err) =>{
 
+  })
+})
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function() {

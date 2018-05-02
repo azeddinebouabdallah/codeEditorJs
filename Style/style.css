@@ -16,12 +16,13 @@ body {
     cursor: ew-resize;
 }
 .gutter {
-    background-color: #2b3a42;
+    background-color: #1e272e;
     background-repeat: no-repeat;
     background-position: 50%;
 }
 .window {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   top: 0;
   left: 0;
@@ -34,7 +35,7 @@ body {
 .fileTree {
   height: 100%;
   width: 100%;
-  background-color: #2b3a42;
+  background-color: #1e272e;
 }
 .split-horizontal{
   background-color: #273238;
@@ -92,10 +93,58 @@ body {
   color: #ddd;
 }
 .elem{
-  color: #fff;
+  /*color: #fff;*/
+  
 }
 
 #browser-plugin-1 {
   width: 1100px;
   height: 900px;
 }
+
+#Welcome {
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  z-index: -1;
+  color: #34495e;
+}
+
+#body_loader {
+  background-color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 12;
+ }
+ 
+ .loader {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 100px;
+     height: 100px;
+     background: #3498db;
+     border-radius: 10px;
+     animation: animate 2s linear infinite;
+     z-index: 13;
+ }
+ 
+ @keyframes animate {
+     0% {
+         transform: translate(-50%, -50%) perspective(200px) rotateX(0deg) rotateY(0deg)
+     }
+     50% {
+         transform: translate(-50%, -50%) perspective(200px) rotateX(-180deg) rotateY(0deg)
+     }
+     100% {
+         transform: translate(-50%, -50%) perspective(200px) rotateX(-180deg) rotateY(-180deg)
+     }
+ }

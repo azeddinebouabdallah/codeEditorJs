@@ -1,11 +1,9 @@
-// Select All Problem
 
 
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
 const fs = require('fs')
-
 
 let tabGroup = new TabGroup();
 let filePath;
@@ -20,22 +18,22 @@ var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) =
 }));
 
 var tree = require('electron-tree-view')({
-root,
-container: document.querySelector('#jstree_demo_div'),
-children: c => c.children,
-label: c => c.name
-})
+    root,
+    container: document.querySelector('#jstree_demo_div'),
+    children: c => c.children,
+    label: c => c.name
+ })
 
 
 ipcRenderer.on('file', (e, item) => {
   openFile(item);
-})
+ })
 
 ipcRenderer.on('save', (e) => {
 
   saveFile();
   
-})
+ })
 
 ipcRenderer.on('saveas', (e, filePath) => {
 
@@ -53,9 +51,8 @@ ipcRenderer.on('saveas', (e, filePath) => {
     var newSavedData = jsonFileContent.fileContent
     var selectedSavedAsFile;
     filesOpened.map((child) => {
-      console.log('map')
-      console.log(child.fileName)
-      if (child.fileName == name){
+      
+      if (child.getFileName() == name){
         selectedSavedAsFile = child;
       }
     })
@@ -69,13 +66,13 @@ ipcRenderer.on('saveas', (e, filePath) => {
     selectedSavedAsFile.saveAs(path, newSavedData)
     
 
-})
+ })
 
 ipcRenderer.on('closetab', (e) => {
   
     // Get the current active Tab and close it
    closeTab();
-})
+ })
 
  /* !!!!!!!!!!!!!!!!!!!!!!!!!!  NEED TO FIX ERROR  !!!!!!!!!!!!!!!!!!!!!!!!!!*/
 ipcRenderer.on('selectall', (e) => {
@@ -88,7 +85,7 @@ ipcRenderer.on('selectall', (e) => {
   //activeTab.EventListener('dom-ready', () => {
   //webview.selectAll()
   //})
-})
+ })
 
 ipcRenderer.on('increasefontsize', (e) => { 
 
@@ -133,7 +130,7 @@ ipcRenderer.on('increasefontsize', (e) => {
     webview.reload();
   })
 
-})
+ })
 
 ipcRenderer.on('decreasefontsize', (e)=> {
 
@@ -172,7 +169,7 @@ ipcRenderer.on('decreasefontsize', (e)=> {
     var webview = ctab.webview;
     webview.reload();
   })
-})
+ })
 
 ipcRenderer.on('resetfontsize', (e) => {
 
@@ -211,14 +208,14 @@ ipcRenderer.on('resetfontsize', (e) => {
     var webview = ctab.webview;
     webview.reload();
   })
-})
+  })
 
 
 ipcRenderer.on('folder', (e)=> {
   
   readFolderOpen();
 
-})
+  })
 
 
 tree.on('selected', item => {
@@ -249,7 +246,7 @@ tabGroup.on("tab-removed", (tab, tabGroup) => {
   jsonContentFile = JSON.parse(jsonContentFile)
  if (jsonContentFile.isSaved){
   for (var i = 0; i < filesOpened.length; i++){
-    if (filesOpened[i].fileName == tab.title ){
+    if (filesOpened[i].getFileName() == tab.title ){
         filesOpened.splice(i, 1)
     }
   }
@@ -295,12 +292,14 @@ function closeTab(){
   jsonContentFile = JSON.parse(jsonContentFile)
   if (jsonContentFile.isSaved){
   for (var i = 0; i < filesOpened.length; i++){
-    if (filesOpened[i].fileName == activeTab.getTitle() ){
+    if (filesOpened[i].getFileName() == activeTab.getTitle() ){
         filesOpened.splice(i, 1)
         console.log('Deleting file from Array')
     }
   }
   activeTab.close(true);
+  }else {
+    ipcRenderer.send('closing_not_saved')
   }
 }
 
@@ -312,7 +311,7 @@ function readFolderOpen(){
 function isOpen(filepath){
   var result;
   for (var i = 0; i < filesOpened.length; i++){
-        if (filesOpened[i].filePath == filepath){
+        if (filesOpened[i].getFilePath() == filepath){
           return true;
         }else {
           result = false;
@@ -348,7 +347,7 @@ function saveFile(){
    var name = currentTab.getTitle();
    var selectedFileSave = null;
    filesOpened.map((child) => {
-     if (child.fileName == name){
+     if (child.getFileName() == name){
        selectedFileSave = child;
      }
    })

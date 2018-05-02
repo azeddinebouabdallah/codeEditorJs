@@ -199,14 +199,35 @@ class File {
           })
         }
 
-    saveAs(path, newSavedData){
+   
+        saveAs(path, newSavedData){
+
         fs.writeFile(path, newSavedData, (err) => {
             if (err) {
               console.log('Error with saving file as')
               return
             }
           })
-        }
+     }
       
     
+    getFileName(){
+       return this.fileName;
+      }
+    getFilePath(){
+      return this.filePath;
+     }
+    getFileContent(){
+      return this.content;
+     }
+    getFileState(){
+      return this.isSaved;
+     }
+    getFileDOC(){
+      return this.dateOfCreation;
+     }
+    
+    
     }
+
+module.exports = File;

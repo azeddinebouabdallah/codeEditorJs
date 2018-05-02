@@ -11,11 +11,7 @@ var nameBeta = window.location.pathname;
 
 
 editor.on('keyup', () => {
- 
-     /*fs.writeFile('./Files/hey.json', '', (err) => {
-
-     });*/
-    
+        
     if (fs.existsSync('Files/' + name + 'json')){
 
         var jsonFile = fs.readFileSync('Files/' + name + 'json', 'utf8', (err)=> {});

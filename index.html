@@ -17,6 +17,7 @@
     <title></title>
   </head>
   <body>
+      
  <div class="window">
      <div class="split split-horizontal" id="one"><!--The Tree-View Goes Here! -->
        <div class="fileTree">
@@ -35,11 +36,19 @@
     <div class="etabs-buttons"></div>
     </div>
     <div class="etabs-views">
+        <h1 id="Welcome">Code Editor</h1>
     </div>
+
+    
   </div>
   
   </div>
+</div>
+<div id="body_loader">
+    <div class="loader">
 
+    </div>
+</div>
   <input type="file" id="dialog-file" style="display: none">
 
 
@@ -100,7 +109,10 @@
         return elemR;
 
       }
-      
+      $(window).on('load', function (){
+        $('#body_loader').fadeOut(2000)
+      })
+  
       
  /* var jsonData = fs.readFileSync('Files/folderOpen.json', 'utf8', (err) => {
   })*/

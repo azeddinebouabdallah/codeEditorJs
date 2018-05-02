@@ -4,6 +4,18 @@
   "type": "folder",
   "children": [
     {
+      "path": "./Files/MainActivity.java.html",
+      "name": "MainActivity.java.html",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "./Files/MainActivity.java.json",
+      "name": "MainActivity.java.json",
+      "type": "file",
+      "children": []
+    },
+    {
       "path": "./Files/Untitled.html.html",
       "name": "Untitled.html.html",
       "type": "file",
@@ -18,18 +30,6 @@
     {
       "path": "./Files/folderOpen.json",
       "name": "folderOpen.json",
-      "type": "file",
-      "children": []
-    },
-    {
-      "path": "./Files/index.html.html",
-      "name": "index.html.html",
-      "type": "file",
-      "children": []
-    },
-    {
-      "path": "./Files/index.html.json",
-      "name": "index.html.json",
       "type": "file",
       "children": []
     }
