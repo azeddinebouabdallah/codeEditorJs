@@ -26,8 +26,10 @@ class File {
         }
         var JSONData = data;
         
+        
         var code = JSON.stringify(JSONData, null, 2);
-        fs.writeFile('Files/'+ this.fileName +'.json', code, (err) => {console.log(err)})
+        fs.writeFile('./Files/'+ this.fileName +'.json', code, (err) => {console.log(err)})
+        
         var newData = this.content.split('\n');
     
         var newOrgData = '';
@@ -149,14 +151,12 @@ class File {
          '</body>\n'+
          '</html>';
       }
-    
-      fs.writeFile('Files/'+ this.fileName +'.html', newPage, (err) => {
+      
+      fs.writeFile('./Files/'+ this.fileName +'.html', newPage, (err) => {
         console.log(err)
       })
       
       this.showFile(this.fileName);
-    
-    
         }
     showFile(filename){
 

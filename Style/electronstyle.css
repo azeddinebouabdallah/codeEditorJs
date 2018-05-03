@@ -7,6 +7,8 @@
     font-size: 14px;
     -webkit-user-select: none;
     user-select: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 .etabs-tabs { /* The oriontation of tabs */
@@ -20,7 +22,7 @@
     color: #ecf0f1;
     height: 32px;
     padding: 6px 8px 4px;
-    border: 1px solid #aaa;
+    /*border: 1px solid #aaa;*/
     border-bottom: none;
     border-left: none;
     background: #2c3e50;
@@ -132,8 +134,10 @@
 
 .etabs-views {
     position: fixed;
-    border-top: 1px solid #aaa;
+    border-top: 1px solid #1e272e;
     height: 105%;
     width: 1200px;
+    margin: 0px;
+    padding: 0px;
 }
 

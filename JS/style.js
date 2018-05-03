@@ -439,6 +439,3 @@ ipcRenderer.on('delete', (e) => {
   
 })
 
-$('.etabs-tab-button-close').on('click', function(){
-  console.log('Click')
-})

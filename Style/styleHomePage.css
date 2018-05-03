@@ -15,7 +15,7 @@ body {
     left: 0;
     right: 0;
     z-index: 0;
-  
+    overflow:hidden;
     display: block;
     background-image: url('../img/background1.jpeg');
     background-size: 120%;

@@ -9,6 +9,7 @@
   "author": "Bouabdallah Azeddine",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "dialogs": "^1.1.20",
     "electron-navigation": "^1.5.6",
     "electron-reload": "^1.2.2",
@@ -18,6 +19,7 @@
     "inspire-tree": "^5.0.0",
     "jquery": "^3.3.1",
     "js-treeview": "^1.1.5",
+    "popper.js": "^1.14.3",
     "prismjs": "^1.14.0",
     "rimraf": "^2.6.2",
     "smalltalk": "^2.5.1",

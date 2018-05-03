@@ -15,7 +15,7 @@ let filename;
 
 
 const mainMenuTemplate = [
-  { label: 'File',
+{ label: 'File',
   submenu: [
     {label: 'Open Directory', click(){
 
@@ -113,13 +113,6 @@ const mainMenuTemplate = [
   },
   {
     role: 'paste'
-  },
-  {
-    label: 'selectall',
-    accelerator: process.platform == 'darwin' ? 'Command+A' : 'Ctrl+A',
-    click(){
-      mainWindow.webContents.send('selectall')
-    }
   }]
 }, {
   label: 'View',
@@ -143,14 +136,6 @@ const mainMenuTemplate = [
       mainWindow.webContents.send('resetfontsize')
     }
   }]
-}, {
-  label: 'Find',
-  submenu: [
-    {
-      label: 'Find in buffer',
-      accelerator: process.platform == 'darwin' ? 'Command+F' : 'Ctrl+F'
-    }
-  ]
 }, { 
   role: 'window',
       submenu: [
