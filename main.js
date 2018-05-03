@@ -15,17 +15,13 @@ let filename;
 
 
 const mainMenuTemplate = [
-{ label: 'File',
+{ 
+  label: 'File',
   submenu: [
     {label: 'Open Directory', click(){
 
-      dialog.showOpenDialog((fileNames) => {
-        if (fileNames === undefined){
-          console.log('File undefined')
-        }else {
-          readFile(fileNames[0])
-        }
-      })
+      openDialogFile();
+      
     }},{
       label: 'Open Folders', // This part is for opening a file
       click(){
@@ -254,27 +250,6 @@ function openNewFile(filePath){
       mainWindow.webContents.send('file' , dataNew);
   })
 }
-function dirTreerrr(filename) {
-  console.log('FileName: ' + filename);
-  info = {
-    path: filename,
-    name: path.basename(filename)
-  };
-  fs.readdir(filename, (err, files) => {
-    console.log('Files: ' + files);
-    files.forEach((file) => {
-      if (fs.lstatSync(path.join(filename,file)).isDirectory()){
-        info.type = 'folder';
-        info.children = fs.readdirSync(filename).map(function(child) {
-          return dirTree(path.join(filename, child));
-        });
-      }else {
-        info.type = "file";
-      }
-    });
-  })
-  return info;
-}
 function dirTree(filename) {
 
   var stats = fs.lstatSync(filename),
@@ -317,6 +292,15 @@ function openDialogFolder(){
     writeFolderOpen(foldername[0]);
     mainWindow.webContents.send('folder');
   });
+}
+function openDialogFile(){
+  dialog.showOpenDialog((fileNames) => {
+    if (fileNames === undefined){
+      console.log('File undefined')
+    }else {
+      readFile(fileNames[0])
+    }
+  })
 }
 function getNewFoldersWhenOpen(){
     var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
