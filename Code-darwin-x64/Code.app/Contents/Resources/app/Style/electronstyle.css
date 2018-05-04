@@ -1,0 +1,143 @@
+.etabs-tabgroup { /* This class is for all the group of tabs */
+    width: 100%;
+    height: 0px;
+    background-color: #2b3a42;
+    cursor: default;
+    font: caption;
+    font-size: 14px;
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.etabs-tabs { /* The oriontation of tabs */
+    float: left;
+    width: 100%;
+}
+
+.etabs-tab { /* The bar bellow tabs */
+    display: none;
+    position: relative;
+    color: #ecf0f1;
+    height: 32px;
+    padding: 6px 8px 4px;
+    /*border: 1px solid #aaa;*/
+    border-bottom: none;
+    border-left: none;
+    background: #2c3e50;
+    font: caption;
+    font-size: 14px;
+    background-color: #2c3e50;
+    cursor: default;
+}
+
+/* Dragula */
+.etabs-tab.gu-mirror {
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.etabs-tab:first-child {
+    border-left: none;
+}
+
+.etabs-tab.visible {
+    display: inline-block;
+    
+}
+
+.etabs-tab.active {
+    background: #fff;
+    color: #333;
+}
+
+.etabs-tab.flash {
+    background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);
+
+}
+
+.etabs-buttons {
+    float: left;
+}
+
+.etabs-buttons button {
+    float: left;
+    color: #bdc3c7;
+    background: none;
+    border: none;
+    font-size: 12px;
+    margin-top: 6px;
+    border-radius: 2px;
+    margin-left: 4px;
+    width: 20px;
+    text-align: center;
+    padding: 4px 0;
+}
+
+.etabs-buttons button:hover {
+    color: #eee;
+    background-color: #bdc3c7;
+}
+
+.etabs-tab-badge {
+    position: absolute;
+    right: 0;
+    top: -7px;
+    background: red;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 10px;
+    padding: 0 5px;
+    width: 100%;
+    
+}
+
+.etabs-tab-badge.hidden {
+    display: none;
+}
+
+.etabs-tab-icon {
+    display: inline-block;
+    height: 16px;
+}
+
+.etabs-tab-icon img {
+    max-width: 16px;
+    max-height: 16px;
+}
+
+.etabs-tab-title {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.etabs-tab-buttons {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.etabs-tab-buttons button {
+    display: inline-block;
+    color: #bdc3c7;
+    background: none;
+    border: none;
+    width: 20px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.etabs-tab-buttons button:hover {
+    color: #eee;
+    background-color: #bdc3c7;
+}
+
+.etabs-views {
+    position: fixed;
+    border-top: 1px solid #1e272e;
+    height: 105%;
+    width: 1200px;
+    margin: 0px;
+    padding: 0px;
+}
+

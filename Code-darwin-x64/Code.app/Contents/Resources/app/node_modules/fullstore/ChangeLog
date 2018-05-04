@@ -1,0 +1,8 @@
+2017.09.07, v1.1.0
+
+feature:
+- (fullstore) add support of initial value
+- (package) webpack v3.0.0
+- (package) nyc v11.0.2
+- (package) eslint v4.0.0
+
