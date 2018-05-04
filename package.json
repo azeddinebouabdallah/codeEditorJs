@@ -2,7 +2,7 @@
   "name": "codeeditor",
   "version": "1.0.0",
   "description": "Code Editor for HTML, CSS and JS",
-  "main": "main.js",
+  "main": "CodeEditor.js",
   "scripts": {
     "start": "electron ."
   },

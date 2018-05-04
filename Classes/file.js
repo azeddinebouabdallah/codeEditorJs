@@ -113,6 +113,44 @@ class File {
          '</body>\n'+
          '</html>';
     
+      }else if (this.exe == 'js')
+      {
+        for (var i = 0; i<newData.length;i++){
+          console.log('Css file')
+          if (i != newData.length - 1){
+            newOrgData += newData[i] + '\n';
+          }
+          else {
+              newOrgData += newData[i] + '\n';
+          }
+    
+      }
+    
+        var newPage = '<!DOCTYPE html>\n'+
+        '<html lang="en" dir="ltr">\n'+
+        '<head>\n'+
+          '<meta charset="utf-8">\n'+
+          '<script src="../codemirror/lib/codemirror.js"></script>\n'+
+          '<link rel="stylesheet" href="../codemirror/lib/codemirror.css">\n'+
+          '<link rel="stylesheet" href="../codemirror/theme/material.css">\n'+
+          '<script src="../codemirror/mode/javascript/javascript.js"></script>\n'+
+        '</head>\n'+
+        '<body>\n'+
+        '<textarea class="codemirror-textarea" id="codemirror" nodeintegration>\n' +
+         newOrgData +
+         '</textarea>\n'+
+         '<script type="text/javascript">\n' +
+         'var textArea = document.getElementById(\'codemirror\');\n' +
+         'var editor = CodeMirror.fromTextArea(textArea, {\n' +
+           'lineNumbers: true,\n' +
+           'mode: "javascript",\n' +
+           'theme: "material",\n' +
+         '});\n' +
+         '</script>\n' +
+        ' <script src="../JS/require.js"></script>\n' +
+         '<script src="../JS/requires.js"></script>\n' +
+         '</body>\n'+
+         '</html>';
       }else {
         console.log('Other file')
         for (var i = 0; i<newData.length;i++){
@@ -170,6 +208,7 @@ class File {
           visible: true,
           active: true,})
       
+          
       }
 
     saveFile(){
@@ -222,9 +261,6 @@ class File {
      }
     getFileState(){
       return this.isSaved;
-     }
-    getFileDOC(){
-      return this.dateOfCreation;
      }
     
     

@@ -1,0 +1,61 @@
+{
+  "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files",
+  "name": "web-files",
+  "type": "folder",
+  "children": [
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/dtjava.js",
+      "name": "dtjava.js",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/error.png",
+      "name": "error.png",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/get_java.png",
+      "name": "get_java.png",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/get_javafx.png",
+      "name": "get_javafx.png",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/javafx-chrome.png",
+      "name": "javafx-chrome.png",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/javafx-loading-100x100.gif",
+      "name": "javafx-loading-100x100.gif",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/javafx-loading-25x25.gif",
+      "name": "javafx-loading-25x25.gif",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/upgrade_java.png",
+      "name": "upgrade_java.png",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/CocoApp/pfee/PFE/dist/web-files/upgrade_javafx.png",
+      "name": "upgrade_javafx.png",
+      "type": "file",
+      "children": []
+    }
+  ]
+}

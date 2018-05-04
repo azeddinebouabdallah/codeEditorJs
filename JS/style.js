@@ -1,4 +1,4 @@
-
+window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
 
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
@@ -11,12 +11,14 @@ let filePath;
 
 let filesOpened = new Array();
 
+let indexOfClosedTab;
 
-var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+var root = JSON.parse(fs.readFileSync('./folderOpen.json', 'utf8', (err) => {
   if (err) {
     console.log(err);
   }
 }));
+
 
 var tree = require('electron-tree-view')({
     root,
@@ -235,30 +237,8 @@ let tab = tabGroup.addTab({
     active: true,
 
 })
-// !!!!!!!! NEED WORK !!!!!!!!!!!!!
-tabGroup.on("tab-removed", (tab, tabGroup) => { 
 
-  var activeTab = tabGroup.getActiveTab();
-  var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
-    if (err){
-      return
-    }
-  })
-  jsonContentFile = JSON.parse(jsonContentFile)
- if (jsonContentFile.isSaved){
-  for (var i = 0; i < filesOpened.length; i++){
-    if (filesOpened[i].getFileName() == tab.title ){
-        filesOpened.splice(i, 1)
-    }
-  }
-  
-  }else {
-
-  }
-  tab.close(true);
- });
-
-
+readPrevious();
 
 function openFile(item){
   data = item; // pass array [name, path] to data
@@ -276,7 +256,7 @@ function openFile(item){
 
   // Call the create File function
   file.createFile();
-
+  closingEventTab();
    //Push file into a list that hold all the opened files
     filesOpened.push(file);
     }
@@ -288,13 +268,9 @@ function closeTab(){
   if (activeTab.getTitle() == 'Home'){
     activeTab.close()
   }else {
-    var jsonContentFile = fs.readFileSync('./Files/' + activeTab.getTitle() + '.json', 'utf8', (err) => {
-    if (err){
-      return
-    }
-  })
-  jsonContentFile = JSON.parse(jsonContentFile)
-  if (jsonContentFile.isSaved){
+  var jsonContentFile = readingFileFromFiles(activeTab.getTitle());
+  
+  if (verifyIfFileIsSaved(jsonContentFile)){
   for (var i = 0; i < filesOpened.length; i++){
     if (filesOpened[i].getFileName() == activeTab.getTitle() ){
         filesOpened.splice(i, 1)
@@ -336,7 +312,7 @@ function forceClose(){
   activeTab.close(true);
 }
 function readFolderOpen(){
-  
+  console.log('ReadFolderFunction')
   refreshWhenFolderOpen();
 }
 // Function to see if file is already open
@@ -385,33 +361,130 @@ function saveFile(){
 
 }
 function refreshWhenFolderOpen(){
+  console.log('refresh Function')
+  let saveStateOfFile = new Array();
+  for (var i = 0 ; i < filesOpened.length; i++){
+    saveStateOfFile.push(filesOpened[i].fileName);
+  }
+  saveStateOfFile = JSON.stringify(saveStateOfFile);
+  console.log('Stringify function Done')
+  fs.writeFile('./stateOfFile.json', saveStateOfFile, (err) => {
+    if (err) {
+      return
+    }
+  })
+
+  console.log('Writing Function Done')
 
   location.reload();
   
-  window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
-  var root = {
-    name: '',
-    children: []
-  }
-  var tree = require('electron-tree-view')({
-    root,
-    container: document.querySelector('#jstree_demo_div'),
-  })
-  var root = JSON.parse(fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
-     if (err) {
-       console.log(err);
-     }
+  var folderOpenJSON = fs.readFileSync('./folderOpen.json', 'utf8', (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    console.dir(data)
+  });
 
-   }));
- 
+  var root = JSON.parse(folderOpenJSON);
+
+   console.log('new Tree Function Done')
   var tree = require('electron-tree-view')({
    root,
    container: document.querySelector('#jstree_demo_div'),
    children: c => c.children,
    label: c => c.name
   })
- tree.loop.reload({ root })
+
+  readFolderOpen();
  
+}
+
+function readPrevious(){
+  fs.readFileSync('./stateOfFile.json', 'utf8', (err, data) => {
+    if (err){
+      return
+    }
+  })
+  var readFileState = JSON.parse(data)
+    if (readFileState.length == 0 ) {return}
+
+    for(var i = 0; i < readFileState.length; i++){
+
+    let tabState = tabGroup.addTab({
+      title: readFileState[i],
+      src: './Files/' + readFileState[i] + '.html',
+      webviewAttributes: {
+          'nodeintegration': true
+      },
+      icon: 'fa fa-home',
+      visible: true,
+      active: true,
+  
+  })
+   
+  }
+  
+}
+function closingEventTab(){
+  $('.etabs-tab-button-close').unbind('click').click(function(){
+    indexOfClosedTab =  $('.etabs-tab-button-close').index(this);
+    closeIndexTab(indexOfClosedTab)
+  })
+}
+function closeIndexTab(index){
+    console.log('Closing function')
+    let tab = tabGroup.getTabByPosition(index+1);
+    let nameOfTab = tab.getTitle();
+    if (nameOfTab == 'Home'){
+      tab.close();
+    }else {
+    let fileReader = readingFileFromFiles(nameOfTab);
+    if (verifyIfFileIsSaved(fileReader)){
+      for (var i = 0; i < filesOpened.length; i++){
+        if (filesOpened[i].getFileName() == nameOfTab){
+            filesOpened.splice(i, 1)
+            console.log('Deleting file from Array')
+        }
+      }
+      tab.close();
+    }else {
+      swal({
+        title: 'Are you sure?',
+        text: "You file isn't saved, you want to save it!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Quit any way!'
+      }).then((result) => {
+        if (result.value) {
+          for (var i = 0; i < filesOpened.length; i++){
+            if (filesOpened[i].getFileName() == nameOfTab){
+                filesOpened.splice(i, 1)
+                console.log('Deleting file from Array')
+            }
+          }
+          tab.close();
+        }
+       
+      })
+    }
+  }
+}
+
+
+
+function readingFileFromFiles(filename){
+    return fs.readFileSync('./Files/' + filename + '.json', 'utf8', (err) => {
+      if (err){
+        return
+      }
+    })
+}
+
+function verifyIfFileIsSaved(fileReader){
+  var result = JSON.parse(fileReader)
+  return result.isSaved;
 }
 
 var viewFiles = document.querySelectorAll('span');
@@ -434,8 +507,9 @@ viewTabs.oncontextmenu = function (e) {
 }
 
 ipcRenderer.on('delete', (e) => {
-  
+  console.log('delete Event')
   readFolderOpen();
   
 })
 
+//Delete

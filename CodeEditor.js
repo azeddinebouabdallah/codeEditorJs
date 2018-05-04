@@ -18,7 +18,7 @@ const mainMenuTemplate = [
 { 
   label: 'File',
   submenu: [
-    {label: 'Open Directory', click(){
+    {label: 'Open File', click(){
 
       openDialogFile();
       
@@ -82,6 +82,20 @@ const mainMenuTemplate = [
       label: 'Close Program',
       accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+F5',
       click (){
+        fs.writeFile('./stateOfFile.json', '', (err) => {
+          if (err) {
+            return
+          }
+        })
+        fs.readdir('./Files/', (err, files) => {
+          if (err) throw err;
+        
+          for (const file of files) {
+            fs.unlink(path.join('./Files/', file), err => {
+              if (err) throw err;
+            });
+          }
+        });
         app.quit()
       }
     },
@@ -136,7 +150,6 @@ const mainMenuTemplate = [
   role: 'window',
       submenu: [
         {role: 'minimize'},
-        {role: 'zoom'}
       ]}, {
         role: 'help',
       submenu: [
@@ -152,7 +165,6 @@ const mainMenuTemplate = [
 
 const ctxMenuHome = new Menu();
 const ctxMenuFiles = new Menu();
-const ctxMenu = new Menu();
 
 function createWindow() {
   mainWindow = new BrowserWindow({})
@@ -163,7 +175,7 @@ function createWindow() {
     slashes: true
   }))
   
-  var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  var data = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {if (err) {return}})
   data = JSON.parse(data);
   writeFolderOpen(data.path);
 
@@ -174,11 +186,6 @@ function createWindow() {
     mainWindow = null
   })
   mainWindow.maximize();
-
-  // App Menu
-  ctxMenu.append(new MenuItem({
-    label: 'test',
-  }))
 
   // Context Menu Inside Pages
   ctxMenuHome.append(new MenuItem({
@@ -213,8 +220,8 @@ function createWindow() {
     label: 'Delete',
     click(){
       // Delete the file [Get the selected file name and then pare the path from openFolders.json and detele the file]
-      deleteAnyFile(filepath)
-      var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+      deleteFile(filepath)
+      var data = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {if (err) {return}})
       data = JSON.parse(data);
       console.log('pathname: == >' + data.path)
       writeFolderOpen(data.path);
@@ -222,23 +229,8 @@ function createWindow() {
       mainWindow.webContents.send('delete')
     }
   }))
-  ctxMenuFiles.append(new MenuItem({
-    label: 'Rename',
-    click(){
-      // Rename the file []
-    }
-  }))
  
 
-}
-function deleteAnyFile(path){
-  var rimraf = require('rimraf');
-  console.log('delete ---------')
-  rimraf(path, function () { console.log('done');
-  var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
-  data = JSON.parse(data);
-  writeFolderOpen(data.path);
- });
 }
 function openNewFile(filePath){
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -250,7 +242,18 @@ function openNewFile(filePath){
       mainWindow.webContents.send('file' , dataNew);
   })
 }
-function dirTree(filename) {
+function deleteFile(path){
+  var rimraf = require('rimraf');
+  console.log('delete ---------')
+  rimraf(path, function () { console.log('done');
+  var data = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  data = JSON.parse(data);
+  writeFolderOpen(data.path);
+ });
+
+
+}
+function getTreeData(filename) {
 
   var stats = fs.lstatSync(filename),
   
@@ -262,7 +265,7 @@ function dirTree(filename) {
   if (stats.isDirectory()) {
       info.type = "folder";
       info.children = fs.readdirSync(filename).map(function(child) {
-          return dirTree(filename + '/' + child); // path.join(filename, child);
+          return getTreeData(filename + '/' + child); // path.join(filename, child);
       });
   } else {
       // Assuming it's a file. In real life it could be a symlink or
@@ -303,12 +306,12 @@ function openDialogFile(){
   })
 }
 function getNewFoldersWhenOpen(){
-    var data = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+    var data = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {if (err) {return}})
     data = JSON.parse(data);
     writeFolderOpen(data.path)
 }
 function writeFolderOpen(path){
-  var dataa = dirTree(path);
+  var dataa = getTreeData(path);
   dataa = JSON.stringify(dataa, null, 2)
 
   let folder = new Folder(dataa.name, dataa.path, dataa);
@@ -342,6 +345,21 @@ ipcMain.on('right_click_file', (e, elem) => {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function() {
+  fs.writeFile('./stateOfFile.json', '[]', (err) => {
+    if (err) {
+      return
+    }
+  })
+  fs.readdir(__dirname + '/Files/', (err, files) => {
+    if (err) throw err;
+  
+    for (const file of files) {
+      fs.unlink(path.join('./Files/', file), err => {
+        if (err) throw err;
+      });
+    }
+  });
+  mainWindow.webContents.send('closeSave')
     app.quit()
 })
 

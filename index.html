@@ -71,7 +71,7 @@
 
       $('span').contextmenu(function (){
         console.log('Elem = ' + $(this).text())
-        var fileO = fs.readFileSync('./Files/folderOpen.json', 'utf8', (err) => {
+        var fileO = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {
           console.log('Error in reading folderOpen.json')
         })
         fileO = JSON.parse(fileO);
@@ -79,7 +79,6 @@
         console.log(fileO.children)
         
           element = recJSON(fileO.children, $(this).text());
-          console.dir(element.path)
         
 
         ipcRenderer.send('right_click_file', element);
@@ -92,13 +91,10 @@
         elem.map((child) => {
           if (!fileFounded)
           {
-          console.dir(child)
-          console.log(child.name + ' : ' + name)
           if (child.type == 'folder'){
             elemR = recJSON(child.children, name)
           }{
             if (child.name == name){
-              console.log('File found + ' + child.name)
               elemR = child;
               fileFounded = true;
             }
@@ -113,6 +109,10 @@
         $('#body_loader').fadeOut(2000)
       })
   
+      $('.etabs-tab-button-close').unbind('click').click(function(){
+       indexOfClosedTab =  $('.etabs-tab-button-close').index(this);
+       closeIndexTab(indexOfClosedTab)
+      })
     
  
   </script>

@@ -7,7 +7,7 @@ class Folder {
 
     createFolder(){
         const fs = require('fs')
-        fs.writeFile('./Files/folderOpen.json', this.subFiles, (err) => {
+        fs.writeFile('./folderOpen.json', this.subFiles, (err) => {
             if (err) {return}
         })
      }
