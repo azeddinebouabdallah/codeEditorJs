@@ -14,12 +14,6 @@
           "type": "folder",
           "children": [
             {
-              "path": "/Users/mac/Didou/Electronjstest2/bower_components/bootstrap/.babelrc.js",
-              "name": ".babelrc.js",
-              "type": "file",
-              "children": []
-            },
-            {
               "path": "/Users/mac/Didou/Electronjstest2/bower_components/bootstrap/.bower.json",
               "name": ".bower.json",
               "type": "file",

@@ -1,8 +1,0 @@
-{
-  "fileName": "main.js",
-  "filePath": "/Users/mac/Didou/Electronjstest2/main.js",
-  "fileexe": "js",
-  "fileDate": "12-12-2012",
-  "fileContent": "const {app, BrowserWindow} = require('electron')\nconst url = require('url')\nconst path = require('path')\n\nlet win\n\nfunction createWindow(){\n  win = new BrowserWindow({width: 800, height: 600})\n  win.loadURL(url.format({\n    pathname: path.join(__dirname, 'index.html'),\n    protocol: 'file:',\n    slashes: true\n  }))\n}\n\napp.on('ready', createWindow)\n",
-  "isSaved": true
-}
