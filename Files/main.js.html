@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<script src="../codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="../codemirror/theme/material.css">
+<script src="../codemirror/mode/javascript/javascript.js"></script>
+</head>
+<body>
+<textarea class="codemirror-textarea" id="codemirror" nodeintegration>
+const {app, BrowserWindow} = require('electron')
+const url = require('url')
+const path = require('path')
+
+let win
+
+function createWindow(){
+  win = new BrowserWindow({width: 800, height: 600})
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+}
+
+app.on('ready', createWindow)
+
+</textarea>
+<script type="text/javascript">
+var textArea = document.getElementById('codemirror');
+var editor = CodeMirror.fromTextArea(textArea, {
+lineNumbers: true,
+mode: "javascript",
+theme: "material",
+});
+</script>
+ <script src="../JS/require.js"></script>
+<script src="../JS/requires.js"></script>
+</body>
+</html>
