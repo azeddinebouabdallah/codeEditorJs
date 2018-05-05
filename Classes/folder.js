@@ -5,9 +5,9 @@ class Folder {
         this.subFiles = subFiles;
     }
 
-    createFolder(){
+    createFolder(path){
         const fs = require('fs')
-        fs.writeFile(__dirname + '/folderOpen.json', this.subFiles, (err) => {
+        fs.writeFile(path, this.subFiles, (err) => {
             if (err) {return}
         })
      }

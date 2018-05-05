@@ -1,4 +1,7 @@
 const fs = require('fs')
+const path = require('path')
+
+var __dirname = path.dirname('./Files/');
 
 var nameBeta = window.location.pathname; 
  nameBeta = nameBeta.replace(/^.*[\\\/]/, '');
@@ -10,7 +13,7 @@ var nameBeta = window.location.pathname;
  }
 
 
-editor.on('keyup', () => {
+ editor.on('keyup', () => {
         
     if (fs.existsSync(__dirname + '/Files/' + name + 'json')){
 

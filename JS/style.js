@@ -1,5 +1,5 @@
 window.$ = window.jQuery = require(__dirname + '/bower_components/jquery/dist/jquery.min.js');
-
+console.log(__dirname)
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
@@ -227,6 +227,27 @@ ipcRenderer.on('delete', (e) => {
   refreshWhenFolderOpen();
     
 })
+ipcRenderer.on('closeButtonEvent', (e) => {
+   if (quitApp()){
+     ipcRenderer.send('quitAppAllFileSaved')
+   }else {
+    swal({
+      title: 'Are you sure?',
+      text: "There are some files aren't saved",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Quit any way!'
+    }).then((result) => {
+      if (result.value) {
+        ipcRenderer.send('quitAppAllFileSaved');
+      }
+     
+    })
+   }
+})
+
 
 tree.on('selected', item => {
   // treeClickEvent Function that Create and add Files to our project
@@ -509,4 +530,16 @@ viewTabs.oncontextmenu = function (e) {
 
 
 
-//Delete
+//Verify save state when quit app
+function quitApp(){
+  var allFilesSaved = true;
+  for (tab of tabGroup.getTabs()){
+    if (tab.getTitle() != 'Home'){
+    var fileReader = readingFileFromFiles(tab.getTitle());
+    if (!verifyIfFileIsSaved(fileReader)){
+      allFilesSaved = false;
+    }
+  }
+  }
+  return allFilesSaved;
+}

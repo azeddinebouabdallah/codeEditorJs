@@ -1,5 +1,5 @@
 window.$ = window.jQuery = require(__dirname + '/bower_components/jquery/dist/jquery.min.js');
-
+console.log(__dirname)
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron

@@ -19,6 +19,9 @@ let mainWindow
 let filepath;
 let filename;
 
+let force_quit = false;
+
+
 // Template of the Menu
 const mainMenuTemplate = [
 { 
@@ -88,6 +91,8 @@ const mainMenuTemplate = [
       label: 'Close Program',
       accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+F5',
       click (){
+        force_quit = true;
+
         fs.writeFile(__dirname + '/stateOfFile.json', '[]', (err) => {
           if (err) {
             return
@@ -185,7 +190,7 @@ function createWindow() {
   }))
   
 
-  var data = fs.readFileSync(__dirname + '/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  var data = fs.readFileSync(__dirname +'/folderOpen.json', 'utf8', (err) => {if (err) {return}})
   if (data != ''){
   data = JSON.parse(data);
   // Create the Folder object if there is opened file
@@ -237,13 +242,22 @@ function createWindow() {
       // Delete the file [Get the selected file name and then parse the path from openFolders.json and detele the file]
       deleteFile(filepath) // This function is basically deleting any path and set the new Folder (with file Deleted on it)
                           // On the folderOpen.json
-      var data = fs.readFileSync(__dirname + '/folderOpen.json', 'utf8', (err) => {if (err) {return}}) // Reading the new folderOpen.json
+      var data = fs.readFileSync(__dirname +'/folderOpen.json', 'utf8', (err) => {if (err) {return}}) // Reading the new folderOpen.json
       data = JSON.parse(data); // parse the data
 
       mainWindow.webContents.send('delete') // Send delete event
     }
   }))
  
+  mainWindow.on('close', function(e){
+
+    if (!force_quit){
+        e.preventDefault();
+        mainWindow.webContents.send('closeButtonEvent')
+      }
+    
+  });
+
 
 }
 
@@ -262,7 +276,7 @@ function deleteFile(path){
   var rimraf = require('rimraf');
   console.log('delete ---------')
   rimraf(path, function () { console.log('done');
-  var data = fs.readFileSync(__dirname + '/folderOpen.json', 'utf8', (err) => {if (err) {return}})
+  var data = fs.readFileSync(__dirname +'/folderOpen.json', 'utf8', (err) => {if (err) {return}})
   data = JSON.parse(data);
   writeFolderOpen(data.path);
  });
@@ -343,7 +357,7 @@ function writeFolderOpen(path){
 
   let folder = new Folder(dataa.name, dataa.path, dataa);
 
-  folder.createFolder();
+  folder.createFolder(__dirname + '/folderOpen.json');
 }
 
 // readFile function that read the file from a path and send Data as file event
@@ -376,14 +390,18 @@ ipcMain.on('right_click_file', (e, elem) => {
     rightClickFiles(e);
 
 })
-
+ipcMain.on('quitAppAllFileSaved', (e) => {
+  console.log('Close')
+  force_quit = true;
+  app.quit();
+})
 // The launch of our application
 app.on('ready', createWindow)
 
 // Close all Window = (quit)
 app.on('window-all-closed', function() {
   // set Empty to stateOfFile
-  fs.writeFile(__dirname + '/stateOfFile.json', '[]', (err) => {
+  fs.writeFile(__dirname +'/stateOfFile.json', '[]', (err) => {
     if (err) {
       return
     }
@@ -394,7 +412,7 @@ app.on('window-all-closed', function() {
     if (err) throw err;
   
     for (const file of files) {
-      fs.unlink(path.join(__dirname + '/Files/', file), err => {
+      fs.unlink(path.join(__dirname +'/Files/', file), err => {
         if (err) throw err;
       });
     }

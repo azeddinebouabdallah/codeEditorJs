@@ -1,4 +1,7 @@
 const fs = require('fs')
+const path = require('path')
+
+var __dirname = path.dirname('./Files/');
 
 var nameBeta = window.location.pathname; 
  nameBeta = nameBeta.replace(/^.*[\\\/]/, '');
@@ -10,11 +13,11 @@ var nameBeta = window.location.pathname;
  }
 
 
-editor.on('keyup', () => {
+ editor.on('keyup', () => {
         
-    if (fs.existsSync(__dirname + '/Files/' + name + 'json')){
+    if (fs.existsSync(path.dirname(__dirname) + '/Files/' + name + 'json')){
 
-        var jsonFile = fs.readFileSync(__dirname + '/Files/' + name + 'json', 'utf8', (err)=> {});
+        var jsonFile = fs.readFileSync(path.dirname(__dirname) + '/Files/' + name + 'json', 'utf8', (err)=> {});
         var jsonFileContent = JSON.parse(jsonFile);
         jsonFileContent.isSaved = false;
         jsonFileContent.fileContent = editor.getValue();
@@ -27,7 +30,7 @@ editor.on('keyup', () => {
         jsonFileContent = JSON.stringify(jsonFileContent, null , 2);
      }
     
-     fs.writeFile(__dirname + '/Files/' + name + 'json' , jsonFileContent, (err) => { 
+     fs.writeFile(path.dirname(__dirname) + '/Files/' + name + 'json' , jsonFileContent, (err) => { 
 
      });
   });

@@ -24,7 +24,7 @@
     "sweetalert2": "^7.19.2"
   },
   "devDependencies": {
-    "electron": "^1.3.4",
+    "electron": "^2.0.0",
     "asar": "^0.14.3",
     "electron-packager": "^12.0.2"
   }
