@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="./codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="./codemirror/theme/3024-day.css">
     <link rel="stylesheet" href="./node_modules/electron-tabs/electron-tabs.css">
-    <link rel="stylesheet" href="./Style/style.css">
+   
     <link rel="stylesheet" href="./jsTree/dist/themes/default/style.min.css" />
     <link rel="stylesheet" href="./Style/electronstyle.css">
+    <link rel="stylesheet" href="./Style/style.css">
     
   <style media="screen">
   </style>
@@ -69,7 +70,7 @@
 
       $('span').contextmenu(function (){
         console.log('Elem = ' + $(this).text())
-        var fileO = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {
+        var fileO = fs.readFileSync(__dirname + '/folderOpen.json', 'utf8', (err) => {
           console.log('Error in reading folderOpen.json')
         })
         fileO = JSON.parse(fileO);

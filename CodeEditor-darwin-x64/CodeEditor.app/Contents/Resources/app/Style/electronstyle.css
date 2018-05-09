@@ -48,8 +48,10 @@
 }
 
 .etabs-tab.active {
-    background: #fff;
-    color: #333;
+    background: #273238;
+    color: #ddd;
+    box-sizing: border-box;
+    border-top: 3px solid #e74c3c;    
 }
 
 .etabs-tab.flash {
@@ -134,8 +136,7 @@
 
 .etabs-views {
     position: fixed;
-    border-top: 1px solid #1e272e;
-    height: 105%;
+    height: 100%;
     width: 1200px;
     margin: 0px;
     padding: 0px;

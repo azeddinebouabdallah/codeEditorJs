@@ -33,14 +33,17 @@ body {
 }
 
 .fileTree {
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: 100vw;
+  overflow: hidden;
   background-color: #1e272e;
 }
 .split-horizontal{
   background-color: #273238;
 }
-
+#one {
+  background-color: #1e272e;
+}
 .split.split-horizontal, .gutter.gutter-horizontal {
   float: left;
 }

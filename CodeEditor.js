@@ -143,7 +143,8 @@ const mainMenuTemplate = [
   }]
 }, {
   label: 'View',
-  submenu : [{role: 'togglefullscreen'}, 
+  submenu : 
+  [{role: 'togglefullscreen'}, 
   {
     label: 'Increase Font Size',
     accelerator: process.platform == 'darwin' ? 'Command+ +' : 'Ctrl+ +',
@@ -173,7 +174,7 @@ const mainMenuTemplate = [
         {
           label: 'Learn More',
           click () {
-
+              require('electron').shell.openExternal('file://' +__dirname + '/details.html');
            }
         }
       ]

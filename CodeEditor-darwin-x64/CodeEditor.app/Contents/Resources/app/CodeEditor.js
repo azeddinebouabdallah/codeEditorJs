@@ -115,7 +115,13 @@ const mainMenuTemplate = [
   click(){
     mainWindow.webContents.toggleDevTools()
   }},
-  {role: 'reload'}
+  {
+    label: 'reload',
+    accelerator: process.platform == 'darwin' ? 'Command+R' : 'F5',
+    click(){
+      mainWindow.reload();
+    }
+  }
   ]
 }, {
   label : 'Edit',

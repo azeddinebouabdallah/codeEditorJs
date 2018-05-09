@@ -69,7 +69,7 @@
 
       $('span').contextmenu(function (){
         console.log('Elem = ' + $(this).text())
-        var fileO = fs.readFileSync('./folderOpen.json', 'utf8', (err) => {
+        var fileO = fs.readFileSync(__dirname + '/folderOpen.json', 'utf8', (err) => {
           console.log('Error in reading folderOpen.json')
         })
         fileO = JSON.parse(fileO);
