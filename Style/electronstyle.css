@@ -48,10 +48,10 @@
 }
 
 .etabs-tab.active {
-    background: #273238;
-    color: #ddd;
-    box-sizing: border-box;
-    border-top: 3px solid #e74c3c;    
+    background: #ecf0f1;
+    color: #273238;
+    border-top: 2px solid #e74c3c;   
+    
 }
 
 .etabs-tab.flash {

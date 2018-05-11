@@ -54,7 +54,6 @@ const mainMenuTemplate = [
               console.log('Error with creating file');
               return;
             }
-            console.log(filename);
             openNewFile(filename);
           })
 
@@ -72,10 +71,8 @@ const mainMenuTemplate = [
       click() {
         var savePath = dialog.showSaveDialog((filename) => {
           if (filename === undefined){
-            console.log('Filename undefined (Save as)')
           }else {
           data = filename;
-          console.log(data + + ': FILE NAME \n')
 
           mainWindow.webContents.send('saveas', data);
           }
@@ -281,8 +278,7 @@ function openNewFile(filePath){
 // This function deletes any File from a specific path
 function deleteFile(path){
   var rimraf = require('rimraf');
-  console.log('delete ---------')
-  rimraf(path, function () { console.log('done');
+  rimraf(path, function () { 
   var data = fs.readFileSync(__dirname +'/folderOpen.json', 'utf8', (err) => {if (err) {return}})
   data = JSON.parse(data);
   writeFolderOpen(data.path);
@@ -398,7 +394,6 @@ ipcMain.on('right_click_file', (e, elem) => {
 
 })
 ipcMain.on('quitAppAllFileSaved', (e) => {
-  console.log('Close')
   force_quit = true;
   app.quit();
 })

@@ -1,5 +1,4 @@
 window.$ = window.jQuery = require(__dirname + '/bower_components/jquery/dist/jquery.min.js');
-console.log(__dirname)
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
 const {ipcRenderer} = electron
@@ -129,7 +128,6 @@ ipcRenderer.on('increasefontsize', (e) => {
   codeMirrorCss += '.CodeMirror {font-size :  ' + fontSize + 'px  }'
  
   // Rewrite the CodeMirror Css
-  console.log ('File Added: ' + codeMirrorCss);
   fs.writeFile(__dirname + '/codemirror/lib/codemirror.css', codeMirrorCss, (err) => {
     if (err) {
       console.log('Error with writing the CodeMirror css file')
@@ -205,7 +203,6 @@ ipcRenderer.on('resetfontsize', (e) => {
   codeMirrorCss += '.CodeMirror {font-size :  ' + fontSize + 'px  }'
  
   // Rewrite the CodeMirror Css
-  console.log ('File Added: ' + codeMirrorCss);
   fs.writeFile(__dirname + '/codemirror/lib/codemirror.css', codeMirrorCss, (err) => {
     if (err) {
       console.log('Error with writing the CodeMirror css file')
@@ -457,7 +454,6 @@ function closingEventTab(){
   })
 }
 function closeIndexTab(index){
-    console.log('Closing function')
     let tab = tabGroup.getTabByPosition(index+1);
     let nameOfTab = tab.getTitle();
     if (nameOfTab == 'Home'){
