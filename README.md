@@ -1,6 +1,17 @@
 # Code Editor
 Code Editor JavaScript
 
-[embed]https://github.com/didoudesigner/codeEditorJs/blob/master/Memoire%20Final.pdf [/embed]
+This Code Editor is for html, css and Javascript languages
+
+We're using Electron.js as the main framework that allow us to create a Desktop applications
+and also we're using CodeMirror that help us to highlight the Syntax.
+
+The PDF file : https://github.com/didoudesigner/codeEditorJs/blob/master/Memoire%20Final.pdf
+
+The project is still underconstruction 
 
 First release version (1.0) : 2 May 2018.
+
+
+
+
