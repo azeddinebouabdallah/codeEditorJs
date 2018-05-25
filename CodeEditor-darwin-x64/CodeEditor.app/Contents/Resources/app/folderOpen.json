@@ -3080,6 +3080,18 @@
       "children": []
     },
     {
+      "path": "/Users/mac/Didou/ElectronJSTest/html.html",
+      "name": "html.html",
+      "type": "file",
+      "children": []
+    },
+    {
+      "path": "/Users/mac/Didou/ElectronJSTest/html.txt",
+      "name": "html.txt",
+      "type": "file",
+      "children": []
+    },
+    {
       "path": "/Users/mac/Didou/ElectronJSTest/index.html",
       "name": "index.html",
       "type": "file",

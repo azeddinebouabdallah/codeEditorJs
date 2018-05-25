@@ -1,7 +1,7 @@
 window.$ = window.jQuery = require(__dirname + '/bower_components/jquery/dist/jquery.min.js');
 const TabGroup = require("electron-tabs");
 const electron = require('electron')
-const {ipcRenderer} = electron
+const {ipcRenderer, remote} = electron
 const fs = require('fs')
 const swal = require('sweetalert2')
 
@@ -538,4 +538,20 @@ function quitApp(){
   }
   }
   return allFilesSaved;
+}
+
+
+// Testing srearch in page 
+ipcRenderer.on('SreachForm', (e) => {
+
+  serachFormPage();
+
+})
+
+function serachFormPage() {
+
+  let searchInPage = require('electron-in-page-search');
+  let inPageSearch = searchInPage(remote.getCurrentWebContents());
+  inPageSearch.openSearchWindow();
+
 }

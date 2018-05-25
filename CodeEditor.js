@@ -107,7 +107,7 @@ const mainMenuTemplate = [
         app.quit()
       }
     },
-    {label: 'Open Dev-Tools',
+   {label: 'Open Dev-Tools',
     accelerator: process.platform == 'darwin' ? 'Command+ù' : 'Ctrl+ù',
   click(){
     mainWindow.webContents.toggleDevTools()
@@ -117,6 +117,11 @@ const mainMenuTemplate = [
     accelerator: process.platform == 'darwin' ? 'Command+R' : 'F5',
     click(){
       mainWindow.reload();
+    }
+  }, {
+    label: 'Search',
+    click() {
+      mainWindow.webContents.send('SreachForm');
     }
   }
   ]
@@ -144,7 +149,7 @@ const mainMenuTemplate = [
   [{role: 'togglefullscreen'}, 
   {
     label: 'Increase Font Size',
-    accelerator: process.platform == 'darwin' ? 'Command+ +' : 'Ctrl+ +',
+    accelerator: process.platform == 'darwin' ? 'Command+ UP' : 'Ctrl+ UP',
     click(){
         mainWindow.webContents.send('increasefontsize')
     }
