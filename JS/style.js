@@ -541,17 +541,3 @@ function quitApp(){
 }
 
 
-// Testing srearch in page 
-ipcRenderer.on('SreachForm', (e) => {
-
-  serachFormPage();
-
-})
-
-function serachFormPage() {
-
-  let searchInPage = require('electron-in-page-search');
-  let inPageSearch = searchInPage(remote.getCurrentWebContents());
-  inPageSearch.openSearchWindow();
-
-}
