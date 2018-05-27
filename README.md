@@ -1,17 +1,13 @@
 # Code Editor
-Code Editor JavaScript
+Code Editor en JavaScript
 
-This Code Editor is for html, css and Javascript languages
+Ce Editeur de code est un projet de fin d'étude de l'université de batna 2.
 
-We're using Electron.js as the main framework that allow us to create a Desktop applications
-and also we're using CodeMirror that help us to highlight the Syntax.
+Bouabdallah Azeddine, Mokkedem Ayoub Groupe 2
 
-The PDF file : https://github.com/didoudesigner/codeEditorJs/blob/master/Memoire%20Final.pdf
+Memoire : https://github.com/didoudesigner/codeEditorJs/blob/master/Memoire%20Final.pdf
 
-The project is still underconstruction 
-
-First release version (1.0) : 2 May 2018.
-
+Date de soutenance : 27-05-2018
 
 
 
