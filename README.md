@@ -1,7 +1,7 @@
 # Code Editor
 Code Editor en JavaScript
 
-Ce Editeur de code est un projet de fin d'étude de l'université de batna 2.
+Ce Code Editor est un projet de fin d'étude de l'université de batna 2.
 
 Bouabdallah Azeddine, Mokkedem Ayoub Groupe 2
 

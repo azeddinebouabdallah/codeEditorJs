@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<script src="../codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="../codemirror/theme/material.css">
+</head>
+<body>
+<textarea class="codemirror-textarea" id="codemirror" nodeintegration>
+\documentclass[12pt, a4paper, onepage, notitlepage]{article}
+
+\usepackage[french, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+\geometry{hmargin = 2cm, vmargin=2cm}
+
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+
+
+\fancyhead[R]{The head of the pages}
+\fancyfoot[C]{The page : \thepage}
+
+\begin{document}
+
+\section{Les équation mathématiques}
+Si on encourage les mathématiciens et les informaticiens à utiliser LATEX pour rédiger leursdocuments scientiques c’est surtout pour la souplesse qu’il procure à inclure les formules mathématiquesainsi que le rendu remarquable qu’il offre.
+\\
+
+Pour insérer une formules mathématqiue au sein d’un document, on a trois méthodes :
+
+\begin{enumerate}
+\item Pas de rupture entre la formule et le texte. On utilise pour cela les \$.
+\item On détache la formule du texte avec  et .
+\item On détache la formule en ayant la possibilité de la numéroter et de la doter d’une légende.C’est l’environnement equation qui rend possible cette pratique.
+\end{enumerate}
+
+\subsection{Les \$}
+Une équation du second degré est de la forme $a * x^2 + b * x + c = 0$ où $a$, $b$ et $c$ sont lescoefficients et x est la variable de l’équation.
+\\
+
+Le texte précédent est réalisé avec le code suivant :
+\\
+
+\includegraphics[width = 15cm]{m}
+
+\subsection{Les crochets}
+Le code suivant va permettre de générer le résultat qui le suit :
+\\
+
+\includegraphics[width =15cm]{m2}
+\\
+
+Le lemme des poignées de main qui suit est facile à démontrer : \[ \sum_{v \in V}^{} deg(v) = 2 |E| \]
+
+
+
+\begin{tabular}{| l | c | c |}
+	\hline
+	Modèle & \multicolumn{2}{c|}{Caractéristique} \\
+	\hline
+	MacBook Pro 13 pouces & Processeur a 2 GHz 256 Go de stockage & 1 699,00  \\
+	\cline{2-3} 
+	 & Processeur a 2 GHz 256 Go de stockage & 1699,00 \\
+	 \cline{2-3} 
+	 & Processeur a 2 GHz 256 Go de stockage & 1699,00 \\
+	\hline
+	MacBook Pro 13 pouces & Processeur a 2 GHz 256 Go de stockage & 1699,00 \\
+	\cline{2-3} 
+	& Processeur a 2 GHz 256 Go de stockage & 1699,00 \\
+	
+	\hline
+	
+\end{tabular}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+</textarea>
+<script type="text/javascript">
+var textArea = document.getElementById('codemirror');
+var editor = CodeMirror.fromTextArea(textArea, {
+lineNumbers: true,
+mode: "xml",
+ htmlMode: true,
+theme: "material",
+});
+</script>
+ <script src="../JS/require.js"></script>
+<script src="../JS/requires.js"></script>
+</body>
+</html>
