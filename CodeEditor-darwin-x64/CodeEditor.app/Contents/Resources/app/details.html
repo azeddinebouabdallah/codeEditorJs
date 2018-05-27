@@ -4,21 +4,23 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="./font/robtoslab.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="./font/Eczar.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Style/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="./Style/styleDetails.css">
     <title>Code Editor</title>
   </head>
   <body>
     <div class="container">
-        <div class="jumbotron" style=" background-image: url('./img/background2.png');
+        <div class="jumbotron" style=" background-image: url('./img/back1.jpg');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100%;
-        padding: 200px 0px;">
-            <h1 class="display-3" style="text-align: center; margin-bottom: 40px; font-family: 'Roboto Slab', serif;">
+        padding: 200px 0px;
+        font-family: 'Eczar', serif;">
+            <h1 class="display-3" style="text-align: center; margin-bottom: 40px; ">
                 Editeur de Code
             </h1>
             <p class="lead" style="text-align: center;" >
@@ -26,7 +28,7 @@
             </p>
             <hr class="my-5" style="border-color: white">
             <p style="text-align: center;"><em>
-                Projet fin d'étude troisieme année license a l'Université de Mustapha Ben Boulaid (Batna 2)
+                Projet fin d'étude troisieme année license à l'Université de Mustapha Ben Boulaid (Batna 2)
             </em></p>
             <p style="text-align: center;"><em><strong>
                 Bouabdallah Azeddine - Mokkedem Ayoub
@@ -38,13 +40,11 @@
                 Introduction
             </h1>
             <p class="lead" style="text-align: center;" >
-                Notre multi-platforme Editeur de Code permet aux developeurs d'ecrire leur code html, css et JavaScript
+                Notre multi-platforme Editeur de Code permet aux développeurs d'écrire leur code html, css et JavaScript
                 d'une façon simple.
             </p>
             <p style="text-align: center;">
-                Dans notre projet on a utiliser des nouveaux technologies pour la creation 
-                de softwares comme le Framework Electron.js, Node.js, Bootstrap 4, jQuery,
-                Sweet Alert 2, CodeMirror et Split.js. aussi il est multi-platforme (Windows, Mac, Linux),
+                Dans ce projet multi-platforme (Windows, Mac, Linux), on a utilisé de nouvelles technologies comme le Framework Electron.js, Node.js, Bootstrap 4, jQuery,Sweet Alert 2, CodeMirror et Split.js.
             </p>
 
             <hr class="my-5">
@@ -57,10 +57,10 @@
                          -moz-box-shadow: 0 10px 6px -6px #777;
                          box-shadow: 0 10px 6px -6px #777; " alt="Colorizer le code">
                         <div class="card-body text-center">
-                          <h5 class="card-title">Coloriser Le Code</h5>
+                          <h5 class="card-title">Colorer Le Code</h5>
                           <p class="card-text">
                               Editer le code (Html, Css et JavaScript) avec une belle colorisation.
-                              vous pouvez aussi editer les autres types de texte comme (.txt, .md ..etc).
+                              Ainsi que les autres types de texte comme (.txt, .md ..etc).
                           </p>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <div class="card-body text-center">
                           <h5 class="card-title">Parcourir le dossier</h5>
                           <p class="card-text">
-                              Parcourir dans les dossier et les fichiers de votre projet façilement, 
+                              Parcourir dans les dossier et les fichiers de votre projet facilement, 
                               avec l'arbre du projet.
                           </p>
                         </div>
@@ -89,10 +89,10 @@
                          -moz-box-shadow: 0 10px 6px -6px #777;
                          box-shadow: 0 10px 6px -6px #777; ">
                         <div class="card-body text-center">
-                          <h5 class="card-title">Operation sur les fichiers</h5>
+                          <h5 class="card-title">Opérations sur les fichiers</h5>
                           <p class="card-text">
-                              Vous pouvez creer, ouvrir et sauvgarder un fichier de tout les types des textes (.html, .java, .txt, ...etc) dans un seul temps.
-                              Vous pouvez aussi ouvrir un dossier qui porte plusieurs fichier
+                              Vous pouvez créer, ouvrir et sauvgarder un fichier texte de tout type (.html, .java, .txt, ...etc) en même temps.
+                              Vous pouvez aussi ouvrir un dossier qui contient plusieurs fichiers.
                           </p>
                         </div>
                     </div>
@@ -106,12 +106,11 @@
                 </h1>
                 <p class="lead" style="text-align: center;" >
                         Dans le lancement de l'éditeur, la page d'accueil apparaît, 
-                        vous pouvez lire à propos de l'éditeur dans la page des détails.
+                        vous pouvez lire à propos de l'éditeur dans la page "détails".
                 </p>
                 <p class="lead" style="text-align: center;" >
-                        Pour ouvrir votre premier projet. Clickez sur le menu Fichier (Électron pour Mac) ensuite ouvrir un dossier.
-                         votre dossier. ensuite la page va actualiser pour mettre votre dossier en place.
-                          finalement vous pouvez ouvrir les fichiers du projet
+                    Pour ouvrir votre premier projet, cliquez sur le menu File (Electron pour Mac),
+                    ensuite Open Folder, choisissez votre dossier, ensuite la page va actualiser pour mettre votre dossier en place.
                 </p>
                 <hr class="my-5" style="border-color: white">
                 <div class="row">
@@ -133,16 +132,13 @@
                                 Manipuler les fichiers
                             </h1>
                             <p> <em>    
-                                    L'éditeur contient un système des fenêtres pour faciliter l'édition de plusieurs fichiers au même temps. 
-                                    La fermeture d'une fenêtre peut se faire en clichant sur le button "X" ou bien dans Le menu
-                                    <strong>Fichier > Fermer La fenêtre</strong>. 
-                                    dans tous les cas si votre fichier n'est pas enregistrer 
-                                    un message vont apparaitre pour la confirmation de la fermeture.</em></p>
+                                L'éditeur contient un système de fenêtres pour faciliter l'édition de plusieurs fichiers
+                                en même temps.
+                                La fermeture d'une fenêtre peut se faire en cliquant sur le bouton "X" ou bien dans
+                                Le menu <strong>Electron (File pour Windows) > Close Tab</strong>. Dans le cas où votre fichier n'est pas enregistré un message apparait pour la confirmation de la fermeture. </em></p>
                             <p><em>
-                                    Quand vous fermez l'éditeur complètement s'il y a un seul fichier n'est pas enregistré 
-                                    un message de confirmation apparaitre. par contre dans MAC si vous utilisez <strong>CMD+Q</strong> 
-                                    (Tuer le processuce) même s'il y a un fichier n'est pas enregistrer 
-                                    l'éditeur va être fermé sans confirmation (<strong>ALT+F4</strong> : dans le cas du Windows). 
+                                    Quand vous fermez l'éditeur complètement un message de confirmation apparait si au moins  un seul fichier n'est pas enregistré. Par contre, sous MAC si vous utilisez <strong>CMD+Q</strong> 
+                                    (Tuer le processuce) l'éditeur va être fermé sans confirmation même s'il y a un fichier non enregistré (<strong>ALT+F4</strong> : dans le cas du Windows). 
                             </em></p>                    
                     </div>
                 </div>
@@ -150,13 +146,13 @@
                 <div class="row">
                     <div class="col-8">
                         <h4 class="display-6">
-                                Changer la taille du police
+                                Changer la taille de la police
                             </h1>
                             <p>     
-                                    Vous pouvez changer la taille de la police utiliser dans notre éditeur comme vous voulez.
+                                    Vous pouvez changer la taille de la police utilisée dans notre éditeur comme vous voulez.
                                     Juste clickez sur <strong>vue > Incrementer La Police</strong> (pour incrémenter la taille), 
-                                    <strong>Decrementer La Police</strong> (pour Decrementer la taille) ou bien <strong>Remise La Police</strong>
-                                    (pour remise la taille par défaut)
+                                    <strong>Decrementer La Police</strong> (pour Decrementer la taille) ou bien <strong>Réinitisaliser la Police</strong>
+                                    (pour remettre la taille par défaut)
                             </p>  
                     </div>
                     <div class="col-4">
@@ -178,14 +174,14 @@
                     </div>
                     <div class="col-8">
                             <h4 class="display-6">
-                                Operation sur les Fichier dans L'arbre
+                                Operation sur les Fichiers dans L'arbre
                             </h1>
                             <p>    
                                 Dans l'arbre des fichiers d'un certain dossier vous pouvez faires 2 opérations<br>
                                 <strong><mark><u>-Copier la direction du fichier: </u></mark></strong> 
                                 qui va copier l'emplacement du fichier dans votre ordinateur<br>
                                 <strong><mark><u>-Supprimer un fichier: </u></mark></strong> qui va supprimer le fichier complètement. 
-                                cetter opération va actualiser l'éditeur et le relancer 
+                                cette opération va actualiser l'éditeur et le relancer. 
                             </p>  
                     </div>
                 </div>
@@ -193,14 +189,14 @@
                 <div class="row">
                     <div class="col-8">
                             <h4 class="display-6">
-                                Operation sur le text dans l'editeur
+                                Operation sur le texte dans l'editeur
                             </h1>
                             <p>    
                                  Dans l'éditeur vous pouvez faire plusieurs opérations sur le texte (le code). il y a 4 opérations: <br>
                                 <strong><mark><u>-Sélectionner tous: </u></mark></strong>permettre de sélectionner tout le texte dans le fichier<br>
-                                <strong><mark><u>-Copier: </u></mark></strong>Copier un certain texte sélectionnait. s'il y a aucun texte sélectionné l'éditeur va prendre toute la line comme défaut<br>
-                                <strong><mark><u>-Couper: </u></mark></strong>Couper un certain texte sélectionnait. s'il y a aucun texte sélectionné l'éditeur va prendre toute la line comme défaut<br>
-                                <strong><mark><u>-Coller: </u></mark></strong>Coller un texte déjà copier ou couper.
+                                <strong><mark><u>-Copier: </u></mark></strong>Copier un certain texte selectionné. S'il y a aucun texte sélectionné l'éditeur va prendre toute la ligne par défaut<br>
+                                <strong><mark><u>-Couper: </u></mark></strong>Couper un certain texte sélectionné. S'il y a aucun texte sélectionné l'éditeur va prendre toute la ligne comme défaut<br>
+                                <strong><mark><u>-Coller: </u></mark></strong>Coller un texte déjà copié ou coupé.
                                 
                             </p>  
                     </div>
@@ -216,7 +212,7 @@
 
         <div class="jumbotron" style="background: #ffffff; color: #2f3542;">
                 <h1 class="display-4" style="text-align: center; margin-bottom: 40px;">
-                    Technologies Utuliser
+                    Technologies Utulisées
                 </h1>
                 <hr class="my-5">
                 <div class="row">
@@ -239,9 +235,9 @@
                                     <div class="card-body text-center">
                                       <h5 class="card-title">Node.js</h5>
                                       <p class="card-text" style="font-size: 0.9rem;">
-                                        Node js est un moteur d'exécution Javascript basé sur le moteur Javascript V8 de Chrome.
-                                        Le paquet de l'écosystème de Node js, npm, est le plus grand écosystème de bibliothèques
-                                        open source dans le monde.
+                                        Node.js est un moteur d'exécution JavaScript basé sur le moteur JavaScript V8 de
+                                        Chrome. Le paquet de l'écosystème de Node.js « npm » est le plus grand écosystème de
+                                        bibliothèques open source dans le monde.
                                     </p>
                                     </div>
                                 </div>
@@ -252,8 +248,8 @@
                                     <div class="card-body text-center">
                                       <h5 class="card-title">ES6 (ECMAScript 6)</h5>
                                       <p class="card-text" style="font-size: 0.9rem;">
-                                            ECMAScript est une spécification de langage de script standardisée par ECMAScript International. 
-                                            Il est utilisé par les applications pour activer les scripts côté client.             
+                                            ECMAScript est une spécification de langage de script standardisée par
+                                            ECMAScript International. Il est utilisé par les applications pour activer les scripts côté client.
                                      </p>
                                     </div>
                                 </div>
@@ -279,7 +275,7 @@
                                           <h5 class="card-title">Bootstrap</h5>
                                           <p class="card-text" style="font-size: 0.9rem;">
                                             Bootstrap est le framework le plus populaire pour la conception réactive des sites web
-                                            , il permettra aussi des creer des belles designe
+                                            , il permettra aussi des créer de beaux designes.
                                             </p>
                                         </div>
                                     </div>
@@ -314,8 +310,8 @@
                                         <div class="card-body text-center">
                                           <h5 class="card-title">Sweet Alert 2</h5>
                                           <p class="card-text" style="font-size: 0.9rem;">
-                                            Sweet Alert 2 est un module qui permettre des créer des fenêtres de dialog,
-                                            et des messages d'alert, d'error et d'information...etc., 
+                                            Sweet Alert 2 est un module qui permet de créer des fenêtres de dialogue,
+                                            et des messages d'alerte, d'erreurs et d'informations ...etc., 
                                             il est utilisé pour Électron. Js
                                             </p>
                                         </div>
@@ -332,6 +328,6 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./node_modules/jquery/dist/jquery.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="./node_modules/popper.js/dist/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="./JS/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -95,8 +95,10 @@ body {
 #jstree_demo_div {
   color: #ddd;
 }
-.elem{
+.all_content{
   /*color: #fff;*/
+  position: relative;
+  z-index: 2;
   
 }
 
@@ -107,9 +109,9 @@ body {
 
 #Welcome {
   position: absolute;
-  left: 35%;
-  top: 40%;
-  z-index: -1;
+  left: 50%;
+  top: 45%;
+  z-index: 0;
   color: #34495e;
 }
 
@@ -151,3 +153,20 @@ body {
          transform: translate(-50%, -50%) perspective(200px) rotateX(-180deg) rotateY(-180deg)
      }
  }
+.etabs-views .visible {
+  height: 95vh;
+}
+
+.electron-in-page-search-window {
+  width: 300px;
+  height: 36px;
+  background-color: white;
+}
+ 
+.electron-in-page-search-window.search-inactive {
+  visibility: hidden;
+}
+ 
+.electron-in-page-search-window.search-active {
+  visibility: visible;
+}

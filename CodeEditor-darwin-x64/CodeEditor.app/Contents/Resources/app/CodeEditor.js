@@ -54,7 +54,6 @@ const mainMenuTemplate = [
               console.log('Error with creating file');
               return;
             }
-            console.log(filename);
             openNewFile(filename);
           })
 
@@ -72,10 +71,8 @@ const mainMenuTemplate = [
       click() {
         var savePath = dialog.showSaveDialog((filename) => {
           if (filename === undefined){
-            console.log('Filename undefined (Save as)')
           }else {
           data = filename;
-          console.log(data + + ': FILE NAME \n')
 
           mainWindow.webContents.send('saveas', data);
           }
@@ -109,13 +106,7 @@ const mainMenuTemplate = [
         });
         app.quit()
       }
-    },
-    {label: 'Open Dev-Tools',
-    accelerator: process.platform == 'darwin' ? 'Command+ù' : 'Ctrl+ù',
-  click(){
-    mainWindow.webContents.toggleDevTools()
-  }},
-  {
+    },{
     label: 'reload',
     accelerator: process.platform == 'darwin' ? 'Command+R' : 'F5',
     click(){
@@ -143,16 +134,17 @@ const mainMenuTemplate = [
   }]
 }, {
   label: 'View',
-  submenu : [{role: 'togglefullscreen'}, 
+  submenu : 
+  [{role: 'togglefullscreen'}, 
   {
     label: 'Increase Font Size',
-    accelerator: process.platform == 'darwin' ? 'Command+ +' : 'Ctrl+ +',
+    accelerator: process.platform == 'darwin' ? 'Command+ UP' : 'Ctrl+ UP',
     click(){
         mainWindow.webContents.send('increasefontsize')
     }
   }, {
     label: 'Decrease Font Size',
-    accelerator: process.platform == 'darwin' ? 'Command+-' : 'Ctrl+-',
+    accelerator: process.platform == 'darwin' ? 'Command+DOWN' : 'Ctrl+DOWN',
     click(){
         mainWindow.webContents.send('decreasefontsize')
     }
@@ -173,7 +165,7 @@ const mainMenuTemplate = [
         {
           label: 'Learn More',
           click () {
-
+              require('electron').shell.openExternal('file://' +__dirname + '/details.html');
            }
         }
       ]
@@ -280,8 +272,7 @@ function openNewFile(filePath){
 // This function deletes any File from a specific path
 function deleteFile(path){
   var rimraf = require('rimraf');
-  console.log('delete ---------')
-  rimraf(path, function () { console.log('done');
+  rimraf(path, function () { 
   var data = fs.readFileSync(__dirname +'/folderOpen.json', 'utf8', (err) => {if (err) {return}})
   data = JSON.parse(data);
   writeFolderOpen(data.path);
@@ -397,7 +388,6 @@ ipcMain.on('right_click_file', (e, elem) => {
 
 })
 ipcMain.on('quitAppAllFileSaved', (e) => {
-  console.log('Close')
   force_quit = true;
   app.quit();
 })

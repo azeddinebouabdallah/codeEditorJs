@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./font/robtoslab.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="./font/Eczar.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Style/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Style/styleDetails.css">
+    <title>Code Editor</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="jumbotron" style=" background-image: url('./img/back1.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+        padding: 200px 0px;
+        font-family: 'Eczar', serif;">
+            <h1 class="display-3" style="text-align: center; margin-bottom: 40px; ">
+                Editeur de Code
+            </h1>
+            <p class="lead" style="text-align: center;" >
+                Colorizer HTML, CSS et JavaScript Syntax
+            </p>
+            <hr class="my-5" style="border-color: white">
+            <p style="text-align: center;"><em>
+                Projet fin d'étude troisieme année license a l'Université de Mustapha Ben Boulaid (Batna 2)
+            </em></p>
+            <p style="text-align: center;"><em><strong>
+                Bouabdallah Azeddine - Mokkedem Ayoub
+            </strong></em></p>
+        </div>
+
+          <div class="jumbotron" style="background: #ffffff; color: #2f3542;">
+            <h1 class="display-5" style="text-align: center; margin-bottom: 40px;">
+                Introduction
+            </h1>
+            <p class="lead" style="text-align: center;" >
+                Notre multi-platforme Editeur de Code permet aux developeurs d'ecrire leur code html, css et JavaScript
+                d'une façon simple.
+            </p>
+            <p style="text-align: center;">
+                Dans notre projet on a utiliser des nouveaux technologies pour la creation 
+                de softwares comme le Framework Electron.js, Node.js, Bootstrap 4, jQuery,
+                Sweet Alert 2, CodeMirror et Split.js. aussi il est multi-platforme (Windows, Mac, Linux),
+            </p>
+
+            <hr class="my-5">
+
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="border: none">
+                        <img class="card-img-top" src="./img/color.png" style="
+                         -webkit-box-shadow: 0 10px 6px -6px #777;
+                         -moz-box-shadow: 0 10px 6px -6px #777;
+                         box-shadow: 0 10px 6px -6px #777; " alt="Colorizer le code">
+                        <div class="card-body text-center">
+                          <h5 class="card-title">Coloriser Le Code</h5>
+                          <p class="card-text">
+                              Editer le code (Html, Css et JavaScript) avec une belle colorisation.
+                              vous pouvez aussi editer les autres types de texte comme (.txt, .md ..etc).
+                          </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="border: none">
+                        <img class="card-img-top" src="./img/TreeView.png" alt="Arbre Des Fichier"
+                        style="
+                         -webkit-box-shadow: 0 10px 6px -6px #777;
+                         -moz-box-shadow: 0 10px 6px -6px #777;
+                         box-shadow: 0 10px 6px -6px #777; ">
+                        <div class="card-body text-center">
+                          <h5 class="card-title">Parcourir le dossier</h5>
+                          <p class="card-text">
+                              Parcourir dans les dossier et les fichiers de votre projet façilement, 
+                              avec l'arbre du projet.
+                          </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="border: none">
+                        <img class="card-img-top" src="./img/multi-platform.png" alt="Card image cap"
+                        style="
+                         -webkit-box-shadow: 0 10px 6px -6px #777;
+                         -moz-box-shadow: 0 10px 6px -6px #777;
+                         box-shadow: 0 10px 6px -6px #777; ">
+                        <div class="card-body text-center">
+                          <h5 class="card-title">Operation sur les fichiers</h5>
+                          <p class="card-text">
+                              Vous pouvez creer, ouvrir et sauvgarder un fichier de tout les types des textes (.html, .java, .txt, ...etc) dans un seul temps.
+                              Vous pouvez aussi ouvrir un dossier qui porte plusieurs fichier
+                          </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron" style="background: radial-gradient(#3A6073, #16222A) ;">
+                <h1 class="display-5" style="text-align: center; margin-bottom: 40px;">
+                    Démarrer
+                </h1>
+                <p class="lead" style="text-align: center;" >
+                        Dans le lancement de l'éditeur, la page d'accueil apparaît, 
+                        vous pouvez lire à propos de l'éditeur dans la page des détails.
+                </p>
+                <p class="lead" style="text-align: center;" >
+                    Pour ouvrir votre premier projet. Cliquez sur le menu File (Electron pour Mac),
+                    ensuite Open Folder. Choisissez votre dossier. Ensuite la page va actualiser pour mettre votre dossier en
+                    place.
+                </p>
+                <hr class="my-5" style="border-color: white">
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <img src="./img/tabs.png" class="img-fluid" alt="Responsive image"
+                        style="
+                         -webkit-box-shadow: 0 10px 6px -6px #f1f2f6;
+                         -moz-box-shadow: 0 10px 6px -6px #f1f2f6;
+                         box-shadow: 0 5px 6px -6px #f1f2f6; ">
+                         <img src="./img/close.png" class="img-fluid" alt="Responsive image"
+                            style="
+                             -webkit-box-shadow: 0 10px 6px -6px #f1f2f6;
+                             -moz-box-shadow: 0 10px 6px -6px #f1f2f6;
+                             box-shadow: 0 5px 6px -6px #f1f2f6; 
+                             margin-top: 20px">
+                    </div>
+                    <div class="col-8">
+                            <h4 class="display-6">
+                                Manipuler les fichiers
+                            </h1>
+                            <p> <em>    
+                                L'éditeur contient un système des fenêtres pour faciliter l'édition de plusieurs fichiers
+                                au même temps.
+                                La fermeture 
+                                d'une fenêtre peut se faire en cliquant sur le bouton "X" ou bien dans
+                                Le menu <strong>Electron (File pour Windows) > Close Tab</strong>. dans tous les cas si votre fichier 
+                                n'est pas enregistré un message vont apparaitre pour la confirmation de la fermeture. </em></p>
+                            <p><em>
+                                    Quand vous fermez l'éditeur complètement s'il y a un seul fichier n'est pas enregistré 
+                                    un message de confirmation apparaitre. par contre dans MAC si vous utilisez <strong>CMD+Q</strong> 
+                                    (Tuer le processuce) même s'il y a un fichier n'est pas enregistrer 
+                                    l'éditeur va être fermé sans confirmation (<strong>ALT+F4</strong> : dans le cas du Windows). 
+                            </em></p>                    
+                    </div>
+                </div>
+                <hr class="my-5" style="border-color: white">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="display-6">
+                                Changer la taille du police
+                            </h1>
+                            <p>     
+                                    Vous pouvez changer la taille de la police utiliser dans notre éditeur comme vous voulez.
+                                    Juste clickez sur <strong>vue > Incrementer La Police</strong> (pour incrémenter la taille), 
+                                    <strong>Decrementer La Police</strong> (pour Decrementer la taille) ou bien <strong>Remise La Police</strong>
+                                    (pour remise la taille par défaut)
+                            </p>  
+                    </div>
+                    <div class="col-4">
+                            <img src="./img/font-size.png" class="img-fluid" alt="Responsive image"
+                            style="
+                             -webkit-box-shadow: 0 10px 6px -6px #f1f2f6;
+                             -moz-box-shadow: 0 10px 6px -6px #f1f2f6;
+                             box-shadow: 0 5px 6px -6px #f1f2f6;">
+                    </div>
+                </div>
+                <hr class="my-5" style="border-color: white">
+                <div class="row">
+                    <div class="col-4">
+                       <img src="./img/contextMenuFiles.png" class="img-fluid" alt="Responsive image"
+                        style="
+                         -webkit-box-shadow: 0 10px 6px -6px #f1f2f6;
+                         -moz-box-shadow: 0 10px 6px -6px #f1f2f6;
+                         box-shadow: 0 5px 6px -6px #f1f2f6;">
+                    </div>
+                    <div class="col-8">
+                            <h4 class="display-6">
+                                Operation sur les Fichier dans L'arbre
+                            </h1>
+                            <p>    
+                                Dans l'arbre des fichiers d'un certain dossier vous pouvez faires 2 opérations<br>
+                                <strong><mark><u>-Copier la direction du fichier: </u></mark></strong> 
+                                qui va copier l'emplacement du fichier dans votre ordinateur<br>
+                                <strong><mark><u>-Supprimer un fichier: </u></mark></strong> qui va supprimer le fichier complètement. 
+                                cetter opération va actualiser l'éditeur et le relancer 
+                            </p>  
+                    </div>
+                </div>
+                <hr class="my-5" style="border-color: white">
+                <div class="row">
+                    <div class="col-8">
+                            <h4 class="display-6">
+                                Operation sur le text dans l'editeur
+                            </h1>
+                            <p>    
+                                 Dans l'éditeur vous pouvez faire plusieurs opérations sur le texte (le code). il y a 4 opérations: <br>
+                                <strong><mark><u>-Sélectionner tous: </u></mark></strong>permettre de sélectionner tout le texte dans le fichier<br>
+                                <strong><mark><u>-Copier: </u></mark></strong>Copier un certain texte sélectionnait. s'il y a aucun texte sélectionné l'éditeur va prendre toute la line comme défaut<br>
+                                <strong><mark><u>-Couper: </u></mark></strong>Couper un certain texte sélectionnait. s'il y a aucun texte sélectionné l'éditeur va prendre toute la line comme défaut<br>
+                                <strong><mark><u>-Coller: </u></mark></strong>Coller un texte déjà copier ou couper.
+                                
+                            </p>  
+                    </div>
+                    <div class="col-4">
+                            <img src="./img/ContextMenuEditor.png" class="img-fluid" alt="Responsive image"
+                             style="
+                              -webkit-box-shadow: 0 10px 6px -6px #f1f2f6;
+                              -moz-box-shadow: 0 10px 6px -6px #f1f2f6;
+                              box-shadow: 0 5px 6px -6px #f1f2f6;">        
+                    </div>
+                </div>
+        </div>
+
+        <div class="jumbotron" style="background: #ffffff; color: #2f3542;">
+                <h1 class="display-4" style="text-align: center; margin-bottom: 40px;">
+                    Technologies Utuliser
+                </h1>
+                <hr class="my-5">
+                <div class="row">
+                    <div class="col">
+                            <div class="card" style="border: none">
+                                    <img class="card-img-top" src="./img/electron.png" alt="Card image cap">
+                                    <div class="card-body text-center">
+                                      <h5 class="card-title">Electron.js</h5>
+                                      <p class="card-text" style="font-size: 0.9rem;">
+                                        Électron est un framework pour créer des applications natives avec les techniques
+                                         web comme Javascript, HTML et CSS avec tous les web frameworks comme 
+                                         (Angular, React js, vue js, ... etc.)
+                                      </p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="col">
+                            <div class="card" style="border: none"> 
+                                    <img class="card-img-top" src="./img/node.png" alt="Card image cap">
+                                    <div class="card-body text-center">
+                                      <h5 class="card-title">Node.js</h5>
+                                      <p class="card-text" style="font-size: 0.9rem;">
+                                        Node.js est un moteur d'exécution JavaScript basé sur le moteur JavaScript V8 de
+                                        Chrome. Le paquet de l'écosystème de Node.js « npm » est le plus grand écosystème de
+                                        bibliothèques open source dans le monde.
+                                    </p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="col">
+                            <div class="card" style="border: none">
+                                    <img class="card-img-top" src="./img/es6.png" alt="Card image cap">
+                                    <div class="card-body text-center">
+                                      <h5 class="card-title">ES6 (ECMAScript 6)</h5>
+                                      <p class="card-text" style="font-size: 0.9rem;">
+                                            ECMAScript est une spécification de langage de script standardisée par
+                                            ECMAScript International. Il est utilisé par les applications pour activer les scripts côté client.
+                                     </p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="col">
+                            <div class="card" style="border: none">
+                                    <img class="card-img-top" src="./img/codemirror.png" alt="Card image cap">
+                                    <div class="card-body text-center">
+                                      <h5 class="card-title">CodeMirror</h5>
+                                      <p class="card-text" style="font-size: 0.9rem;">
+                                            CodeMirror est un éditeur de texte implémenté en JavaScript pour les navigateurs.
+                                             Il est spécialisé pour l'édition de code
+                                    </p>
+                                    </div>
+                                </div>
+                    </div>
+                </div>    
+                <div class="row">
+                        <div class="col">
+                                <div class="card" style="border: none">
+                                        <img class="card-img-top" src="./img/bootstrap.png" alt="Card image cap">
+                                        <div class="card-body text-center">
+                                          <h5 class="card-title">Bootstrap</h5>
+                                          <p class="card-text" style="font-size: 0.9rem;">
+                                            Bootstrap est le framework le plus populaire pour la conception réactive des sites web
+                                            , il permettra aussi des creer des belles designe
+                                            </p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="col">
+                                <div class="card" style="border: none"> 
+                                        <img class="card-img-top" src="./img/jquery.png" alt="Card image cap">
+                                        <div class="card-body text-center">
+                                          <h5 class="card-title">JQuery</h5>
+                                          <p class="card-text" style="font-size: 0.9rem;">
+                                                JQuery est une bibliothèque riche de Javascript, permet de minimiser le code Javascript.
+                                                elle est utilisée dans le côté client (Front-End)
+                                            </p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="col">
+                                <div class="card" style="border: none">
+                                        <img class="card-img-top" src="./img/split.png" alt="Card image cap">
+                                        <div class="card-body text-center">
+                                          <h5 class="card-title">Split.Js</h5>
+                                          <p class="card-text" style="font-size: 0.9rem;">
+                                                Split js est un framework qui permet de diviser la fenêtre aux plusieurs parties
+                                                avec une fonctionnalité de glisser les fenêtres
+                                            </p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="col">
+                                <div class="card" style="border: none">
+                                        <img class="card-img-top" src="./img/sweetalert.png" alt="Card image cap">
+                                        <div class="card-body text-center">
+                                          <h5 class="card-title">Sweet Alert 2</h5>
+                                          <p class="card-text" style="font-size: 0.9rem;">
+                                            Sweet Alert 2 est un module qui permettre des créer des fenêtres de dialog,
+                                            et des messages d'alert, d'error et d'information...etc., 
+                                            il est utilisé pour Électron. Js
+                                            </p>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>      
+        </div>
+
+        <div class="jumbotron" style="padding-top: 22px;  background: #dfe4ea; color: #57606f">
+                <p class="lead" style="text-align: center;" >University of Batna 2</p>
+            </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./node_modules/jquery/dist/jquery.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="./node_modules/popper.js/dist/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="./JS/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

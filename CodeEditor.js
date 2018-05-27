@@ -106,22 +106,11 @@ const mainMenuTemplate = [
         });
         app.quit()
       }
-    },
-   {label: 'Open Dev-Tools',
-    accelerator: process.platform == 'darwin' ? 'Command+ù' : 'Ctrl+ù',
-  click(){
-    mainWindow.webContents.toggleDevTools()
-  }},
-  {
+    },{
     label: 'reload',
     accelerator: process.platform == 'darwin' ? 'Command+R' : 'F5',
     click(){
       mainWindow.reload();
-    }
-  }, {
-    label: 'Search',
-    click() {
-      mainWindow.webContents.send('SreachForm');
     }
   }
   ]
@@ -155,7 +144,7 @@ const mainMenuTemplate = [
     }
   }, {
     label: 'Decrease Font Size',
-    accelerator: process.platform == 'darwin' ? 'Command+-' : 'Ctrl+-',
+    accelerator: process.platform == 'darwin' ? 'Command+DOWN' : 'Ctrl+DOWN',
     click(){
         mainWindow.webContents.send('decreasefontsize')
     }

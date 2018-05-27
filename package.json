@@ -5,7 +5,7 @@
   "main": "CodeEditor.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . CodeEditor"
+    "build": "electron-packager . CodeEditor && cp Icon.icns CodeEditor-darwin-x64/CodeEditor.app/Contents/Resources/electron.icns"
   },
   "author": "Bouabdallah Azeddine",
   "license": "MIT",
@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "asar": "^0.14.3",
-    "electron-packager": "^12.0.2"
+    "electron-packager": "^12.1.0"
   }
 }
